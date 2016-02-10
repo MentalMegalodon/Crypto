@@ -1,0 +1,165 @@
+% -*-latex-*-
+\documentclass[12pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{cancel}
+
+\usepackage[paper=letterpaper,includehead,left=1in,right=1in,bottom=1in,top=.6in,headheight=.6in]{geometry}
+\usepackage{fancyhdr}
+\fancyhead[L]{University of Texas at Austin\\
+Department of Computer Science}
+\fancyhead[R]{Cryptography\\
+CS 346, Spring 2016}
+\pagestyle{fancy}
+
+\frenchspacing
+
+\newcommand{\AAA}{\mathcal{A}}
+\newcommand{\CCC}{\mathcal{C}}
+\newcommand{\FFF}{\mathcal{F}}
+\newcommand{\KKK}{\mathcal{K}}
+\newcommand{\MMM}{\mathcal{M}}
+
+\newcommand{\Concat}{\parallel}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Enc}{\mathsf{Enc}}
+\newcommand{\Dec}{\mathsf{Dec}}
+\newcommand{\Mac}{\mathsf{Mac}}
+\newcommand{\Vrfy}{\mathsf{Vrfy}}
+\newcommand{\Decrypt}[2]{\Dec_{#1}(#2)}
+\newcommand{\Encrypt}[2]{\Enc_{#1}(#2)}
+\newcommand{\Gen}{\mathsf{Gen}}
+\newcommand{\GenEncDec}{(\Gen,\Enc,\Dec)}
+\newcommand{\GenMacVrfy}{(\Gen,\Mac,\Vrfy)}
+\newcommand{\ExptEavArgs}[2]{\mathsf{PrivK}^{\mathsf{eav}}_{#1,#2}}
+\newcommand{\ExptCcaArgs}[2]{\mathsf{PrivK}^{\mathsf{CCA}}_{#1,#2}}
+\newcommand{\ExptEav}{\ExptEavArgs{\AAA}{\Pi}}
+\newcommand{\ExptCca}{\ExptCcaArgs{\AAA}{\Pi}}
+\newcommand{\ExptPrgArgs}[2]{\mathsf{PRG}_{#1,#2}}
+\newcommand{\ExptPrg}{\ExptPrgArgs{\AAA}{G}}
+\newcommand{\Fcns}[1]{\mathsf{Func}_n}
+\newcommand{\LengthKey}[1]{\ell_{\mathit{key}}(#1)}
+\newcommand{\LengthInput}[1]{\ell_{\mathit{in}}(#1)}
+\newcommand{\LengthOutput}[1]{\ell_{\mathit{out}}(#1)}
+\newcommand{\xor}{\oplus}
+\newcommand{\Pit}{\widetilde{\Pi}}
+\newcommand{\negl}{\tt negl}
+
+\newcommand{\Exec}[5]{\mathit{exec}^{#1}_{#2}(#3,#4,#5)}
+
+\begin{document}
+
+\title{CS 346 Class Notes}
+\date{Feb 10, 2016}
+\author{Mark Lindberg}
+\maketitle
+\thispagestyle{fancy}
+
+New HW out, due Wed, Feb 24.
+
+{\bf Last Time:}
+
+We had CPA-secure schemes with CBC, OFB, and CTR block ciphers. Note that for each of these, the $IV$ is sent along with the ciphertext.
+
+{\bf Today:}
+
+How do you decrypt with CBC, given $(IV,c_1,c_2,c_3)$? We rely on the invertibility of $F_k$. Then $m_1=IV\xor F_k^{-1}(c_1)$. $m_2=c_1\xor F_k^{-1}(c_2)$, and $m_3=c_2\xor F_k^{-1}(c_3)$.
+
+In OFB mode, we don't need the inverse of $F_k$. $m_1=c_1\xor F_k(IV)$, $m_2=c_2\xor F_k^2(IV)$, $m_3=F_k^3(IV)$, where $F_k^n$ means applying $F_k$ $n$ times to the given value.
+
+In CTR mode, again, we don't need any inverse. CTR mode is parallelizable. $m_1=F_k(CTR+1)\xor c_1$, $m_2=F_k(CTR+2)\xor c_2$, etc.
+
+CBC mode has the advantage that if you reuse an IV, we have problems where the prefix of the message is equal, but as soon as the messages differ, they are distinct. In CTR mode, a reused counter can be fatal, due to the properties of $\xor$.
+
+Now, a stronger security notion: CCA-security. Chosen Ciphertext Attack. $\ExptCca$.\begin{enumerate}
+
+\item Before determining $m_0$, $m_1$, $\AAA$ gets access to $\Dec_k$ oracle in addition to $\Enc_k$.
+
+\item After receiving a challenge ciphertext $c$, It again has access to $\Dec_k$ and $\Enc_k$, with the exception that $\Dec_k$ cannot be called on $c$, because that would tell us immediately whether $m_0$ or $m_1$ was used.
+
+\end{enumerate}
+
+A scheme is CCA-secure if $\forall$ PPT adversaries $\AAA$, $\Pr[\ExptCca=1]\leq\frac{1}{2}+\negl$.
+
+None of the schemes we've seen so far are CCA-secure.
+
+Consider $\Enc_k(m)=(r,F_k(r)\xor m)$, the first CPA-secure scheme we saw. This scheme is not CCA-secure. $\AAA$ can set $m_0=0^n$ and $m_1=1^n$. We will get challenge ciphertext $(r,s)$, where $s=F_k(r)\xor m_b$. Call $\Dec_k(r,\overline{s})$, where $\overline{s}=\neg s$.
+
+\begin{align*}
+F_k(r)\xor m_b&=s\\
+1^n\xor F_k(r)\xor m_b&=s\xor1^n=\overline{s}\\
+=F_k(r)\xor(m_b\xor1^n)&=F_k(r)\xor\overline{m_b}
+\end{align*}
+
+Then $\Dec_k(r,\overline{s})=F_k(r)\xor F_k(r)\xor\overline{m_b}=\overline{m_b}$, which makes it trivial to determine which message was sent.
+
+We can do the same thing on each block individually for CTR mode, as it's literally the exact same thing, with $r=CTR+1$, etc.
+
+With CBC mode, we will begin by examining 1-block messages. $\AAA$: $m_0=0^n$, and $m_1=1^n$. Then we get $(IV,s)$, where $s=F_k(m_b\xor IV)$. Now we make a call to $\Dec_k$. Here, $(IV,\overline{s})$ is not so helpful for us. Instead, we call $(\overline{IV},s)$.
+
+\begin{align*}
+\Dec_k(\overline{IV},s)&=F^{-1}_k(s)\xor\overline{IV}\\
+ARGH.
+\end{align*}
+
+To achieve CCA security, we will first develop another tool--MAC. Message Authentication Code. (Chapter 4)
+
+With a one-time-pad, someone can tamper with the message and it will be undetectable. Now we care about the integrity of the message. We want to be able to detect any tampering with the messages.
+
+MAC: Encryption scheme $\Pi=\GenMacVrfy$. $\Gen(1^n)$ produces a key, usually a random $n$-bit string. $\Gen$ is PPT.
+
+Tag Generation Algorithm. $\Mac$: Takes a message $m\in\{0,1\}^*$, or $\{0,1\}^{\ell(n)}$ for fixed length), $k$, returns TAC. $\Mac$ is PPT.
+
+$\Vrfy$: Takes a key $k$ message $m$, tag $t$, and outputs $1$ if it's valid or $0$ if it's invalid. $\Vrfy$ is a deterministic polynomial time algorithm.
+
+Correctness: $\Vrfy_k(m,\Mac_k(m))=1$.
+
+What is a secure $\Mac$? As in chapter 3, we will define ``secure'' in terms of suitable experiments.
+
+The Message Authentication Experiment: $\Mac-forge_{\AAA,\Pi}(n)$.\begin{enumerate}
+
+\item Choose $k$, a random $n$-bit string.
+
+\item $\AAA$ gets access to $\Mac_k$ oracle, then outputs $(m,t)$.
+
+\item $\AAA$ succeeds if $\Vrfy_k(m,t)=1$, where $m\not\in Q$, where $Q$ is the set of messages passed to the oracle in step $2$. The experiment outputs $1$ if it succeeds in this step.
+
+\end{enumerate}
+
+$\Mac$ $\Pi$ is existentially unforgeable under an adaptive chosen-message attack (``secure'') if $\forall$ PPT $\AAA$, $\Pr[\Mac-forge_{\AAA,\Pi}(n)=1]\leq\negl$.
+
+``Strong'' version. We call the experiment $\Mac-sforge(n)$, and change the previous experiment to say to say $(m,t)\not\in Q$ where $m,t$ are input-output pairs for oracle calls. Basically, we cannot forge an ``alternate'' tag for a message for a message, having seen a tag already.
+
+There is no difference in the case where $\Mac$ is deterministic.
+
+$\Vrfy_k(m,t)$ just checks $\Mac_k(m)=t$, in the canonical, common, practical version.
+
+Might want to look at exercise $4.2$ in the text, for fun. $\Vrfy$ oracle can be simulated by using the $\Mac$ oracle. It leads to an equivalent definition. $4.3$ is in the HW.
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

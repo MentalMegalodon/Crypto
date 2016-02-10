@@ -1,0 +1,215 @@
+\documentclass[11pt]{article}
+
+\usepackage{pdfsync}
+
+\usepackage{a4wide}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{mathtools}
+\usepackage{mathdots}
+\usepackage[left=1in,top=1in,right=1in,bottom=1in]{geometry}
+\RequirePackage{enumitem}
+
+\newcommand{\mm}{\mathbb{M}^n_k(c)}
+\newcommand{\VV}{\ep\,I\times_a \mathbb{E}^{n+1}}
+\newcommand{\mmm}{\ep\,I\times_a\mm}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\nab}{\bar\nabla}
+\newcommand{\nat}{\widetilde{\nabla}}
+\newcommand{\na}{\nabla}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\ti}[1]{\tilde{#1}}
+\newcommand{\dt}{\partial_t}
+\newcommand{\grad}{\mathrm{grad}}
+\newcommand{\Arg}{\text{Arg}}
+\newcommand{\Log}{\text{Log}}
+\newcommand{\lm}{\underline{\bf Lemma}: }
+\newcommand{\pf}{\underline{\bf Proof}: }
+\newcommand{\pbc}{\underline{\bf Proof by Contradiction}: }
+\newcommand{\pfc}{\underline{\bf Proof by Contrapositive}: }
+\newcommand{\pbi}{\underline{\bf Proof by Induction}: }
+
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{examp}{Example}
+\newenvironment{example}[1]{\begin{examp} #1 \newline \rm }{\end{examp}}
+%\newenvironment{defi}{}{\par}
+
+\newenvironment{proof}
+ {\begin{trivlist}\item[\textit{ Proof:}]\,}
+ {$\Box$\end{trivlist}}
+\newcommand{\produ}[1]{\langle #1\rangle}
+\newcommand{\E}{\overline{E}}
+\newcommand{\PP}{\bar{P}^{n+1}}
+\newcommand{\DD}{\mathbf{D}}
+\renewcommand{\S}{\mathbf{S}}
+%\newcommand{\kaa}{ \left(c-\ep\frac{(a')^2}{a^2}\right) }
+\newcommand{\g}[1]{g\left(#1\right)}
+
+\newcommand{\sgn}{\operatorname{sign}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\iso}{{\;\stackrel{_\sim}{\to}\;}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Perm}{\operatorname{Perm}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\Ad}{\operatorname{Ad}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\inv}{\operatorname{inv}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Mat}{\operatorname{Mat}}
+\newcommand{\Map}{\operatorname{Map}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\ceq}{\overset{\checkmark}{=}}
+\newcommand{\xor}{\oplus}
+\newcommand{\pit}{\widetilde{\pi}}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+
+\DeclareMathOperator{\std}{std}
+
+\newcommand{\tikzmark}[1]{%
+  \tikz[overlay,remember picture] \node (#1) {};}
+
+%opening
+\newenvironment{problems}[1][\arabic*.]
+{\begin{enumerate}[label={#1}, leftmargin=*, format={\textbf}]}
+{\end{enumerate}}
+
+\title{Crypto Class Notes, Feb 3}
+\author{Mark Lindberg}
+\date{}
+
+\begin{document}
+\pagestyle{plain}
+\maketitle
+
+$\pi$: CPA Secure: $\forall$ PPT $A$, ``Advantage'' of adversary is negligible.
+
+More formally, $Pr(Priv\ K^{CPA}_{A,\pi}=1)\leq\frac{1}{2}+NEGL(n)$.
+
+Where the Priv K is the adversary guessing b correctly.
+
+Today, EAV-secure $\leftrightarrow$ PRG. Pseudo-Random Generator.
+
+CPA-secure $\leftrightarrow$ PRF. Psedo-Random Function.
+
+If one-way functions exist, PRFs exist, and CPA-secure encryptions do exist.
+
+What is a PRF? It is a ``keyed'' function.
+
+Generally written as $F(\underbrace{k}_{\text{Key}},\underbrace{x}_{\text{Input}})$, also written as $F_k(x)$.
+
+For security parameter m, the key, input, and output lengths are specified by 3 polynomials, $\ell_{key}$, $\ell_{in}$, and $\ell_{out}$ respectively. The key is $\ell_{key}(m)$ bits long, the input is $\ell_{in}(m)$ bits long, and the output is $\ell_{out}(m)$ bits long.
+
+In the text, ``length-preserving'' means all results from the polynomials are equal to $m$. The text focuses on this special case. We will make this assumption for this lecture as well. In the last question on the homework, we look at PRFs, and the definition will need to be generalized. (Given in HW.)
+
+DEFINITION: \underline{PRF} (Pseudo-Random Function?): Let $F$ be a length-preserving, keyed, efficient (polynomial time computable) function. $F$ is a PRF if for all PPT (Probabilistic Polynomial Time) distinguishers $D$, $|\underbrace{Pr(D^{F_k}(1^n)-1)}_{\text{Random choice of $k$}}-\underbrace{Pr(D^f(1^m))}_{\substack{\text{Random chance of $f\in Func_m$}\\\text{ randomness in $D$.}}}|\leq NEGL(n)$ (We're considering $F_k$ and $f$ as oracles that return the particular $n$-bit output string for that input string. In constant time.) where $Func_m$ is the set of all functions from $m$ by strings to $m$-bit strings.
+
+We can think of representing an $f\in Func_m$ as a table. $m\cdot 2^m$ bits. Then $|Func_m|=2^{m\cdot2^m}$.
+
+Now we will present a scheme that is CPA secure.
+
+CPA-secure ENC-scheme $\pi=(Gen, Enc, Dec)$ (construction 3.30?).
+
+Assume $F$ is a PRF. (Caution for last HW problem: We're assuming length-preserving here, but not true for last problem.) Then $Gen(1^n)$ produces a random $n$-bit key $k$. Then $Enc_k(m)$ returns a pair $(\underbrace{?}_{\text{$n$ bits.}},\underbrace{F_k(?)\xor m}_{\text{$n$ bits.}})$. where $?$ is a random $n$-bit string.
+
+$Dec_k(c)$, where $k$ is $n$ bits, and $c$ is $2n$ bits. $c$ is of the form $(?, s)$, each of which are $n$ bits. $m=??\xor F_k(?)$.
+
+Theorem 3.31: $\pi$ is CPA-secure. 
+
+Define $\widetilde{\pi}=(\widetilde{Gen},\widetilde{Enc},\widetilde{Dec})$.
+
+$\widetilde{Gen}(1^n)$ returns a random $f$ in $Func_n$. ($f$ is our key, but also is a function.)
+
+$\widetilde{Enc}_f(m)$ returns $(r, f(r)\xor m)$
+
+$\widetilde{Dec}_f(c)$, $c=r, s$, $m=f(r)\xor s$.
+
+Two parts to the proof:
+
+Part 1: $|Pr(Priv\ K_{A,\pi}^{CPA}=1)-Pr(Priv\ K_{A,\widetilde{\pi}}^{CPA}=1)|\leq NEGL(m)$.
+
+Construct a PPT distinguisher $D$ for $F$.\begin{itemize}
+
+\item Simulate $A$ on input $1^m$.
+
+\item When $A$ calls oracle on a message $m$\begin{itemize}
+
+\item $D$ generates random $n$-bit string $r$.
+
+\item $D$ calls its own oracle on $r$, getting $y$.
+
+\item $D$ returns to $A$ $(r, y\xor m)$.
+
+\end{itemize}
+
+\item $A$ determines its messages $m_0$ and $m_1$.
+
+\item Determine $b$.
+
+\item Use oracle call to get $c$.
+
+\item $D$ outputs $1$ iff $A$ is correct.
+
+\end{itemize}
+
+Negligible implies negligible!
+
+Need $\forall$ PPT $A$, $Pr(Priv\ K_{A,\pi}^{CPA}=1)\leq\frac{1}{2}+NEGL(n)$.
+
+By part 1, it is sufficient to prove that $Pr(Priv\ K_{A,\widetilde{\pi}}^{CPA}=1)\leq\frac{1}{2}+NEGL(n)$.
+
+Then negl + negl = negl, so yay! :)
+
+Part 2: Intuition: Run the experiment, replace $\pi$ with $\pit$. It's in the text.
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
