@@ -1,0 +1,163 @@
+% -*-latex-*-
+\documentclass[12pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{cancel}
+
+\usepackage[paper=letterpaper,includehead,left=1in,right=1in,bottom=1in,top=.6in,headheight=.6in]{geometry}
+\usepackage{fancyhdr}
+\fancyhead[L]{University of Texas at Austin\\
+Department of Computer Science}
+\fancyhead[R]{Cryptography\\
+CS 346, Spring 2016}
+\pagestyle{fancy}
+
+\frenchspacing
+
+\newcommand{\AAA}{\mathcal{A}}
+\newcommand{\CCC}{\mathcal{C}}
+\newcommand{\FFF}{\mathcal{F}}
+\newcommand{\KKK}{\mathcal{K}}
+\newcommand{\MMM}{\mathcal{M}}
+
+\newcommand{\Concat}{\parallel}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Enc}{\mathsf{Enc}}
+\newcommand{\Dec}{\mathsf{Dec}}
+\newcommand{\Mac}{\mathsf{Mac}}
+\newcommand{\Macf}{\mathsf{Mac\text{-}forge}}
+\newcommand{\Vrfy}{\mathsf{Vrfy}}
+\newcommand{\Decrypt}[2]{\Dec_{#1}(#2)}
+\newcommand{\Encrypt}[2]{\Enc_{#1}(#2)}
+\newcommand{\Gen}{\mathsf{Gen}}
+\newcommand{\ang}[1]{\langle#1\rangle}
+\newcommand{\GenEncDec}{(\Gen,\Enc,\Dec)}
+\newcommand{\GenMacVrfy}{(\Gen,\Mac,\Vrfy)}
+\newcommand{\ExptEavArgs}[2]{\mathsf{PrivK}^{\mathsf{eav}}_{#1,#2}}
+\newcommand{\ExptCcaArgs}[2]{\mathsf{PrivK}^{\mathsf{CCA}}_{#1,#2}}
+\newcommand{\ExptEav}{\ExptEavArgs{\AAA}{\Pi}}
+\newcommand{\ExptCca}{\ExptCcaArgs{\AAA}{\Pi}}
+\newcommand{\ExptPrgArgs}[2]{\mathsf{PRG}_{#1,#2}}
+\newcommand{\ExptPrg}{\ExptPrgArgs{\AAA}{G}}
+\newcommand{\Fcns}[1]{\mathsf{Func}_n}
+\newcommand{\LengthKey}[1]{\ell_{\mathit{key}}(#1)}
+\newcommand{\LengthInput}[1]{\ell_{\mathit{in}}(#1)}
+\newcommand{\LengthOutput}[1]{\ell_{\mathit{out}}(#1)}
+\newcommand{\xor}{\oplus}
+\newcommand{\Pit}{\widetilde{\Pi}}
+\newcommand{\negl}{{\tt negl}}
+
+\newcommand{\Exec}[5]{\mathit{exec}^{#1}_{#2}(#3,#4,#5)}
+
+\begin{document}
+
+\title{CS 346 Class Notes}
+\date{Feb 10, 2016}
+\author{Mark Lindberg}
+\maketitle
+\thispagestyle{fancy}
+
+{\bf Last Time:}
+
+Message Authentication Code (MAC)
+
+$\Gen(1^n)$ $\to$ $n$-bit key $k$.
+
+$\Mac_k(m)$ $\to$ tag $t$.
+
+$\Vrfy_k(m,t)$ $\to$ valid/invalid.
+
+{\bf This Time:}
+
+$\Macf_{\AAA,t}(n)$, $\AAA$ gets access to $\Mac_k$ oracle, eventually outputs $(m,t)$.
+
+$\AAA$ ``succeeds'' if $\Vrfy_k(m,t)$ outputs valid AND $m\not\in Q$, where $Q$ is the set uf all messages passed to the $\Mac_k$ oracle.
+
+The $\Mac$ $\Pi$ is secure if $\forall$ PPT $\AAA$, $\Pr[A\text{ succeeds}]=\negl(m)$.
+
+Today we will examine several $\Mac$s.
+
+A first secure $\Mac$ for fixed-length messages of length $n$.
+
+Assume $F$ is a PRF. Let $m$ be an $n$-bit message. $\Gen$ will work as normal, generating an $n$-bit key.
+
+A natural first urge is to set $\Mac_k(m)=F_k(m)$. We will go ahead and do this.
+
+This is a deterministic $\Mac$, so we can use the ``canonical verification'', which is the $\Vrfy$ algorithm defined above.
+
+Proof that $\Pi$ defined here is a secure $\Mac$.
+
+Proof by contradiction sketch: If $\Pi$ were not secure, $F$ would not be a PRF. Assume $\Pi$ is not secure. Then there is a PPT adversary $\AAA$ such that $\Pr[A\text{ succeeds}]=f(m)$, such that $f(m)$ is non-negligible.
+
+Actual proof presented, direct proof. Let $\AAA$ be an arbitrary PPT adversary in the experiment $\Macf_{\AAA,\Pi}(n)$. Let $h(n)$ denote the success probability of $A$. Construct a PT distinguisher $D$ for $F$ based on $\AAA$.
+
+The advantage of $D$ is $\Pr[D^{F_k}(1^n)=1]-\Pr[D^{f}(1^n)=1]$.
+
+$D$ will simulate $\AAA$, using its oracle to answer $\AAA$'s queries to $\Mac_k$. Finally, $D$ gets output $(m,t)$ of $\AAA$. $D$ should output $1$ when $\AAA$ succeeds. This involves a single oracle call, for $\Vrfy$, maintaining $Q$.
+
+Scenario $1$: $D$'s oracle is $F_k$. Then $\Pr[D^{F_k}(1^m)=1]=\Pr[\Macf_{\AAA,\Pi}(m)=1]$.
+
+Scenario $2$: $D$'s oracle is $f$. $\Pr[D^{f}(1^n)=1]\leq\frac{1}{2^n}$.
+
+Now we will examine secure $\Mac$ $\Pi$ for arbitrary-length messages. It will be based on the secure fixed-length $\Mac$ $\Pi'$ ($\Mac',\Vrfy'$) shown above.
+
+First idea for $\Mac_k$. Chop $m$ into $n$-bit blocks, $m_1,m_2,\dots,m_d$, let $t_i=\Mac'(m_i)$, and use $(t_1,t_2,\dots,t_d)$ as the tag.
+
+This is bad. This can be easily broken using a reordering attack. Present $m=m_1,m_2$, get tag $t_1,t_2$. Then message $m'=m_2,m_1$ will have tag $t_2,t_1$, which will pass $\Vrfy$.
+
+To combat this attack, break $m$ into $\frac{n}{2}$-bit blocks $m_1,\dots,m_d$, then $t_i=\Mac'_k(\ang{i}\mid\mid m_i)$, where $\ang{i}$ is the $\frac{n}{2}$-bit binary encoding of $i$. This prevents the reordering attack.
+
+This scheme is still insecure. Since we have an arbitrary-length message $\Mac$, we can use a truncation attack, and present $m=m_1,m_2,m_3$, get $(t_1,t_2,t_3)$. Then we can present $m'=m_1,m_2$. The tag $(t_1,t_2)$ will be valid for $m'$.
+
+To prevent the truncation attack, we will include the length $\ell$ of the full message in the calculation. We will chop our message into $\frac{n}{3}$-bit blocks. Then $t_i=\Mac'_k(\ang{\ell}\mid\mid\ang{i}\mid\mid m_i)$. Note: We pad the last block with $0's$ if necessary. The tag will be $(t_1,\dots)$. By this point, we are sending $4\ell$ bits.
+
+Unfortunately, even this scheme is still insecure. It can be attacked with a ``mix and match'' attack. For example, get tag $t=(t_1,t_2,t_3)$ for $m=m_1,m_2,m_3$. Take another message, same length, $m'=m_4,m_5,m_6$, get tag $t'=(t_4,t_5,t_6)$. Then $(t_1,t_5,t_6)$ is a valid tag for $m_1,m_5,m_6$, which has never been queried from the oracle before.
+
+Finally, let's fix all of this! We'll chop our message $m=m_1,\dots,m_d$ into $\frac{n}{4}$ bit blocks, and pick a random $\frac{n}{4}$-bit value $r$ for the entire message, and $t_i=\Mac'_k(r\mid\mid\ang{\ell}\mid\mid\ang{i}\mid\mid m_i)$. $\Mac_k(m)=(r,t_1,\dots,t_d)$. At this point, this is not a deterministic $\Mac$, so $\Vrfy$ has to behave slightly differently, taking into account the random $r$ passed to it. It can reconstruct the tag as above, with this slight extra step.
+
+This is secure!
+
+Proof-ish. Fix the PPT adversary $\AAA$ in the forging experiment. We need to show that $\Pr[\AAA]$ succeeding is negligible. More formally, $\Pr[\Macf_{\AAA,=Pi}(m)=1]$ is $\negl$.
+
+Fix a message $m$. There are three events of interest in the experiment $\Macf_{\AAA,\Pi}(m)$.
+
+$E_1$: $\AAA$ succeeds.
+
+$E_2$: Some $r$ repeats.
+
+$E_3$: Some $(r||\ang{\ell}||\ang{i}||m_i)$ is passed to $\Mac'_k$ when checking $\AAA$'s output is ``new''.
+
+\begin{align*}
+\Pr[E_1]&=\Pr[E_1\wedge E_2]+\Pr[E_1\wedge\overline{E_2}\wedge E_3]+\Pr[E_1\wedge\overline{E_2}\wedge\overline{E_3}]\\
+&\leq\Pr[E_2]+\Pr[E_1\wedge E_3]+\Pr[E_1\wedge\overline{E_2}\wedge\overline{E_3}]
+\end{align*}
+
+Proof to be completed at the beginning of the next class.
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
