@@ -1,0 +1,166 @@
+% -*-latex-*-
+\documentclass[12pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{cancel}
+
+\usepackage[paper=letterpaper,includehead,left=1in,right=1in,bottom=1in,top=.6in,headheight=.6in]{geometry}
+\usepackage{fancyhdr}
+\fancyhead[L]{University of Texas at Austin\\
+Department of Computer Science}
+\fancyhead[R]{Cryptography\\
+CS 346, Spring 2016}
+\pagestyle{fancy}
+
+\frenchspacing
+
+\newcommand{\AAA}{\mathcal{A}}
+\newcommand{\CCC}{\mathcal{C}}
+\newcommand{\FFF}{\mathcal{F}}
+\newcommand{\KKK}{\mathcal{K}}
+\newcommand{\MMM}{\mathcal{M}}
+
+\newcommand{\Concat}{\parallel}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Enc}{\mathsf{Enc}}
+\newcommand{\Dec}{\mathsf{Dec}}
+\newcommand{\Mac}{\mathsf{Mac}}
+\newcommand{\Macf}{\mathsf{Mac\text{-}forge}}
+\newcommand{\Macsf}{\mathsf{Mac\text{-}sforge}}
+\newcommand{\Encf}{\mathsf{Enc\text{-}forge}}
+\newcommand{\Vrfy}{\mathsf{Vrfy}}
+\newcommand{\Decrypt}[2]{\Dec_{#1}(#2)}
+\newcommand{\Encrypt}[2]{\Enc_{#1}(#2)}
+\newcommand{\Gen}{\mathsf{Gen}}
+\newcommand{\ang}[1]{\langle#1\rangle}
+\newcommand{\GenEncDec}{(\Gen,\Enc,\Dec)}
+\newcommand{\GenMacVrfy}{(\Gen,\Mac,\Vrfy)}
+\newcommand{\ExptEavArgs}[2]{\mathsf{PrivK}^{\mathsf{eav}}_{#1,#2}}
+\newcommand{\ExptCcaArgs}[2]{\mathsf{PrivK}^{\mathsf{CCA}}_{#1,#2}}
+\newcommand{\ExptCpaArgs}[2]{\mathsf{PrivK}^{\mathsf{CPA}}_{#1,#2}}
+\newcommand{\ExptEav}{\ExptEavArgs{\AAA}{\Pi}}
+\newcommand{\ExptCca}{\ExptCcaArgs{\AAA}{\Pi}}
+\newcommand{\ExptCpa}{\ExptCpaArgs{\AAA}{\Pi}}
+\newcommand{\ExptPrgArgs}[2]{\mathsf{PRG}_{#1,#2}}
+\newcommand{\ExptPrg}{\ExptPrgArgs{\AAA}{G}}
+\newcommand{\Fcns}[1]{\mathsf{Func}_n}
+\newcommand{\LengthKey}[1]{\ell_{\mathit{key}}(#1)}
+\newcommand{\LengthInput}[1]{\ell_{\mathit{in}}(#1)}
+\newcommand{\LengthOutput}[1]{\ell_{\mathit{out}}(#1)}
+\newcommand{\xor}{\oplus}
+\newcommand{\Pit}{\widetilde{\Pi}}
+\newcommand{\negl}{{\tt negl}}
+
+\newcommand{\Exec}[5]{\mathit{exec}^{#1}_{#2}(#3,#4,#5)}
+
+\begin{document}
+
+\title{CS 346 Class Notes}
+\date{Feb 22, 2016}
+\author{Mark Lindberg}
+\maketitle
+\thispagestyle{fancy}
+
+{\bf Last Time:}
+\begin{tabular}{| l | l |}
+\hline
+Experiment & Security notion\\\hline
+$\Macsf_{\AAA,\Pi}(n)$ & Strongly secure mac.\\\hline
+$\ExptCpa(n)$ & CPA-secure encryption scheme.\\\hline
+$\ExptCca(n)$ & CCA-secure encryption scheme.\\\hline
+$\Encf_{\AAA,\Pi}(n)$ & Unforgeable encryption scheme.\\\hline
+\end{tabular}
+
+An authenticated encryption scheme should be\begin{enumerate}
+
+\item Unforgeable.
+
+\item CCA-secure.
+
+\end{enumerate}
+
+We'll get the above by combining a CPA-secure scheme with a strongly secure MAC.
+
+{\bf This Time:}
+
+In the $\Macsf_{\AAA,\Pi}(n)$ experiment the adversary $\AAA$ gets access to $\Mac_k$ oracle which outputs $(m,t)$ The adversary succeeds if it can output a pair $(m,t)$ which is new such that $\Vrfy_k(m,t)=1$.
+
+In the $\ExptCpa(n)$ experiment, the challenger generates $k$. The adversary gets access to $\Enc_k$ oracle. The adversary picks $m_0,m_1$ of the same length, sends them to the challenger. The challenger picks a random bit $b$, encrypts $c=\Enc_k(b)$, and sends back $c$. The adversary then has more oracle access to $\Enc_k$. (Not on $m_0$ or $m_1$, though.)
+
+In the $\ExptCca(n)$ experiment, much is the same as the previous experiment, except that the adversary also gets access to a $\Dec_k$ oracle, though they cannot call it on the $c$ produced by the challenger.
+
+In the $\Encf_{\AAA,\Pi}(n)$ experiment, the adversary gets access to $\Enc_k$ oracle. The adversary outputs $c$. The adversary succeeds if\begin{enumerate}
+
+\item $\Dec_k(c)=1$. ($c$ is a valid ciphertext.)
+
+\item $\Dec_k(c)$ is not a message we queried the oracle on previously.
+
+\end{enumerate}
+
+``Encrypt-then-authenticate'' paradigm. Let $\Pi_E=(\Enc,\Dec)$ be a CPA-secure encryption scheme, and $\Pi_M=(\Mac,\Vrfy)$ be a strongly secure MAC. ($\Gen$ is dropped because we can use the same one for both, but don't want name collisions.) Then $\Pi:=(\Gen',\Enc',\Dec')$.
+
+$\Gen'$ generates independent $n$-bit keys $k_E$ and $k_M$. Let $k=(k_E,k_M)$.
+
+$\Enc'_k(m)=(c,\Mac_{k_M}(c))$ where $c=\Enc_{k_E}(m)$.
+
+$\Dec'_k((c,t))$. First, verify that $\Vrfy_{k_M}(c,t)=1$. If not, return $\perp$. If so, then return $\Dec_{k_E}(c)$.
+
+THEOREM: $\Pi'$ is an authentication scheme as defined above.
+
+Intuitive proof outline: Consider an adversary $\AAA$ in the CCA experiment. We'll show that whp (with high probability), all calls to $\Dec'_k$ one outputs $\perp$ unless they correspond to a call to $\Enc'_k$. A call comes to $\Enc'_k$, which comes from the use of $\Pi_M$, which yields unforgeablity. Consequently, the ability to call $\Dec'_k$ is ``useless'', so the CPA security of $\Pi_E$ will be enough.
+
+Some proof details:
+
+``Valid query'' event. Call to $\Dec'_k$ with $(c,t)$ such that\begin{enumerate}
+
+\item $(c,t)$ is not output of prior $\Enc'_k$ call.
+
+\item $\Dec'_k(c,t)\neq\perp$.
+
+\end{enumerate}
+
+Claim: $\Pr[\text{valid query}]\leq\negl(n)$.
+
+Assume $\AAA$ makes $\leq q(n)$ $\Dec$ queries, where $q$ is polynomial.
+
+Simulation argument: Construct an adversary $\AAA_M$ from $\AAA$, in the $\Macsf_{\AAA_M,\Pi_M}(n)$ experiment. It has access to $\Mac_{k_M}$. At the beginning, $\AAA_M$ chooses a random $k_E$ when $\AAA$ call $\Enc'_k(m)$. $\AAA_M$ simulates this call\begin{enumerate}
+
+\item can compute $c=\Enc_{k_E}(m)$.
+
+\item uses oracle to get $t$.
+
+\end{enumerate}
+
+If $(c,t)$ is the output of a previous call to $\Enc'_k(m)$, return $m$. Else, if this is the $i$th nontrivial query, where $i$ is a random number we picked, halt and output $(c,t)$. Else, return $\perp$.
+
+$$\Pr\left[\Macsf_{\AAA_M,\Pi_M}(m)=1\right]\geq\frac{\Pr[\text{valid query}]}{q(n)}$$
+
+This is definitely the most complicated/confusing proof we've seen so far...
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
