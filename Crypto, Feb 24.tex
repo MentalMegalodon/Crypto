@@ -1,0 +1,199 @@
+% -*-latex-*-
+\documentclass[12pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{cancel}
+
+\usepackage[paper=letterpaper,includehead,left=1in,right=1in,bottom=1in,top=.6in,headheight=.6in]{geometry}
+\usepackage{fancyhdr}
+\fancyhead[L]{University of Texas at Austin\\
+Department of Computer Science}
+\fancyhead[R]{Cryptography\\
+CS 346, Spring 2016}
+\pagestyle{fancy}
+
+\frenchspacing
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\AAA}{\mathcal{A}}
+\newcommand{\CCC}{\mathcal{C}}
+\newcommand{\FFF}{\mathcal{F}}
+\newcommand{\KKK}{\mathcal{K}}
+\newcommand{\MMM}{\mathcal{M}}
+\newcommand{\TTT}{\mathcal{T}}
+
+\newcommand{\Concat}{\parallel}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Enc}{\mathsf{Enc}}
+\newcommand{\Dec}{\mathsf{Dec}}
+\newcommand{\Mac}{\mathsf{Mac}}
+\newcommand{\Macf}{\mathsf{Mac\text{-}forge}}
+\newcommand{\Macsf}{\mathsf{Mac\text{-}sforge}}
+\newcommand{\Encf}{\mathsf{Enc\text{-}forge}}
+\newcommand{\Vrfy}{\mathsf{Vrfy}}
+\newcommand{\Decrypt}[2]{\Dec_{#1}(#2)}
+\newcommand{\Encrypt}[2]{\Enc_{#1}(#2)}
+\newcommand{\Gen}{\mathsf{Gen}}
+\newcommand{\ang}[1]{\langle#1\rangle}
+\newcommand{\GenEncDec}{(\Gen,\Enc,\Dec)}
+\newcommand{\GenMacVrfy}{(\Gen,\Mac,\Vrfy)}
+\newcommand{\ExptEavArgs}[2]{\mathsf{PrivK}^{\mathsf{eav}}_{#1,#2}}
+\newcommand{\ExptCcaArgs}[2]{\mathsf{PrivK}^{\mathsf{CCA}}_{#1,#2}}
+\newcommand{\ExptCpaArgs}[2]{\mathsf{PrivK}^{\mathsf{CPA}}_{#1,#2}}
+\newcommand{\ExptEav}{\ExptEavArgs{\AAA}{\Pi}}
+\newcommand{\ExptCca}{\ExptCcaArgs{\AAA}{\Pi}}
+\newcommand{\ExptCpa}{\ExptCpaArgs{\AAA}{\Pi}}
+\newcommand{\ExptPrgArgs}[2]{\mathsf{PRG}_{#1,#2}}
+\newcommand{\ExptPrg}{\ExptPrgArgs{\AAA}{G}}
+\newcommand{\Fcns}[1]{\mathsf{Func}_n}
+\newcommand{\LengthKey}[1]{\ell_{\mathit{key}}(#1)}
+\newcommand{\LengthInput}[1]{\ell_{\mathit{in}}(#1)}
+\newcommand{\LengthOutput}[1]{\ell_{\mathit{out}}(#1)}
+\newcommand{\xor}{\oplus}
+\newcommand{\Pit}{\widetilde{\Pi}}
+\newcommand{\negl}{{\tt negl}}
+
+\newcommand{\Exec}[5]{\mathit{exec}^{#1}_{#2}(#3,#4,#5)}
+
+\begin{document}
+
+\title{CS 346 Class Notes}
+\date{Feb 22, 2016}
+\author{Mark Lindberg}
+\maketitle
+\thispagestyle{fancy}
+
+{\bf Last Time:}
+
+$\Pi'$ is an authentication scheme if it is\begin{enumerate}
+
+\item Unforgeable.
+
+\item CCA-secure.
+
+\end{enumerate}
+
+We built one last time from a CPA-secure encryption scheme $\Pi_E$, and a strongly secure MAC $\Pi_M$, using the ``Encrypt, then authenticate'' mentality.
+
+The key claim was that $\Pr[\text{valid query}]$ is negligible.
+
+Then $\AAA$ passes some $(c,t)$ to $\Dec'_k$ oracle such that\begin{enumerate}
+
+\item $\Dec'_k((c,t))\neq\perp$
+
+\item $(c,t)$ is not the output of a prior $\Enc'_k$ query.
+
+\end{enumerate}
+
+{\bf This Time:}
+
+It remains to show that $\Pi'$ is a CCA-secure.
+
+Fix an adversary $\AAA$ in the experiment. Let $\ExptCcaArgs{\AAA}{\Pi'}(n)=1$ be the event ``$\AAA$ succeeds".
+
+We need $\Pr[\AAA\text{ succeeds}]\leq\frac{1}{2}+\negl(n)$.
+
+Proof idea: Create an adversary $\AAA_E$ for the experiment $\ExptCpaArgs{\AAA_E}{\Pi_E}(n)$ that simulates $\AAA$.
+
+$\AAA_E$ need to simulate oracle queries of $\AAA$. A key $k_M$ is chosen at uniform.
+
+Case 1: $\AAA_E$ calls $\Enc_{k_E}$ oracle on $m$, gets $c$. $\AAA_E$ computes $t=\Mac_{k_M}(c)$. $\AAA_E$ gives $(c,t)$ to $\AAA$.
+
+Case 2: $\AAA$ calls $\Dec'_k$ oracle on $(c,t)$. If $(c,t)$ output of a previous $\Enc'_k$ call, output corresponding $m$. Otherwise, return $\perp$.
+
+\begin{align*}
+\Pr[\AAA\text{ succeeds}]&=\Pr[\AAA\text{ succeeds}\wedge\text{valid query}]+\Pr[\AAA\text{ succeeds}\wedge\overline{\text{valid query}}]\\
+&\leq\Pr[\text{valid query}] + \Pr[\AAA\text{ succeeds}\wedge\overline{\text{valid query}}]
+\end{align*}
+
+$\AA$ decides on $m_1,m_2$. $\AAA_E$ picks the same $m_1$, $m_2$. Gets back the ciphertext $\Enc_{k_E}(m_b)$. $\AAA_E$ computes $t=\Mac_{k_M}(c)$. It return $(c,t)$ to $\AAA$.
+
+The simulation of $\AAA$ by $\AAA_E$ is faithful as long as ``valid query'' does not occur.
+
+\begin{align*}
+\Pr[\AAA\text{ succeeds}\wedge\overline{\text{valid query}}]&=\Pr[\AAA_E\text{ succeeds}\wedge\overline{\text{valid query}}]\\
+&\leq\Pr[\AAA_E\text{ succeeds}]\\
+&\leq\frac{1}{2}+\negl(n)
+\end{align*}
+
+There's a nice example showing that it is crucial that $k_E, k_M$ are chosen independently. Suppose both were set to the same $k$, $F$ is a strong PRP. This implies that $F^{-1}$ is also a strong PRP. (Pseudo-random permutation)
+
+The CCA-scheme for $\frac{n}{2}$ bit messages is $c=F_k(r||m)$, where both are $\frac{n}{2}$-bit blocks.
+
+For the strongly secure MAC, it is possible to use $t=F^{-1}_k(m)$. Yeah, uh...
+
+If we compose them, the tag is the unencrypted message.
+
+Section 4.7: Information-theoretic MACs.
+
+Experiment: $\Macf_{\AAA,\Pi}^{1-\text{time}}$. $\MMM$ is the message space. $\TTT$ is the tag space. $\KKK$ is the key space. $\AAA$ picks a message $m'\in\MMM$, calls $\Mac_k$ oracle to get $t'$. $\AAA$ outputs a pair $(m,t)$. $\AAA$ succeeds if $\Vrfy_k(m,t)=1$ AND $m\neq m'$.
+
+Is there a MAC $\Pi$ such that $\Pr[\Macf_{\AAA,\Pi}^{1\text{-time}}=1]\leq\frac{1}{|\TTT|}$ for ALL $\AAA$? (Not restricted to PPT.)
+
+Yes. If we use a ``strong universal function,'' also called a pairwise-independent family of functions or strongly uniform family of hash functions.
+
+$f$ is strongly universal if $\forall m,m'$ such that $m\neq m'$ and $t,t'\in\TTT$, $\Pr[f_k(m)=t\wedge f_k(m')=t']=\frac{1}{|\TTT|^2}$.
+
+Theorem: A strongly universal $f$ gives a MAC $\Pi$ which satisfies spiderweb.
+
+Define $\Mac_k(m)$ is $f_k(m)$, with canonical verification.
+
+Claim 1: $\forall m\in \MMM,t\it\TTT=\Mac_k(m)$, $\Pr[f_k(m)=t]=\frac{1}{|\TTT|}$.
+
+Let $m'\in\MMM$, $m'\neq m$ (assuming $|\MMM|\geq 2$). Then
+
+\begin{align*}
+\Pr[f_k(m)=t]&=\sum\limits_{t\in\TTT}\Pr[f_k(m)=t\wedge f_k(m')=t']\\
+&=\sum\limits_{t\in\TTT}\frac{1}{|T|^2}\\
+&=\frac{|\TTT|}{|\TTT|^2}\\
+&=\frac{1}{|\TTT|}
+\end{align*}
+
+Then by conditional probability,
+
+\begin{align*}
+\Pr[f_k(m)&=t\mid f_k(m')=t']\\
+&=\frac{\Pr[f_k(m)=t\wedge f_k(m')=t']}{\Pr[f_k(m')=t']}\\
+&=\frac{\frac{1}{|\TTT|^2}}{\frac{1}{|\TTT|}}\\
+&=\frac{1}{|\TTT|}
+\end{align*}
+
+The classic strong universal function. Pick a prime $p$. Let $\KKK=\Z_p\times\Z_p$, $\MMM=\Z_p$, and $\TTT=\Z_p$.
+
+$f_{a,b}(m)=(a\times m+b)\mod p$.
+
+EXAM:
+
+Study problem sets 1 and 2 solutions! Remember and learn the basic definitions and concepts.
+
+PRG, PRF, PRP, weak PRF.
+
+Notesheet, writing on both sides. Can be printed. YESSSSSS.
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
