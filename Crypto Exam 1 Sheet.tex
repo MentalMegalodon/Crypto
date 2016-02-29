@@ -78,7 +78,7 @@
 
 \defn{Perfect Secrecy}: An encryption scheme $\GenEncDec$ with message space $\MMM$ such that for every probability distribution over $\MMM$, every message $m\in \MMM$, and every ciphertext $c\in\CCC$, for which $\Pr[C=c]>0$, $\Pr[M=m\mid C=c]=\Pr[M=m]$. Equivalently, $\forall m,m'\in\MMM,c\in\CCC$, $\Pr[\Enc_K(m)=c]=\Pr[\Enc_K(m')=c]$.
 
-\defn{Adversarial Indistinguishability Experiment}: $\ExptEav$: The Adversary $\AAA$ outputs $m_0,m_1\in\MMM$. $k\from\Gen$, $b\in\{0,1\}$ uniformly. $c\from\Enc_k(m_b)$ is given to $\AAA$, called challenge ciphertext. $b'\from\AAA$. Output is $1$ (``success'') iff $b`=b$, notated $\ExptEav=1$.
+\defn{$\ExptEav$}: (Adversarial Indistinguishability Experiment): The Adversary $\AAA$ outputs $m_0,m_1\in\MMM$. $k\from\Gen$, $b\in\{0,1\}$ uniformly. $c\from\Enc_k(m_b)$ is given to $\AAA$, called challenge ciphertext. $b'\from\AAA$. Output is $1$ (``success'') iff $b`=b$, notated $\ExptEav=1$.
 
 \defn{Perfect Indistinguishability}: An encryption scheme $\Pi=\GenEncDec$ with $\MMM$, such that $\forall\AAA$, $\Pr[\ExptEav=1]=\frac{1}{2}$.
 
@@ -110,7 +110,7 @@
 
 \defn{Fixed-length encryption scheme}: An encryption scheme such that for a $k\from\Gen(1^n)$, $\Enc_k$ is only defined for messages $m\in\{0,1\}^{\ell(n)}$ (fixed length messages).
 
-\defn{Adversarial Indistinguishability Experiment} (EAV): $\ExptEav(n)$, where $n$ is the security parameter, and success is defined as before. However, $\AAA$ is a PPT adversary, $|m_0|=|m_1|$, but the guessing for $b=b'$ is identical.
+\defn{$\ExptEav(n)$} (Adversarial Indistinguishability Experiment-EAV): , where $n$ is the security parameter, and success is defined as before. However, $\AAA$ is a PPT adversary, $|m_0|=|m_1|$, but the guessing for $b=b'$ is identical.
 
 \defn{EAV-secure} (indistinguishable encryptions in the presence of an eavesdropper): A private key encryption scheme $\GenEncDec$ such than for all PPT adversaries $\AAA$, for all $n$, $\Pr[\ExptEav(n)=1]\leq\frac{1}{2}+\negl(n)$, where the probability is taken over the randomness used by $\AAA$ and the encryption scheme $\Pi$. Equivalently: $\left|\Pr[{\tt out}_{\AAA}(\ExptEav(n,0))=1]-[{\tt out}_{\AAA}(\ExptEav(n,1))=1]\right|\leq\negl(n)$.
 
@@ -156,7 +156,7 @@
 
 \thm{} If $F$ is a PRP and $\ell_{in}(n)\geq n$, $F$ is a PRF.
 
-\defn{Strong PRP}: Let $F:\{0,1\}^*\times\{0,1\}^*\to\{0,1\}^*$ be a n efficient, length-preserving, keyed permutation such that for all PPT distinguishers $D$, $\left|\Pr[D^{F_k^(\cdot),F_k^{-1}(\cdot)}(1^n)=1]-\Pr[D^{f(\cdot),f^{-1}(\cdot)}(1^n)=1]\right|\leq\negl(n)$, where $f\in{\tt Perm}_n$ uniformly. Any strong PRP is a PRP.
+\defn{Strong PRP}: Let $F:\{0,1\}^*\times\{0,1\}^*\to\{0,1\}^*$ be a n efficient, length-preserving, keyed permutation such that for all PPT distinguishers $D$, $\left|\Pr[D^{F_k(\cdot),F_k^{-1}(\cdot)}(1^n)=1]-\right.$ $\left.\Pr[D^{f(\cdot),f^{-1}(\cdot)}(1^n)=1]\right|\leq\negl(n)$, where $f\in{\tt Perm}_n$ uniformly. Any strong PRP is a PRP.
 
 \defn{Synchronized}: Stream cipher mode where sender and receiver must know how much plaintext has been encrypted/decrypted so far. Typically used in a single session between parties.
 

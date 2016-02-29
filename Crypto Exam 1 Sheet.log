@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  29 FEB 2016 00:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  29 FEB 2016 08:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -263,8 +263,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 79--80
  []
 
 
-Overfull \hbox (26.34256pt too wide) in paragraph at lines 81--82
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 :
+Underfull \hbox (badness 10000) in paragraph at lines 81--82
+[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 : (Ad-ver-sar-ial In-dis-tin-
  []
 
 
@@ -281,11 +281,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 95--96
 Underfull \hbox (badness 10000) in paragraph at lines 97--98
 []\OT1/cmr/bx/n/8 Definition: $[]$ \OT1/cmr/m/n/8 (Prob-a-bilis-tic Poly-no-mia
 l
- []
-
-
-Overfull \hbox (23.98141pt too wide) in paragraph at lines 113--114
-[]\OT1/cmr/bx/n/8 Definition: $[]$
  []
 
 
@@ -325,19 +320,32 @@ cmr/m/n/8 :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 159--160
-\OT1/cmr/m/n/8 cient, length-preserving, keyed per-mu-ta-tion
+Underfull \hbox (badness 6284) in paragraph at lines 159--160
+\OMS/cmsy/m/n/8 f\OT1/cmr/m/n/8 0\OML/cmm/m/it/8 ; \OT1/cmr/m/n/8 1\OMS/cmsy/m/
+n/8 g[] ^^B f\OT1/cmr/m/n/8 0\OML/cmm/m/it/8 ; \OT1/cmr/m/n/8 1\OMS/cmsy/m/n/8 
+g[] ! f\OT1/cmr/m/n/8 0\OML/cmm/m/it/8 ; \OT1/cmr/m/n/8 1\OMS/cmsy/m/n/8 g[]$ \
+OT1/cmr/m/n/8 be a n ef-
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 159--160
-\OT1/cmr/m/n/8 such that for all PPT dis-tin-guish-ers $\OML/cmm/m/it/8 D$\OT1/
-cmr/m/n/8 ,
+\OT1/cmr/m/n/8 fi-cient, length-preserving, keyed per-mu-
  []
 
 
-Overfull \hbox (20.90526pt too wide) in paragraph at lines 159--160
-[] \OMS/cmsy/m/n/8 ^^T
+Underfull \hbox (badness 10000) in paragraph at lines 159--160
+\OT1/cmr/m/n/8 ta-tion such that for all PPT dis-tin-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 159--160
+\OT1/cmr/m/n/8 guish-ers $\OML/cmm/m/it/8 D$\OT1/cmr/m/n/8 , $[]$
+ []
+
+
+Underfull \hbox (badness 7238) in paragraph at lines 159--160
+[] \OMS/cmsy/m/n/8 ^^T []\OT1/cmr/m/n/8 (\OML/cmm/m/it/8 n\OT1/cmr/m/n/8 )$, wh
+ere
  []
 
 [1
@@ -356,7 +364,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 183--184
 Here is how much of TeX's memory you used:
  1901 strings out of 493089
  23709 string characters out of 6134842
- 117403 words of memory out of 5000000
+ 122604 words of memory out of 5000000
  5392 multiletter control sequences out of 15000+600000
  9748 words of font info for 38 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -377,7 +385,7 @@ cm/cmsy6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm
 mti8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
 t8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symbols/
 msbm10.pfb>
-Output written on "Crypto Exam 1 Sheet.pdf" (2 pages, 163696 bytes).
+Output written on "Crypto Exam 1 Sheet.pdf" (2 pages, 163798 bytes).
 PDF statistics:
  71 PDF objects out of 1000 (max. 8388607)
  51 compressed objects within 1 object stream
