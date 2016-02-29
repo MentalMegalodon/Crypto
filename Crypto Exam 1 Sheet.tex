@@ -1,0 +1,247 @@
+% -*-latex-*-
+\documentclass[12pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{cancel}
+\usepackage{multicol}
+\setlength{\columnseprule}{0.4pt}
+
+\usepackage[paper=letterpaper,left=.25in,right=.25in,bottom=.25in,top=.25in]{geometry}
+\frenchspacing
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\AAA}{\mathcal{A}}
+\newcommand{\CCC}{\mathcal{C}}
+\newcommand{\FFF}{\mathcal{F}}
+\newcommand{\KKK}{\mathcal{K}}
+\newcommand{\MMM}{\mathcal{M}}
+\newcommand{\TTT}{\mathcal{T}}
+\pagenumbering{gobble}
+\newcommand{\Concat}{\parallel}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\defn}[1]{{\bf Definition:} \underline{#1}}
+\newcommand{\thm}[1]{{\bf Theorem:} \underline{#1}}
+\newcommand{\con}[1]{{\bf Construction:} \underline{#1}}
+\newcommand{\pf}{{\bf Proof:}}
+\newcommand{\Enc}{\mathsf{Enc}}
+\newcommand{\Dec}{\mathsf{Dec}}
+\newcommand{\Mac}{\mathsf{Mac}}
+\newcommand{\Macf}{\mathsf{Mac\text{-}forge}}
+\newcommand{\Macsf}{\mathsf{Mac\text{-}sforge}}
+\newcommand{\Encf}{\mathsf{Enc\text{-}forge}}
+\newcommand{\Vrfy}{\mathsf{Vrfy}}
+\newcommand{\Decrypt}[2]{\Dec_{#1}(#2)}
+\newcommand{\Encrypt}[2]{\Enc_{#1}(#2)}
+\newcommand{\Gen}{\mathsf{Gen}}
+\newcommand{\ang}[1]{\langle#1\rangle}
+\newcommand{\GenEncDec}{(\Gen,\Enc,\Dec)}
+\newcommand{\GenMacVrfy}{(\Gen,\Mac,\Vrfy)}
+\newcommand{\ExptEavArgs}[2]{\mathsf{PrivK}^{\mathsf{eav}}_{#1,#2}}
+\newcommand{\ExptMultArgs}[2]{\mathsf{PrivK}^{\mathsf{mult}}_{#1,#2}}
+\newcommand{\ExptCcaArgs}[2]{\mathsf{PrivK}^{\mathsf{CCA}}_{#1,#2}}
+\newcommand{\ExptCpaArgs}[2]{\mathsf{PrivK}^{\mathsf{CPA}}_{#1,#2}}
+\newcommand{\ExptLrCpa}{\mathsf{PrivK}^{\mathsf{LR-CPA}}_{\AAA,\Pi}}
+\newcommand{\ExptEav}{\ExptEavArgs{\AAA}{\Pi}}
+\newcommand{\ExptMult}{\ExptMultArgs{\AAA}{\Pi}}
+\newcommand{\ExptCca}{\ExptCcaArgs{\AAA}{\Pi}}
+\newcommand{\ExptCpa}{\ExptCpaArgs{\AAA}{\Pi}}
+\newcommand{\ExptPrgArgs}[2]{\mathsf{PRG}_{#1,#2}}
+\newcommand{\ExptPrg}{\ExptPrgArgs{\AAA}{G}}
+\newcommand{\Fcns}[1]{\mathsf{Func}_n}
+\newcommand{\LengthKey}[1]{\ell_{\mathit{key}}(#1)}
+\newcommand{\LengthInput}[1]{\ell_{\mathit{in}}(#1)}
+\newcommand{\LengthOutput}[1]{\ell_{\mathit{out}}(#1)}
+\newcommand{\xor}{\oplus}
+\newcommand{\Pit}{\widetilde{\Pi}}
+\newcommand{\negl}{{\tt negl}}
+\newcommand{\ctr}{{\tt ctr}}
+\newcommand{\from}{\leftarrow}
+
+\newcommand{\Exec}[5]{\mathit{exec}^{#1}_{#2}(#3,#4,#5)}
+\setlength{\parindent}{0cm}
+
+\begin{document}
+%\tiny
+\scriptsize
+\begin{multicols}{3}
+
+\defn{Private-key Encryption Scheme}: Specify a message space $\MMM$, and $\Gen$, $\Dec$, and $\Enc$ algorithms. $\Gen$ is a probabilistic algorithm that outputs a key $k$. $\Enc$ takes $k$ and $m\in\MMM$, and outputs ciphertext $c$. Notation: $c=\Enc_k(m)$. $\Dec$ takes $k$ and $c$, and outputs $m$. Notation: $m=\Dec_k(c)$. Must have $\Dec_k(\Enc_k(m))=m$ for all $k$. The set of valid keys is $\KKK$. WLOG, assume $\Gen$ chooses a uniform $k\in\KKK$.
+
+\defn{Kerchoffs' Principle}: An encryption scheme should be designed to be secure {\it even if} an eavesdropper knows all the details of the scheme, so long as the attacker doesn't know the key being used. 
+
+\defn{Sufficient Key-space Principle}: Any secure encryption scheme must have a key space that is sufficiently large to make an exhaustive-search attack infeasible. Necessary, but not sufficient.
+
+\thm{Bayes Theorem}: $\Pr[A|B]=\frac{\Pr[B|A]\cdot\Pr[A]}{\Pr[B]}$.
+
+\defn{Perfect Secrecy}: An encryption scheme $\GenEncDec$ with message space $\MMM$ such that for every probability distribution over $\MMM$, every message $m\in \MMM$, and every ciphertext $c\in\CCC$, for which $\Pr[C=c]>0$, $\Pr[M=m\mid C=c]=\Pr[M=m]$. Equivalently, $\forall m,m'\in\MMM,c\in\CCC$, $\Pr[\Enc_K(m)=c]=\Pr[\Enc_K(m')=c]$.
+
+\defn{Adversarial Indistinguishability Experiment}: $\ExptEav$: The Adversary $\AAA$ outputs $m_0,m_1\in\MMM$. $k\from\Gen$, $b\in\{0,1\}$ uniformly. $c\from\Enc_k(m_b)$ is given to $\AAA$, called challenge ciphertext. $b'\from\AAA$. Output is $1$ (``success'') iff $b`=b$, notated $\ExptEav=1$.
+
+\defn{Perfect Indistinguishability}: An encryption scheme $\Pi=\GenEncDec$ with $\MMM$, such that $\forall\AAA$, $\Pr[\ExptEav=1]=\frac{1}{2}$.
+
+\thm{}Perfect Indistinguishability $\Leftrightarrow$ Perfect Secrecy.
+
+\defn{One-time Pad}: Fix $\ell>0$. $\MMM=\KKK=\CCC=\{0,1\}^\ell$ (binary strings length $\ell$). $\Gen$: uniform $k\in\KKK$. $\Enc$: $c=k\xor m$, $\xor$ is bitwise xor. $\Dec$: $m=k\xor c$.
+
+\thm{}The one-time pad encryption scheme is perfectly secret.
+
+\thm{}In a perfectly secure encryption scheme, $|\KKK|\geq|\MMM|$. ($|X|$ denotes magnitude/size of $X$.)
+
+\thm{Shannon's Theorem}: Let $\GenEncDec$ be an encryption scheme with $|\MMM|=|\KKK|=|\CCC|$. It is perfectly secret iff all $k\in\KKK$ are chosen with probability $1/|\KKK|$ by $\Gen$, and $\forall m\in\MMM, c\in\CCC$, $\exists!k\in\KKK$ such that $c=\Enc_k(m)$.
+
+\defn{}A cryptographic scheme is \underline{$(t,\varepsilon)$-secure} if any adversary running for time at most $t$ succeeds in breaking the scheme with probability at most $\varepsilon$.
+
+\defn{PPT} (Probabilistic Polynomial Time): An adversary which runs for time at most $p(n)$, where $n$ is the security parameter (length of key), and $p$ is a polynomial.
+
+\defn{\negl} (Negligible): A function $f$ from the natural numbers to the non-negative real numbers such that for every positive polynomial $p$ there is an $N\in\N$ such that $\forall n>N$, $f(n)<\frac{1}{p(n)}$.
+
+\defn{Secure}: A scheme where any PPT adversary succeeds in breaking the scheme with at most negligible probability.
+
+\defn{Probabilistic}: An algorithm that can ``toss a coin'' - access unbiased random bits - as necessary.
+
+\thm{}Let $\negl_1,\negl_2$ be negligible functions, $p$ a polynomial. Then $\negl_1(n)+\negl_2(n)$ and $p(n)\cdot\negl_1(n)$ are both negligible.
+
+\defn{Secure}: A scheme for which every PPT adversary $\AAA$ carrying out an attack of some formally specified type, the probability that $\AAA$ succeeds is negligible.
+
+\defn{}We denote an error from $\Dec$ by $\perp$ (bottom), when it is asked to decrypt a non-valid ciphertext.
+
+\defn{Fixed-length encryption scheme}: An encryption scheme such that for a $k\from\Gen(1^n)$, $\Enc_k$ is only defined for messages $m\in\{0,1\}^{\ell(n)}$ (fixed length messages).
+
+\defn{Adversarial Indistinguishability Experiment} (EAV): $\ExptEav(n)$, where $n$ is the security parameter, and success is defined as before. However, $\AAA$ is a PPT adversary, $|m_0|=|m_1|$, but the guessing for $b=b'$ is identical.
+
+\defn{EAV-secure} (indistinguishable encryptions in the presence of an eavesdropper): A private key encryption scheme $\GenEncDec$ such than for all PPT adversaries $\AAA$, for all $n$, $\Pr[\ExptEav(n)=1]\leq\frac{1}{2}+\negl(n)$, where the probability is taken over the randomness used by $\AAA$ and the encryption scheme $\Pi$. Equivalently: $\left|\Pr[{\tt out}_{\AAA}(\ExptEav(n,0))=1]-[{\tt out}_{\AAA}(\ExptEav(n,1))=1]\right|\leq\negl(n)$.
+
+\thm{}Let $\Pi=(\Enc,\Dec)$ be a fixed-length private-key encryption scheme for messages of length $\ell$ that has indistinguishable encryptions in the presence of an eavesdropper. Then for all PPT adversaries $\AAA$ and any $i\in\{1,\dots,\ell\}$, there is a negligible function $\negl$ such that $\Pr[\AAA(1^n,\Enc_k(m))=m^i]\leq\frac{1}{2}+\negl(n)$, where $m^i$ is the $i^{\text{th}}$ bit of $m$.
+
+\thm{}Let $(\Enc,\Dec)$ be a fixed-length private key encryption scheme for messages of length $\ell$ that is EAV-secure. Then for any PPT algorithm $\AAA$ there is a PPT algorithm $\AAA'$ such that for any $S\subseteq\{0,1\}^\ell$ and any function $f:\{0,1\}^\ell\to\{0,1\}$, $\left|\Pr[\AAA(1^n,\Enc_k(m))=f(m)]-\Pr[\AAA(1^n)=f(m)]\right|\leq\negl(n)$. That is, $\AAA$ cannot determine any function $f$ of the original message $m$, given the ciphertext, with more than negligible probability better than when not given the ciphertext.
+
+\defn{PRG} (Pseudo-Random Generator): Let $\ell$ be a polynomial and $G$ be a deterministic polynomial-time algorithm such that for any $n$ and any input $s\in\{0,1\}^n$, the result $G(s)$ is a string of length $\ell(n)$. The following must hold: For every $n$, $\ell(n)>n$. For any PPT algorithm $D$, there is a negligible function $\negl$ such that $\left|\Pr[D(G(s))=1]-\Pr[D(r)=1]\right|\leq\negl(n)$. $\ell$ is the \underline{expansion factor} of $G$.
+
+\con{Stream Cipher:} Let $G$ be a pseudorandom generator with expansion factor $\ell$. Let $\Gen(1^n)$ output a uniform $k\in\{0,1\}^n$. Let $c=\Enc_k(m)=G(k)\xor m$. Let $\Dec_k(c)=G(k)\xor c$. This is an EAV-secure private-key encryption scheme.
+
+\defn{$\ExptMult$}: The EAV experiment, except $\AAA$ presents 2 equal length lists of equal length messages, $\vec{M}_0=(m_{0,1},\dots,m_{0,t})$ and $\vec{M}_1=(m_{1,1},\dots,m_{1,t})$, the challenger chooses one of the lists and returns the ciphertext of all messages from that list, and $\AAA$ attempts to determine which list was chosen.
+
+\defn{Multiple-EAV-Secure}: Same as EAV secure, except with the $\ExptMult$ experiment.
+
+\thm{}There are private-key encryption schemes which are EAV-secure but not multiple-EAV-secure.
+
+\thm{}Any multiple-EAV-secure private-key encryption scheme is also EAV-secure.
+
+\thm{}If $\Pi$ is a stateless encryption scheme in which $\Enc$ is deterministic, then $\Pi$ cannot be multiple-EAV-secure.
+
+%``During World War II, the British placed mines at certain locations, knowing that the Germans--when finding those mines--would encrypt the locations and send them back to headquarters. These encrypted messages were used by cryptanalysts at Bletchley Park to break the German encryption scheme."
+
+\defn{$\ExptCpa(n)$}: $k\from\Gen(1^n)$, then adversary $\AAA$ is given $1^n$ and oracle access to $\Enc_k(\cdot)$. $\AAA$, after making its oracle calls, outputs $m_0,m_1$, a pair of same length messages. $b$ is chosen, $c=\Enc_k(m_b)$ is computed and returned, and $\AAA$ outputs $b'$. $\AAA$ ``succeeds'' if $b'=b$, and the experiment outputs $1$. Else, the experiment outputs $0$.
+
+\defn{CPA-secure} (Chosen Plaintext Attack): A private-key encryption scheme $\Pi=\GenEncDec$ such that for all PPT adversaries $\AAA$, $\Pr\left[\ExptCpa(n)=1\right]\leq\frac{1}{2}+\negl(n)$.
+
+\defn{$\ExptLrCpa(n)$}: Same as $\ExptMult$, but for CPA-security. Extends to \underline{Multiple-CPA-security}.
+
+\thm{}CPA-secure $\Rightarrow$ multiple-CPA-secure.
+
+\defn{Keyed Function}: A function $F:\{0,1\}^*\times\{0,1\}^*\to\{0,1\}^*$, with first input called key $k$. It is \underline{efficient} if there is a polynomial-time algorithm that computes $F(k,x)$ given $k$ and $x$.
+
+\defn{Length-Preserving}: A keyed function such that $\ell_{key}(n)=\ell_{in}(n)=\ell_{out}(n)$.
+
+\defn{${\tt Func}_n$}: The set of all functions mapping $n$-bit strings to $n$-bit strings. $|{\tt Func}_n|=2^{n\cdot2^n}$.
+
+\defn{PRF} (Pseudo-Random Function): An efficient, length-preserving keyed function such that for all PPT distinguishers $D$, $\left|\Pr[D^{F_k^(\cdot)}(1^n)=1]-\Pr[D^{f(\cdot)}(1^n)=1]\right|\leq\negl(n)$, where $f$ is chosen uniformly from ${\tt Func}_n$. $|\text{PRF}|=2^n$, there are at most that many distinct functions. (Some are not secure.)
+
+\defn{Permutation}: A keyed function $F$ such that $\ell_{in}=\ell_{out}$, and for all $k\in\KKK$, $F_k\{0,1\}^{\ell_{in}(n)}\to\{0,1\}^{\ell_{out}(n)}$ is one-to-one. $F_k$ is \underline{efficient} if $F_k(x)$ and $F_k^{-1}(x)$ are computable with a polynomial-time algorithm.
+
+\defn{PRP} (Pseudo-Random Permutation): Same as a PRF, except $F$ must be indistinguishable from a random $f\in{\tt Perm}_n$, the set of truly random permutations.
+
+\thm{} If $F$ is a PRP and $\ell_{in}(n)\geq n$, $F$ is a PRF.
+
+\defn{Strong PRP}: Let $F:\{0,1\}^*\times\{0,1\}^*\to\{0,1\}^*$ be a n efficient, length-preserving, keyed permutation such that for all PPT distinguishers $D$, $\left|\Pr[D^{F_k^(\cdot),F_k^{-1}(\cdot)}(1^n)=1]-\Pr[D^{f(\cdot),f^{-1}(\cdot)}(1^n)=1]\right|\leq\negl(n)$, where $f\in{\tt Perm}_n$ uniformly. Any strong PRP is a PRP.
+
+\defn{Synchronized}: Stream cipher mode where sender and receiver must know how much plaintext has been encrypted/decrypted so far. Typically used in a single session between parties.
+
+\defn{Unsynchronized}: Stream cipher mode which is stateless, taking a new IV each time.
+
+\defn{ECB Mode} (Electronic Code Book): Here, $c:=\ang{F_k(m_1),F_k(m_2),\dots,F_k(m_\ell)}$, where $m=m_1,m_2,\dots,m_\ell$ is the message and $F$ is a block cipher of length $n$. Deterministic, and therefore not CPA-secure. Should not be used, only included for historical significance.
+
+\defn{CBC Mode} (Cipher Block Chaining): Choose an IV of length $n$. Then, $c_0=IV$, $c_1=F_k(c_0\xor m_1)$, $c_2=F_k(c_1\xor m_2)$, and so on. To decrypt, compute $m_\ell=F^{-1}_k(c_\ell)\xor c_{\ell-1}$, $m_{\ell-1}=F_k^{-1}(c_{\ell-1})\xor c_{\ell-2}$, and so on. If $F$ is a PRP, and $IV$ is chosen uniformly at random, then CBC mode is CPA-secure. It cannot be computed in parallel, since encrypting $c_i$ requires $c_{i-1}$ for $i>0$. Using $c_\ell$ as $IV$ for the next encryption is \underline{not secure}.
+
+\defn{OFB Mode} (Output FeedBack): Let $IV$ be uniformly chosen of length $n$. Then $c_0=IV$, $c_1=F_k(IV)\xor m_1$, $c_2=F_k(F_k(IV))\xor m_2$, \dots $c_\ell=F_k^\ell(IV)\xor m_\ell$, where $F_k^\ell$ denotes $F_k$ applied $\ell$ times. $F$ need not be invertible, and $m_\ell$ need not be of length $n$, the message may be truncated to match its length. OFB mode is CPA-secure. Using $F_k^{\ell}(IV)$ as the next $IV$, producing a synchronized stream cipher, it remains secure.
+
+\defn{CTR Mode} (CounTeR): Pick an $\ctr=IV$, then $c_0=\ctr$, $c_1=F_k(\ctr+1)\xor m_1$, \dots, $c_\ell=F_k(\ctr+\ell)\xor m_\ell$. $F$ need not be invertible. Here, the encryption can be fully parallelized. CTR mode is CPA-secure, assuming $F$ is a PRF. The stateful variant, where $F_k(\ctr+\ell)$ is used as the new $IV$, remains secure.
+
+Note: None of these schemes achieve message integrity in the sense of chapter 4.
+
+\defn{$\ExptCca(n)$}: The adversary $\AAA$ is given access to a decryption oracle in addition to an encryption oracle, then outputs $m_0,m_1$, gets $c:=\Enc_k(m_b)$, the challenge ciphertext, and tries to determine $b'$. $\AAA$ again has oracle access, but cannot query the decryption oracle with $c$. Success is as defined in previous experiments.
+
+\defn{CCA-Secure} (Chosen Ciphertext Attack): A private-key encryption scheme $\Pi$ such that for all PPT adversaries $\AAA$, $\Pr[\ExptCca(n)=1]\leq\frac{1}{2}+\negl(n)$. Any CCA-secure scheme is also multiple-CCA-secure.
+
+Note: NOTHING above this point is CCA-secure.
+
+\defn{Non-Malleability}: An encryption scheme with the property that if the adversary tries to modify a given ciphertext, the result is either an invalid ciphertext or one whose corresponding plaintext has no relation to the original plaintext.
+
+\defn{MAC} (Message Authentication Code): Three probabilistic polynomial-time algorithms $\Gen\Mac\Vrfy$ such that $\Gen$ takes $1^n$, outputs $k$ with $|k|\geq n$. $\Mac$, the tag-generation algorithm, takes $k$ and $m\in\{0,1\}^*$ and outputs tag $t$. Deterministic $\Vrfy$ takes $k$, $m$, $t$, and outputs $b$, where $b=1$ means $t$ is a valid tag for $m$ with key $k$, and $b=0$ means it is not. It must be that $\Vrfy_k(m,\Mac_k(m))=1$. If $\Mac_k$ is only defined for $m\in\{0,1\}^{\ell(n)}$, we call it a fixed-length MAC.
+
+\defn{Canonical Verification}: Deterministic MACs ($\Mac$ is deterministic), where $\Vrfy_k(m,t)$ computes $\tilde{t}:=\Mac_k(m)$, and out puts $1$ iff $\tilde{t}=t$.
+
+\defn{$\Macf_{\AAA,\Pi}(n)$}: $k\from\Gen(1^n)$. $\AAA$ is given $1^n$ and oracle access to $\Mac_k(\cdot)$. Eventually outputs $(m,t)$. Success is defined as $\Vrfy(m,t)=1$, and $m$ is not a message previously queried from the oracle.
+
+\defn{Secure MAC} (Existentially Unforgeable Under an Adaptive Chosen-Message Attack): A MAC such that for all PPT adversaries $\AAA$, $\Pr[\Macf_{\AAA,\Pi}(n)=1]\leq\negl(n)$. Note: This definition offers no protection against replay attacks.
+
+\defn{Strong MAC}: MAC such that $(m,t)$ cannot have been previously output by the oracle, but using $(m,t')$ is a valid guess.
+
+\thm{} With a canonical $\Vrfy$, Strong Mac $\Leftrightarrow$ Secure MAC.
+
+\con{}: $\Mac_k(m)=F_k(m)$, where $k\in\{0,1\}^n$, $m\in\{0,1\}^n$, and $F$ a PRF. $\Vrfy$ is canonical. If $|m|\neq|k|$, $\Mac$ outputs nothing, and $\Vrfy$ outputs $0$. This construction is a secure fixed-length MAC.
+
+\con{} Another $\Mac_k$: Chop $m$ into $n$-bit blocks, $m_1,m_2,\dots,m_d$, let $t_i=\Mac'(m_i)$, and use $(t_1,t_2,\dots,t_d)$ as the tag.
+
+This is bad. This can be easily broken using a reordering attack. Present $m=m_1,m_2$, get tag $t_1,t_2$. Then message $m'=m_2,m_1$ will have tag $t_2,t_1$, which will pass $\Vrfy$.
+
+To combat this attack, break $m$ into $\frac{n}{2}$-bit blocks $m_1,\dots,m_d$, then $t_i=\Mac'_k(\ang{i}\mid\mid m_i)$, where $\ang{i}$ is the $\frac{n}{2}$-bit binary encoding of $i$. This prevents the reordering attack.
+
+This scheme is still insecure. Since we have an arbitrary-length message $\Mac$, we can use a truncation attack, and present $m=m_1,m_2,m_3$, get $(t_1,t_2,t_3)$. Then we can present $m'=m_1,m_2$. The tag $(t_1,t_2)$ will be valid for $m'$.
+
+To prevent the truncation attack, we will include the length $\ell$ of the full message in the calculation. We will chop our message into $\frac{n}{3}$-bit blocks. Then $t_i=\Mac'_k(\ang{\ell}\mid\mid\ang{i}\mid\mid m_i)$. Note: We pad the last block with $0's$ if necessary. The tag will be $(t_1,\dots)$. By this point, we are sending $4\ell$ bits.
+
+Unfortunately, even this scheme is still insecure. It can be attacked with a ``mix and match'' attack. For example, get tag $t=(t_1,t_2,t_3)$ for $m=m_1,m_2,m_3$. Take another message, same length, $m'=m_4,m_5,m_6$, get tag $t'=(t_4,t_5,t_6)$. Then $(t_1,t_5,t_6)$ is a valid tag for $m_1,m_5,m_6$, which has never been queried from the oracle before.
+
+Finally, let's fix all of this! We'll chop our message $m=m_1,\dots,m_d$ into $\frac{n}{4}$ bit blocks, and pick a random $\frac{n}{4}$-bit value $r$ for the entire message, and $t_i=\Mac'_k(r\mid\mid\ang{\ell}\mid\mid\ang{i}\mid\mid m_i)$. $\Mac_k(m)=(r,t_1,\dots,t_d)$. At this point, this is not a deterministic $\Mac$, so $\Vrfy$ has to behave slightly differently, taking into account the random $r$ passed to it. It can reconstruct the tag as above, with this slight extra step.
+
+This is secure!
+
+But it does produce a tag of 4x the length of the message.
+
+\con{CBC-MAC}: Used widely in practice. On input a key $k\in\{0,1\}^n$, $m$ of length $\ell(n)\cdot n$, let $\ell=\ell(n)$, parse $m=m_1,\dots,m_\ell$, set $t_0:=0^n$, then for $i\in\{1,\ell\}$, $t_i:=F_k(t_i-1)$, where $F$ is a PRF. Output $t_\ell$ only as the tag. $\Vrfy$ is done in the canonical way.
+
+To extend this to arbitrary length messages, {\it prepend} the message with length $|m|$, encoded as an $n$-bit string.
+
+Alternatively, have keys $k_1$, $k_2$, compute CBC-MAC using $k_1$, then output tag $\hat{t}:=F_{k_2}(t)$.
+
+\end{multicols}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
