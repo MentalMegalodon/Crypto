@@ -148,7 +148,7 @@
 
 \defn{${\tt Func}_n$}: The set of all functions mapping $n$-bit strings to $n$-bit strings. $|{\tt Func}_n|=2^{n\cdot2^n}$.
 
-\defn{PRF} (Pseudo-Random Function): An efficient, length-preserving keyed function such that for all PPT distinguishers $D$, $\left|\Pr[D^{F_k^(\cdot)}(1^n)=1]-\Pr[D^{f(\cdot)}(1^n)=1]\right|\leq\negl(n)$, where $f$ is chosen uniformly from ${\tt Func}_n$. $|\text{PRF}|=2^n$, there are at most that many distinct functions. (Some are not secure.)
+\defn{PRF} (Pseudo-Random Function): An efficient, length-preserving keyed function such that for all PPT distinguishers $D$, $\left|\Pr[D^{F_k(\cdot)}(1^n)=1]-\Pr[D^{f(\cdot)}(1^n)=1]\right|\leq\negl(n)$, where $f$ is chosen uniformly from ${\tt Func}_n$. $|\text{PRF}|=2^n$, there are at most that many distinct functions. (Some are not secure.)
 
 \defn{Permutation}: A keyed function $F$ such that $\ell_{in}=\ell_{out}$, and for all $k\in\KKK$, $F_k\{0,1\}^{\ell_{in}(n)}\to\{0,1\}^{\ell_{out}(n)}$ is one-to-one. $F_k$ is \underline{efficient} if $F_k(x)$ and $F_k^{-1}(x)$ are computable with a polynomial-time algorithm.
 
