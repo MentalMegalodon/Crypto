@@ -1,0 +1,180 @@
+% -*-latex-*-
+\documentclass[12pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{cancel}
+
+\usepackage[paper=letterpaper,includehead,left=1in,right=1in,bottom=1in,top=.6in,headheight=.6in]{geometry}
+\usepackage{fancyhdr}
+\fancyhead[L]{University of Texas at Austin\\
+Department of Computer Science}
+\fancyhead[R]{Cryptography\\
+CS 346, Spring 2016}
+\pagestyle{fancy}
+
+\frenchspacing
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\AAA}{\mathcal{A}}
+\newcommand{\CCC}{\mathcal{C}}
+\newcommand{\FFF}{\mathcal{F}}
+\newcommand{\KKK}{\mathcal{K}}
+\newcommand{\MMM}{\mathcal{M}}
+\newcommand{\TTT}{\mathcal{T}}
+
+\newcommand{\Concat}{\parallel}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Enc}{\mathsf{Enc}}
+\newcommand{\Dec}{\mathsf{Dec}}
+\newcommand{\Mac}{\mathsf{Mac}}
+\newcommand{\Macf}{\mathsf{Mac\text{-}forge}}
+\newcommand{\Macsf}{\mathsf{Mac\text{-}sforge}}
+\newcommand{\Encf}{\mathsf{Enc\text{-}forge}}
+\newcommand{\Vrfy}{\mathsf{Vrfy}}
+\newcommand{\Decrypt}[2]{\Dec_{#1}(#2)}
+\newcommand{\Encrypt}[2]{\Enc_{#1}(#2)}
+\newcommand{\Gen}{\mathsf{Gen}}
+\newcommand{\ang}[1]{\langle#1\rangle}
+\newcommand{\GenEncDec}{(\Gen,\Enc,\Dec)}
+\newcommand{\GenMacVrfy}{(\Gen,\Mac,\Vrfy)}
+\newcommand{\ExptEavArgs}[2]{\mathsf{PrivK}^{\mathsf{eav}}_{#1,#2}}
+\newcommand{\ExptCcaArgs}[2]{\mathsf{PrivK}^{\mathsf{CCA}}_{#1,#2}}
+\newcommand{\ExptCpaArgs}[2]{\mathsf{PrivK}^{\mathsf{CPA}}_{#1,#2}}
+\newcommand{\ExptHCArgs}[2]{\mathsf{Hash\text{-}coll}_{#1,#2}}
+\newcommand{\ExptEav}{\ExptEavArgs{\AAA}{\Pi}}
+\newcommand{\ExptCca}{\ExptCcaArgs{\AAA}{\Pi}}
+\newcommand{\ExptCpa}{\ExptCpaArgs{\AAA}{\Pi}}
+\newcommand{\ExptHC}{\ExptHCArgs{\AAA}{\Pi}}
+\newcommand{\ExptPrgArgs}[2]{\mathsf{PRG}_{#1,#2}}
+\newcommand{\ExptPrg}{\ExptPrgArgs{\AAA}{G}}
+\newcommand{\Fcns}[1]{\mathsf{Func}_n}
+\newcommand{\LengthKey}[1]{\ell_{\mathit{key}}(#1)}
+\newcommand{\LengthInput}[1]{\ell_{\mathit{in}}(#1)}
+\newcommand{\LengthOutput}[1]{\ell_{\mathit{out}}(#1)}
+\newcommand{\xor}{\oplus}
+\newcommand{\Pit}{\widetilde{\Pi}}
+\newcommand{\negl}{{\tt negl}}
+
+\newcommand{\Exec}[5]{\mathit{exec}^{#1}_{#2}(#3,#4,#5)}
+
+\begin{document}
+
+\title{CS 346 Class Notes}
+\date{Mar 7, 2016}
+\author{Mark Lindberg}
+\maketitle
+\thispagestyle{fancy}
+
+{\bf Last Time:}
+
+5.3 Message Authentication using Hash functions.
+
+``Hash and Mac'' paradigm.
+
+Construction 5.5:
+
+$\Pi=(\Mac,\Vrfy)$. A fixed-length MAC for messages of length $\ell(n)$.
+
+$\Pi_H=(\Gen_H,H)$. A hash function with output length $\ell(n)$.
+
+Construct Mac: $\Pi'=(\Gen',\Mac',\Vrfy')$.
+
+$\Gen'$: Run $\Gen_H$ to get $s$. Also get random $n$-bit $k$. Key is $(s,k)$.
+
+$\Mac'_{s,k}(m)=\Mac_k(H^s(m))$.
+
+$\Vrfy'_{s,k}(m)=\Vrfy_k(H^s(m),t)$.
+
+{\bf This Time:}
+
+Theorem 5.6: If $\Pi$ is secure and $\Pi_H$ is collision resistant, then $\Pi'$ is secure.
+
+Proof: Let $\AAA'$ be an arbitrary PPT adversary in the $\Macf_{\AAA',\Pi'}(n)$ experiment.
+
+Split the $\AAA'$ successes into ``Type I'' and ``Type II''.
+
+$\AAA'$ succeeds if it produces $(m,t)$, such that $m\not\in Q$ (set of messages $\AAA'$ has previously made oracle calls on), and $\Vrfy'_{s,k}(m,t)=1$. From $\Vrfy'$ definition, $\Vrfy_k(H^s(m),t)=1$.
+
+Note that $\Pr[\AAA'\text{ succeeds}] = \Pr[\AAA'\text{ has Type I success}] + \Pr[\AAA'\text{ has Type II success}]$.
+
+\begin{itemize}
+
+\item[Type I]: $H^s(m)=H^s(m')$ for some $m'\in Q$.
+
+\item[Type II]: Otherwise.
+
+\end{itemize}
+
+Type I breaks collision resistance of $\Pi_H$. We can then relate Type II to breaking $\Pi$'s security.
+
+Type I:
+
+To prove: $\Pr[\AAA'\text{ has Type I success}]$ is $\negl$:
+
+Construct a PPT adversary $\AAA_H$ in $\ExptHC(n)$ that simulates $\AAA'$.
+
+$\AAA_H$ gets $s$ and outputs $m,m'$. It succeeds iff $m\neq m'$ and $H^s(m)=H^s(m')$.
+
+To simulate $\AAA'$. $\AAA'$ calls oracle $\Mac'_{k,s}(m)=\Mac_k(H^s(m))$ at outset, $\AAA_H$ generates a random $n$-bit $k$ when $\AAA'$ outputs $(m,t)$.
+
+If $\AAA'$ does not have a Type I success, $\AAA_H$ outputs arbitrary messages.
+
+Otherwise, output $m,m'$ such that $H^s(m)=H^s(m')$ and $m'\in Q$.
+
+Type II:
+
+To prove: $\Pr[\AAA'\text{ has Type II success}]$ is $\negl$.
+
+Construct a PPT adversary $\AAA$ for $\Macf_{A,\Pi}(n)$. $\AAA$ simulates $\AAA'$.
+
+To simulate a call to $\underbrace{\Mac'_{s,k}(m)}_{\text{Oracle of }\AAA'}=\underbrace{\Mac_k(H^s(m))}_{\text{Oracle of }\AAA}$.
+
+At outset, $\AAA$ run $\Gen_H(1^n)$ to get $s$. When $\AAA'$ outputs $m,t$, if $\AAA'$ does not get a Type II success, give an arbitrary output.
+
+Otherwise, $\AAA$ outputs $\left(H^s(m),t\right)$. This will pass $\Vrfy$. Note that $H^s(m)\neq H^s(m')$ for any $m'\neq m$, $m,m'\in Q$, because it's a Type II success, and therefore cannot be a Type I success.
+
+Done!
+
+HMAC construction!
+
+Um, I took a picture. That thing was ridiculous.
+
+Generic birthday attacks on Hash functions.
+
+THE BIRTHDAY PARADOX IS NOT A FREAKING PARADOX, DANGIT.
+
+On a hash function with $\ell(n)$-bit output strings, $O(2^{\frac{\ell(n)}{2}})$ evaluations are sufficient to find a collision with good probability.
+
+Analysis: Assume idealized Hash function (worst case), $n$ bins, throw balls into random bins until we have a collision. Expected time, $\Theta(\sqrt{n})$. Hehehe. This is mathematically provable, and makes perfect sense probabilistically, and there is no paradox. Period. *sigh*
+
+Constant space birthday attack: Pick an IV, and keep hashing the output, and try to see when it loops on itself.
+
+There's a solution to this. Huh.
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
