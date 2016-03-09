@@ -1,0 +1,166 @@
+% -*-latex-*-
+\documentclass[12pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{cancel}
+
+\usepackage[paper=letterpaper,includehead,left=1in,right=1in,bottom=1in,top=.6in,headheight=.6in]{geometry}
+\usepackage{fancyhdr}
+\fancyhead[L]{University of Texas at Austin\\
+Department of Computer Science}
+\fancyhead[R]{Cryptography\\
+CS 346, Spring 2016}
+\pagestyle{fancy}
+
+\frenchspacing
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\AAA}{\mathcal{A}}
+\newcommand{\CCC}{\mathcal{C}}
+\newcommand{\FFF}{\mathcal{F}}
+\newcommand{\KKK}{\mathcal{K}}
+\newcommand{\MMM}{\mathcal{M}}
+\newcommand{\TTT}{\mathcal{T}}
+
+\newcommand{\Concat}{\parallel}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Enc}{\mathsf{Enc}}
+\newcommand{\Dec}{\mathsf{Dec}}
+\newcommand{\Mac}{\mathsf{Mac}}
+\newcommand{\Macf}{\mathsf{Mac\text{-}forge}}
+\newcommand{\Macsf}{\mathsf{Mac\text{-}sforge}}
+\newcommand{\Encf}{\mathsf{Enc\text{-}forge}}
+\newcommand{\Vrfy}{\mathsf{Vrfy}}
+\newcommand{\Decrypt}[2]{\Dec_{#1}(#2)}
+\newcommand{\Encrypt}[2]{\Enc_{#1}(#2)}
+\newcommand{\Gen}{\mathsf{Gen}}
+\newcommand{\ang}[1]{\langle#1\rangle}
+\newcommand{\GenEncDec}{(\Gen,\Enc,\Dec)}
+\newcommand{\GenMacVrfy}{(\Gen,\Mac,\Vrfy)}
+\newcommand{\ExptEavArgs}[2]{\mathsf{PrivK}^{\mathsf{eav}}_{#1,#2}}
+\newcommand{\ExptCcaArgs}[2]{\mathsf{PrivK}^{\mathsf{CCA}}_{#1,#2}}
+\newcommand{\ExptCpaArgs}[2]{\mathsf{PrivK}^{\mathsf{CPA}}_{#1,#2}}
+\newcommand{\ExptHCArgs}[2]{\mathsf{Hash\text{-}coll}_{#1,#2}}
+\newcommand{\ExptEav}{\ExptEavArgs{\AAA}{\Pi}}
+\newcommand{\ExptCca}{\ExptCcaArgs{\AAA}{\Pi}}
+\newcommand{\ExptCpa}{\ExptCpaArgs{\AAA}{\Pi}}
+\newcommand{\ExptHC}{\ExptHCArgs{\AAA}{\Pi}}
+\newcommand{\ExptPrgArgs}[2]{\mathsf{PRG}_{#1,#2}}
+\newcommand{\ExptPrg}{\ExptPrgArgs{\AAA}{G}}
+\newcommand{\Fcns}[1]{\mathsf{Func}_n}
+\newcommand{\LengthKey}[1]{\ell_{\mathit{key}}(#1)}
+\newcommand{\LengthInput}[1]{\ell_{\mathit{in}}(#1)}
+\newcommand{\LengthOutput}[1]{\ell_{\mathit{out}}(#1)}
+\newcommand{\xor}{\oplus}
+\newcommand{\Pit}{\widetilde{\Pi}}
+\newcommand{\negl}{{\tt negl}}
+
+\newcommand{\Exec}[5]{\mathit{exec}^{#1}_{#2}(#3,#4,#5)}
+
+\begin{document}
+
+\title{CS 346 Class Notes}
+\date{Mar 9, 2016}
+\author{Mark Lindberg}
+\maketitle
+\thispagestyle{fancy}
+
+{\bf Last Time:}
+
+Apparently $\epsilon$ is the empty string.
+
+{\bf This Time:}
+
+To find the loop in a linked list (useful for finding collisions in hash function), maintain 2 pointers, $A$ and $B$. Each step, move $A$ forward 1 step, and $B$ forward 2 steps. Repeat this process until the pointers hold the same value. At time $t$, then $B$ has advance $2t$ steps, and $A$ has advance $t$ steps. When they collide, they must both be somewhere in the cycle itself.
+
+Because $B$ has advanced $t$ more steps than $A$, then $t$ must be a multiple of $s$, the cycle length. The first multiple of $s\geq r$, where $r$ is the number of steps from the beginning of the list until the beginning of the cycle is reached.
+
+Let $k=\left\lfloor\frac{r}{s}\right\rfloor$, and $\ell=r\mod{s}$. Then $r=ks+\ell$.
+
+If $\ell=0$, then $r$ is a multiple of $s$, and $t=ks$.
+
+Else, $\ell>0$, then they meet at $t=(k+1)s$. Then the loop index of the meeting point is $(k+1)s-(ks+\ell)=s-\ell$.
+
+Now run pointers $C$ and $D$ at speed 1, one from the head of the list, one from the collision point.
+
+$C$ reaches the loop at step $i\cdot s+\ell$ for $i\geq k$.
+
+$D$ reaches loop index $0$ at step $i\cdot s+\ell$ for $i\geq 0$.
+
+They will meet at step $ks+\ell$.
+
+\underline{Random Oracle Model}:
+
+The Algorithm has access to an oracle for a random function from $\ell_{\in}(n)$-bits to $\ell_{out}(n)$-bits. Compare this to $f$ in the definition of a PRF.
+
+We can easily construct a PRG, collision resistant hash function, or a PRF in the random-oracle model.\begin{enumerate}
+
+\item $\ell_{in}(n)<\ell_{out}(n)$, get a PRG such that $\left|\Pr[D^H(y)=1]-\Pr[D^H(H(x))=1]\right|\leq\negl(n)$.
+
+\item $\ell_{in}>\ell_{out}(n)$, $\Omega\left(2^{\ell_{out}(n)/2}\right)$.
+
+\item $\ell_{in}(n)=2n$. $\ell_{out}(n)=n$. $F_k(x)=F(k,x)=y$, $F_k(x)=H(k||x)$.
+
+\end{enumerate}
+
+Additional applications of hash functions:\begin{enumerate}
+
+\item We can track hash values of known viruses.
+
+\item Deduplication in cloud storage.
+
+\item File location/load balancing in P2P systems.
+
+\item Merkle trees.
+
+\end{enumerate}
+
+\underline{Password Hashing!}\begin{itemize}
+
+\item Store a hash of each user's PWD in the PWD file.
+
+\item This means that is it sufficient for the attacker to find \underline{\it a} preimage of your PWD, which may or may not be your password.
+
+\end{itemize}
+
+The second item may be weak to something called Hellman's scheme.
+
+Preprocessing time $2^{\ell}$. Uses $2^{\frac{2}{3}\ell}$ space.
+
+Subsequently, can answer a preimage query in $2^{\frac{2}{3}\ell}$ time.
+
+Mitigation techniques to fight these attacks:\begin{enumerate}
+
+\item Use a slow hash function--make it take maybe half a second.
+
+\item Add a salt to every password.
+
+\end{enumerate}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
