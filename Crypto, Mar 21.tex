@@ -1,0 +1,201 @@
+% -*-latex-*-
+\documentclass[12pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{cancel}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[usenames, dvipsnames]{color}
+
+\usepackage[paper=letterpaper,includehead,left=1in,right=1in,bottom=1in,top=.6in,headheight=.6in]{geometry}
+\usepackage{fancyhdr}
+\fancyhead[L]{University of Texas at Austin\\
+Department of Computer Science}
+\fancyhead[R]{Cryptography\\
+CS 346, Spring 2016}
+\pagestyle{fancy}
+
+\frenchspacing
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\AAA}{\mathcal{A}}
+\newcommand{\CCC}{\mathcal{C}}
+\newcommand{\FFF}{\mathcal{F}}
+\newcommand{\KKK}{\mathcal{K}}
+\newcommand{\MMM}{\mathcal{M}}
+\newcommand{\TTT}{\mathcal{T}}
+
+\newcommand{\Concat}{\parallel}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Enc}{\mathsf{Enc}}
+\newcommand{\Dec}{\mathsf{Dec}}
+\newcommand{\Mac}{\mathsf{Mac}}
+\newcommand{\Macf}{\mathsf{Mac\text{-}forge}}
+\newcommand{\Macsf}{\mathsf{Mac\text{-}sforge}}
+\newcommand{\Encf}{\mathsf{Enc\text{-}forge}}
+\newcommand{\Vrfy}{\mathsf{Vrfy}}
+\newcommand{\Decrypt}[2]{\Dec_{#1}(#2)}
+\newcommand{\Encrypt}[2]{\Enc_{#1}(#2)}
+\newcommand{\Gen}{\mathsf{Gen}}
+\newcommand{\ang}[1]{\langle#1\rangle}
+\newcommand{\GenEncDec}{(\Gen,\Enc,\Dec)}
+\newcommand{\GenMacVrfy}{(\Gen,\Mac,\Vrfy)}
+\newcommand{\ExptEavArgs}[2]{\mathsf{PrivK}^{\mathsf{eav}}_{#1,#2}}
+\newcommand{\ExptCcaArgs}[2]{\mathsf{PrivK}^{\mathsf{CCA}}_{#1,#2}}
+\newcommand{\ExptCpaArgs}[2]{\mathsf{PrivK}^{\mathsf{CPA}}_{#1,#2}}
+\newcommand{\ExptHCArgs}[2]{\mathsf{Hash\text{-}coll}_{#1,#2}}
+\newcommand{\ExptEav}{\ExptEavArgs{\AAA}{\Pi}}
+\newcommand{\ExptCca}{\ExptCcaArgs{\AAA}{\Pi}}
+\newcommand{\ExptCpa}{\ExptCpaArgs{\AAA}{\Pi}}
+\newcommand{\ExptHC}{\ExptHCArgs{\AAA}{\Pi}}
+\newcommand{\ExptPrgArgs}[2]{\mathsf{PRG}_{#1,#2}}
+\newcommand{\ExptPrg}{\ExptPrgArgs{\AAA}{G}}
+\newcommand{\Fcns}[1]{\mathsf{Func}_n}
+\newcommand{\LengthKey}[1]{\ell_{\mathit{key}}(#1)}
+\newcommand{\LengthInput}[1]{\ell_{\mathit{in}}(#1)}
+\newcommand{\LengthOutput}[1]{\ell_{\mathit{out}}(#1)}
+\newcommand{\xor}{\oplus}
+\newcommand{\Pit}{\widetilde{\Pi}}
+\newcommand{\negl}{{\tt negl}}
+
+\newcommand{\Exec}[5]{\mathit{exec}^{#1}_{#2}(#3,#4,#5)}
+
+\begin{document}
+
+\title{CS 346 Class Notes}
+\date{Mar 21, 2016}
+\author{Mark Lindberg}
+\maketitle
+\thispagestyle{fancy}
+
+{\bf Last Time:}
+
+HW stuff.
+
+4.29:
+
+$$\begin{bmatrix}
+k_{1,1}&k_{1,2}&k_{1,3}&\cdots&{1,n}\\
+k_{2,1}&k_{1,1}&k_{1,2}&\cdots&{2,n}\\
+\vdots&\vdots&\vdots&\ddots&\vdots\\
+k_{\ell,1}&k_{\ell-1,2}&k_{\ell-2,3}&\cdots&{\ell-n+1,1}\\
+\end{bmatrix}$$
+
+Somehow it's diagonal filled, so defining the first column and row define the entire matrix.
+
+$k_{\ell-n+1,1}=k_{\max(1,\ell-n+1),max(1,n-\ell+1)}$.
+
+{\bf This Time:}
+
+Whirlwind tour of chapter 6.
+
+\underline{Practical constructions of symmetric key primitives.}
+
+6.1. \underline{Stream Ciphers.}
+
+These are analogous to PRGs.
+
+6.1.1 \underline{Linear Feedback Shift Register}
+
+There are $n$ bits of state. For each bit of output, shift each of the bits of the state, $s_0$ shifts off as our next random bit, and $s_{n-1}$ will be replaced with the $\xor$ of some subset of the remaining bits. This can be implemented extremely efficiently in hardware.
+
+Seeing $2n$ output bits is enough to determine the initial state $s_0,s_n-1$ {\it and} the subset of bits which are $\xor$ed together to form each successive $s_{n-1}$ value.
+
+This is not a good proxy for a PRG at all.
+
+6.1.2 \underline{Adding Nonlinearity}
+
+\begin{enumerate}
+
+\item Nonlinear feedback function.
+
+\item Output bit is a non-linear function of the state.
+
+\item ``Nonlinear combination generators''.
+
+\end{enumerate}
+
+Trinium: Developed in 2008.
+
+Based on 3 LFSRs.
+
+93 bit LFSR A, 84 bit LFSR B, and 111 bit LFSR C, for a total of 288 bits.
+
+There's a really complicated diagram of how this actually works.
+
+1152 pre-computer iterations is the magic number. :P
+
+Older: RC4 - No longer recommended for use.
+
+Designed for fast software implementation.
+
+It uses byte operations and array indexing.
+
+It is initialized with $(S,i,j)$, where $S$ is a 256-byte array, and $i$ and $j$ are indices in the array.
+
+The key is $16$ bytes (in our example).
+
+Again, there is a weird diagram for how it is initialized.
+
+\href{https://en.wikipedia.org/wiki/RC4}{\textcolor{blue}{\underline{Wikipedia explanation.}}}
+
+\ 
+
+6.2 \underline{Block Ciphers}. (Practical implementation of strong PRPs.)
+
+Fixed key length, and input length = output length (block length).
+
+DES: Block length is 64 bits. Key length is 56 bits.
+
+Triple DES: Key length is 112 bits.
+
+Substitution-Permutation Networks:
+
+Based on Shannon's ``confusion-diffusion paradigm''
+
+Block length: 128 bits.
+
+There are $2^{128}!$ permutations. HOLY. That number has $10^{40}$ DIGITS. If we index from $0$, we need $\log_2(2^{128}!)$ bits, which is $>2^128$. Yeah.
+
+There's another diagram.
+
+Substitution Permutation Networks: SPN.
+
+Use fixed permutations for the f's. Where is the key used?\begin{enumerate}
+
+\item Key mixing - xor input with a round subkey.
+
+\item Substitution - confusion via fixed permutations.
+
+\item Permutation - Diffusion.
+
+\end{enumerate}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
