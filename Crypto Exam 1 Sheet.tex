@@ -156,7 +156,7 @@
 
 \thm{} If $F$ is a PRP and $\ell_{in}(n)\geq n$, $F$ is a PRF.
 
-\defn{Strong PRP}: Let $F:\{0,1\}^*\times\{0,1\}^*\to\{0,1\}^*$ be a n efficient, length-preserving, keyed permutation such that for all PPT distinguishers $D$, $\left|\Pr[D^{F_k(\cdot),F_k^{-1}(\cdot)}(1^n)=1]-\right.$ $\left.\Pr[D^{f(\cdot),f^{-1}(\cdot)}(1^n)=1]\right|\leq\negl(n)$, where $f\in{\tt Perm}_n$ uniformly. Any strong PRP is a PRP.
+\defn{Strong PRP}: Let $F:\{0,1\}^*\times\{0,1\}^*\to\{0,1\}^*$ be an efficient, length-preserving, keyed permutation such that for all PPT distinguishers $D$, $\left|\Pr[D^{F_k(\cdot),F_k^{-1}(\cdot)}(1^n)=1]-\right.$ $\left.\Pr[D^{f(\cdot),f^{-1}(\cdot)}(1^n)=1]\right|\leq\negl(n)$, where $f\in{\tt Perm}_n$ uniformly. Any strong PRP is a PRP.
 
 \defn{Synchronized}: Stream cipher mode where sender and receiver must know how much plaintext has been encrypted/decrypted so far. Typically used in a single session between parties.
 

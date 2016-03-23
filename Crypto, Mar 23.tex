@@ -1,0 +1,182 @@
+% -*-latex-*-
+\documentclass[12pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{cancel}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[usenames, dvipsnames]{color}
+
+\usepackage[paper=letterpaper,includehead,left=1in,right=1in,bottom=1in,top=.6in,headheight=.6in]{geometry}
+\usepackage{fancyhdr}
+\fancyhead[L]{University of Texas at Austin\\
+Department of Computer Science}
+\fancyhead[R]{Cryptography\\
+CS 346, Spring 2016}
+\pagestyle{fancy}
+
+\frenchspacing
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\AAA}{\mathcal{A}}
+\newcommand{\CCC}{\mathcal{C}}
+\newcommand{\FFF}{\mathcal{F}}
+\newcommand{\KKK}{\mathcal{K}}
+\newcommand{\MMM}{\mathcal{M}}
+\newcommand{\TTT}{\mathcal{T}}
+
+\newcommand{\Concat}{\parallel}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Enc}{\mathsf{Enc}}
+\newcommand{\Dec}{\mathsf{Dec}}
+\newcommand{\Mac}{\mathsf{Mac}}
+\newcommand{\Macf}{\mathsf{Mac\text{-}forge}}
+\newcommand{\Macsf}{\mathsf{Mac\text{-}sforge}}
+\newcommand{\Encf}{\mathsf{Enc\text{-}forge}}
+\newcommand{\Vrfy}{\mathsf{Vrfy}}
+\newcommand{\Decrypt}[2]{\Dec_{#1}(#2)}
+\newcommand{\Encrypt}[2]{\Enc_{#1}(#2)}
+\newcommand{\Gen}{\mathsf{Gen}}
+\newcommand{\ang}[1]{\langle#1\rangle}
+\newcommand{\GenEncDec}{(\Gen,\Enc,\Dec)}
+\newcommand{\GenMacVrfy}{(\Gen,\Mac,\Vrfy)}
+\newcommand{\ExptEavArgs}[2]{\mathsf{PrivK}^{\mathsf{eav}}_{#1,#2}}
+\newcommand{\ExptCcaArgs}[2]{\mathsf{PrivK}^{\mathsf{CCA}}_{#1,#2}}
+\newcommand{\ExptCpaArgs}[2]{\mathsf{PrivK}^{\mathsf{CPA}}_{#1,#2}}
+\newcommand{\ExptHCArgs}[2]{\mathsf{Hash\text{-}coll}_{#1,#2}}
+\newcommand{\ExptEav}{\ExptEavArgs{\AAA}{\Pi}}
+\newcommand{\ExptCca}{\ExptCcaArgs{\AAA}{\Pi}}
+\newcommand{\ExptCpa}{\ExptCpaArgs{\AAA}{\Pi}}
+\newcommand{\ExptHC}{\ExptHCArgs{\AAA}{\Pi}}
+\newcommand{\ExptPrgArgs}[2]{\mathsf{PRG}_{#1,#2}}
+\newcommand{\ExptPrg}{\ExptPrgArgs{\AAA}{G}}
+\newcommand{\Fcns}[1]{\mathsf{Func}_n}
+\newcommand{\LengthKey}[1]{\ell_{\mathit{key}}(#1)}
+\newcommand{\LengthInput}[1]{\ell_{\mathit{in}}(#1)}
+\newcommand{\LengthOutput}[1]{\ell_{\mathit{out}}(#1)}
+\newcommand{\xor}{\oplus}
+\newcommand{\Pit}{\widetilde{\Pi}}
+\newcommand{\negl}{{\tt negl}}
+
+\newcommand{\Exec}[5]{\mathit{exec}^{#1}_{#2}(#3,#4,#5)}
+
+\begin{document}
+
+\title{CS 346 Class Notes}
+\date{Mar 23, 2016}
+\author{Mark Lindberg}
+\maketitle
+\thispagestyle{fancy}
+
+{\bf Last Time:}
+
+Chapter 6: \underline{Practical constructions}.
+
+{\bf This Time:}
+
+Continued!
+
+Substitution-Permutation Networks: (SPNs). (AES block cipher is an example of this.)
+
+Each ``round'' has 3 OPS:\begin{enumerate}
+
+\item Key mixing. $x\to x\xor k$, where $k$ is the sub-key for the round $i$.
+
+\item Substitution. Break up $x$ into pieces and apply ``s-boxes''. (Each s-box sounds like a permutation.)
+
+\item Permutation. Permute the bits of $x$ post-substitution by step 2.
+
+\end{enumerate}
+
+Given the key, $k$ (And hence, $\forall i$, $k_i$), then each action of each operation, and therefore the whole process, is invertible. Permutations can be inverted, because they are one to one. With the sub-key, we can ``undo'' the key mixing as well.
+
+Remark: The last round of all 3 OPS should be followed by an additional key mixing step, else the substitution and permutation steps are completely reversible, and therefore pointless.
+
+Feistel Networks: (We'll focus on the ``balanced'' case.)
+
+We take our $n$-bit input and divide it into two halves. (Balance means we can assume clean division.)
+
+Call these halves $L_0$ and $R_0$, both of which are $\frac{n}{2}$-bits.
+
+Let $f_i$ be the round function for round $i$.
+
+For round $i$, compute $R_i=L_{i-1}\xor f_i(R_{i-1})$, and $L_i=R_{i-1}$. (Run the computation and swap them.)
+
+Here, we {\it can} let $f_i$ be non-invertible.
+
+To invert the whole thing, $R_{i-1}=L_i$, and $L_{i-1}=R_i\xor f_{i}(R_{i-1})$.
+
+DES uses a 16-round balanced Feistel Network.\begin{itemize}
+
+\item The round function is the same in each round (Except for round sub-key). The function is sometimes called the DES ``mangler'' function. It has an SPN-like structure.
+
+\end{itemize}
+
+In DES, the block side is 64 bits. The key size is 56 bits. (This is short, one can brute-force it today because of advances in computing.) [There is a variation called triple-DES which addresses this.]
+
+Our round function takes a $64/2=32$-bit input (And produces a 32-bit output, of course).
+
+The sub-key in each round is 48-bits, formed by a permutation of a subset of the key's bites.
+
+There is a trivial expansion step during which half of the bits of the input are duplicated to get a 48-bit result.
+
+This is XORed with the sub key. This gives the key-mixing step.
+
+Next, We break the mixed key into 8x 6-bit chunks in the obvious way.
+
+The $i$th chunk goes to s-box $s_i$ which gives us a ``permutation'' which produces 4 bits. This is the analogue of step 2. It's a little different in that the value shrinks. We get a 32-bit value from the s-boxes.
+
+There is then a 32-bit permutation which is applied to the 32 bits, giving us a 32-bit output.
+
+Mangler function!
+
+Increasing the key-size of a block cipher. (Using DES as an example.)
+
+Idea 1: ``double encryption'', $F_{k_2}(F_{k_1}(x))=y$, but this still admits an attack using roughly $2^{56}$ evaluations.
+
+Idea 2: ``triple encryption'', $F_{k_1}(F_{k_2}(F_{k_1}(x)))=y$. This one needs $2^{112}$ evaluations, so it's good and secure.
+
+\underline{Hash functions in practice!}
+
+SHA, SHA-2, and others, are based on a Davies-Meyer construction (Function $:2n\to n$ plus the Merkle-Damg\r{a}rd function.
+
+Davies-Meyer\begin{itemize}
+
+\item Uses a block cipher to get a compression function.
+
+\end{itemize}
+
+Can be justified in ``ideal-cipher'' model. That is, it can be proved collision resistant in the ``ideal-cipher'' model.
+
+SHA-3.
+
+We don't need to bound the running time of $\AAA$. Just need to bound the number of block cipher evaluations.
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
