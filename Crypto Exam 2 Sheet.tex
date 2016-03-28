@@ -43,11 +43,13 @@
 \newcommand{\ExptMultArgs}[2]{\mathsf{PrivK}^{\mathsf{mult}}_{#1,#2}}
 \newcommand{\ExptCcaArgs}[2]{\mathsf{PrivK}^{\mathsf{CCA}}_{#1,#2}}
 \newcommand{\ExptCpaArgs}[2]{\mathsf{PrivK}^{\mathsf{CPA}}_{#1,#2}}
+\newcommand{\ExptHCArgs}[2]{\mathsf{Hash\text{-}Coll}_{#1,#2}}
 \newcommand{\ExptLrCpa}{\mathsf{PrivK}^{\mathsf{LR-CPA}}_{\AAA,\Pi}}
 \newcommand{\ExptEav}{\ExptEavArgs{\AAA}{\Pi}}
 \newcommand{\ExptMult}{\ExptMultArgs{\AAA}{\Pi}}
 \newcommand{\ExptCca}{\ExptCcaArgs{\AAA}{\Pi}}
 \newcommand{\ExptCpa}{\ExptCpaArgs{\AAA}{\Pi}}
+\newcommand{\ExptHC}{\ExptHCArgs{\AAA}{\Pi}}
 \newcommand{\ExptPrgArgs}[2]{\mathsf{PRG}_{#1,#2}}
 \newcommand{\ExptPrg}{\ExptPrgArgs{\AAA}{G}}
 \newcommand{\ExptEncfArgs}[2]{\mathsf{Enc\text{-}Forge}_{#1,#2}}
@@ -59,6 +61,8 @@
 \newcommand{\xor}{\oplus}
 \newcommand{\Pit}{\widetilde{\Pi}}
 \newcommand{\negl}{{\tt negl}}
+\newcommand{\opad}{{\tt opad}}
+\newcommand{\ipad}{{\tt ipad}}
 \newcommand{\ctr}{{\tt ctr}}
 \newcommand{\from}{\leftarrow}
 
@@ -75,6 +79,62 @@
 \defn{Unforgeable}: A private-key encryption scheme $\Pi$ such that for all PPT adversaries $\AAA$, $\Pr[\ExptEncf(n)=1]\leq\negl(n)$.
 
 \defn{Authenticated}: A private-key encryption scheme that is CCA-secure and unforgeable.
+
+\con{Encrypt-and-authenticate}: Given plaintext $m$, sender transmits $\ang{c,t}$, where $c\from\Enc_{k_E}(m)$ and $t\from\Mac_{k_M}(m)$. The receiver behaves as expected, obtaining $m$ from $\Dec_{k_E}(c)$, and running $\Vrfy_{k_M}(m,t)$. It is likely the case here that $t$ leaks information about the message (often, MACs are deterministic, breaking CPA-security), and so this is \underline{not} an authenticated encryption scheme.
+
+\con{Authenticate-then-encrypt}: Given plaintext $m$, sender transmits $c$, where $t\from\Mac_{k_M}(m)$ and $c\from\Enc_{k_E}(m||t)$. The receiver behaves as expected, decrypting $m||t$ from $c$, then checking $\Vrfy_{k_M}(m,t)$. If, for example, a CBC-mode-with-padding scheme is used, the decrypt algorithm will return a ``bad padding'' error, while if the padding passes, $\Vrfy$ will return an ``authentication failure''. This difference can leak information and allow for various attacks on the scheme, so this is \underline{not} an authenticated encryption scheme.
+
+\con{Encrypt-then-authenticate}: Given plaintext $m$, sender transmits $\ang{c,t}$, where $c\from\Enc_{k_E}(m)$ and $t\from\Mac_{k_M}(m)$. The receiver behaves as expected, checking $\Vrfy_{k_M}(c,t)$, then decrypting $m$ as $\Dec_{k_E}(c)$. Of the three listed, this is the only one that \underline{is} an authenticated encryption scheme (Assuming that $\Enc$ is CPA-secure, $\Mac$ is strongly secure, and $k_E$ and $k_M$ are chosen independently uniformly at random.)
+
+There are 3 major types of network attacker attacks.
+
+In a \underline{reordering attack}, an attacker swaps the order of messages sent across a network, making $c_2$ arrive before $c_1$.
+
+In a \underline{replay attack}, an attacker resends messages later.
+
+In a \underline{reflection attack}, an attacker sends messages from a sender back to them at a later time, which the other person never sent.
+
+The first two attacks can be prevented when $A$ and $B$ (the two people communicating across the network) keep counters, $\ctr_{A,B}$ and $\ctr_{B,A}$, of how many messages have been sent/received in each direction.
+
+A reflection attack can either be prevented by having a reflection bit $b$ to say who the sender is, or by having a different key-set for messages going different directions.
+
+In the $\Macf_{\AAA,\Pi}^{\text{1-time}}$ experiment, adversary $\AAA$ outputs $m'$, is given a tag $t'\from\Mac_k(m')$, then can calculate and think, then output $(m,t)$, $m\neq m'$, which are verified as usual to determine success.
+
+\defn{$\varepsilon$-secure} (also one-time $\varepsilon$-secure): A MAC $\Pi=\GenMacVrfy$ such that for all (even unbounded) adversaries $\AAA$, $\Pr[\Macf_{\AAA,\Pi}^{\text{1-time}}=1]\leq\varepsilon$.
+
+\defn{Strongly universal}: A function $h:\KKK\times\KKK\to\TTT$ such that for all distinct $m,m'\in\MMM$, and all $t,t'\in\TTT$, it holds that $\Pr[h_k(m)=t\wedge h_k(m1)=t']=\frac{1}{|\TTT|^2}$, where the probability is taken over uniform choice of $k\in\KKK$.
+
+\con{}: Let $h:\KKK\times\MMM\to\TTT$ be a strongly universal function. Define a MAC as follows: $\Gen$: uniform $k\in\KKK$. $\Mac$: given $k,m$, output tag $t:=h_k(m)$. $\Vrfy$: On input $k,m,t$, output 1 iff $t\overset{?}{=}h_k(m)$.
+
+\thm{}: If $h$ is a strongly universal function, then the above construction is a $\frac{1}{|\TTT|}$-secure MAC for messages in $\MMM$.
+
+\thm{}: for any prime $p$, the function $h$ defined as $h_{a,b}(m)=[a\cdot m+b\mod{p}]$, where $\MMM=\Z_p$, and $\KKK=\Z_p\times\Z_p$, so $(a,b)\in\KKK$, $m\in\MMM$, is strongly universal.
+
+\defn{Hash function}: A function with output length $\ell$ is a pair of PPT algorithms $(\Gen, H)$ such that $\Gen(1^n)$ outputs a key $s$, and $H$ takes $s$ and a string $x\in\{0,1\}^*$, and outputs a string $H^s(x)\in\{0,1\}^n$, assuming $n$ is implicit in $s$.
+
+\defn{Compression function} (fixed-length hash function for inputs of length $\ell'$): a hash function where $H^s$ is only defined for inputs $x\in\{0,1\}^{\ell'(n)}$, and $\ell'(n)>\ell(n)$.
+
+\defn{$\ExptHC(n)$}: $s\from\Gen(1^n)$. Adversary $\AAA$is given $s$ and outputs $x,x'$. (If $\Pi$ is fixed-length, then $x,x'\in\{0,1\}^{\ell'(n)}$.) The output is 1 (success) iff $x\neq x'$ but $H^s(x)=H^s(x')$.
+
+\defn{Collision resistant}: A has function $\Pi=(\Gen, H)$ such that for all PPT adversaries $\AAA$, $\Pr[\ExptHC(n)=1]\leq\negl(n)$.
+
+\defn{Second-preimage resistance} (target-collision resistance): A hash function such that given $s$ and $x$, an adversary cannot find $x'$ such that $x'\neq x$ and $H^s(x)\neq H^s(x')$.
+
+\defn{Preimage resistance}: A hash function such that given $s$ and $y$, an adversary cannot find $x$ such that $H^s(x)=y$.
+
+\con{Merkle-Damg\r{a}rd}: Let $(\Gen, h)$ be a fixed-length hash function for inputs of length $2n$ and with output length $n$. Construct $(\Gen, H)$ as follows: $\Gen=\Gen$, $H$: given $s$ and $x\in\{0,1\}^*$ of length $L<2^n$, let $B=\left\lceil\frac{L}{n}\right\rceil$, pad $x$ so its length is a multiple of $n$. Consider the padded result as $n$-bit blocks $x_1, \dots,x_B$. Set $x_{B+1}=L$. Set $z_0=0^n$, as the IV. For $i=1,\dots,B+1$, let $z_i=h^s(z_{i-1}||x_i)$. Output $z_{B+1}$.
+
+\thm{} If $(\Gen, h)$ is collision resistant, then so is $(\Gen, H)$.
+
+\con{Hash-and-MAC}: Let $\Pi=(\Mac,\Vrfy)$ be a MAC for length $\ell(n)$, let $\Pi_{H}(\Gen_H,H)$ be a hash function, with output length $\ell(n)$. Construct MAC $\Pi'=(\Gen',\Mac',\Vrfy')$ as follows: $\Gen'$: Takes $1^n$, choses uniform $k\in\{0,1\}^n$, $s\from\Gen_H(1^n)$, outputs key $k'=\ang{k,s}$. $\Mac'$: Given $\ang{k,s}$, $m\in\{0,1\}^*$, output $t\from\Mac_k(H^s(m))$. $\Vrfy'$: Given $\ang{k,s}$, $m\in\{0,1\}^*$, tag $t$, output 1 iff $\Vrfy_k(H^s(m),t)=1$.
+
+\thm{}: If $\Pi$ is a secure MAC and $\Pi_H$ is collision resistant, the above construction is a secure MAC for arbitrary-length messages.
+
+\con{HMAC}: Let $(\Gen_H,H)$ be a Merkle-Damg\r{a}rd-generated hash function on $(Gen_H,h)$ taking inputs of length $n+n'$. Let \opad and \ipad be fixed constants of length $n'$. Define a MAC as follows: $\Gen$: Given $1^n$, $s\from\Gen_H(1^n)$, uniform random $k\in\{0,1\}^{n'}$. Output key $\ang{s,k}$. $\Mac$: Given $\ang{s,k}$ and $m\in\{0,1\}^*$, output $t:=H^s\left((k\xor\opad)||H^s((k\xor\ipad)||m)\right)$. $\Vrfy$: Given $\ang{s,k}$, $m\in\{0,1\}^*$, tag $t$, output $1$ iff $t$ recomputes correctly.
+
+\defn{Weakly collision resistant}: A Hash function $(\Gen_H, H)$ defined as a Merkle-Damg\r{a}rd transform, except with $k=IV$ being uniformly chosen from $\{0,1\}^n$, such that every PPT adversary $\AAA$ has at most negligible success finding a collision (without knowing $k$.).
+
+\thm{}: Let $k_{out}=h^s(IV||(k\xor\opad))$, $\hat{y}$ be the length-padded $y$, including anything before it, $\widetilde{\Mac}_k(y)=h^s(k||\hat{y}$, and $G^s(k)=h^s(IV||(k\xor\opad))||h^s(IV||(k\xor\ipad))=k_{out}||k_{in}$. If $G^s$ is a PRG for any $s$, $\widetilde{\Mac}_k(y)$ is a secure fixed-length mac for messages of length $n$, and $(\Gen_H,H)$ is weakly collision resistant, then HMAC is a secure MAC for arbitrary-length messages.
 
 \end{multicols}
 

@@ -1,0 +1,172 @@
+% -*-latex-*-
+\documentclass[12pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{cancel}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[usenames, dvipsnames]{color}
+
+\usepackage[paper=letterpaper,includehead,left=1in,right=1in,bottom=1in,top=.6in,headheight=.6in]{geometry}
+\usepackage{fancyhdr}
+\fancyhead[L]{University of Texas at Austin\\
+Department of Computer Science}
+\fancyhead[R]{Cryptography\\
+CS 346, Spring 2016}
+\pagestyle{fancy}
+
+\frenchspacing
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\AAA}{\mathcal{A}}
+\newcommand{\CCC}{\mathcal{C}}
+\newcommand{\FFF}{\mathcal{F}}
+\newcommand{\KKK}{\mathcal{K}}
+\newcommand{\MMM}{\mathcal{M}}
+\newcommand{\TTT}{\mathcal{T}}
+
+\newcommand{\Concat}{\parallel}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Enc}{\mathsf{Enc}}
+\newcommand{\Dec}{\mathsf{Dec}}
+\newcommand{\Mac}{\mathsf{Mac}}
+\newcommand{\Macf}{\mathsf{Mac\text{-}forge}}
+\newcommand{\Macsf}{\mathsf{Mac\text{-}sforge}}
+\newcommand{\Encf}{\mathsf{Enc\text{-}forge}}
+\newcommand{\Vrfy}{\mathsf{Vrfy}}
+\newcommand{\Decrypt}[2]{\Dec_{#1}(#2)}
+\newcommand{\Encrypt}[2]{\Enc_{#1}(#2)}
+\newcommand{\Gen}{\mathsf{Gen}}
+\newcommand{\ang}[1]{\langle#1\rangle}
+\newcommand{\GenEncDec}{(\Gen,\Enc,\Dec)}
+\newcommand{\GenMacVrfy}{(\Gen,\Mac,\Vrfy)}
+\newcommand{\ExptEavArgs}[2]{\mathsf{PrivK}^{\mathsf{eav}}_{#1,#2}}
+\newcommand{\ExptCcaArgs}[2]{\mathsf{PrivK}^{\mathsf{CCA}}_{#1,#2}}
+\newcommand{\ExptCpaArgs}[2]{\mathsf{PrivK}^{\mathsf{CPA}}_{#1,#2}}
+\newcommand{\ExptHCArgs}[2]{\mathsf{Hash\text{-}coll}_{#1,#2}}
+\newcommand{\ExptINVTArgs}[2]{\mathsf{Invert}_{#1,#2}}
+\newcommand{\ExptEav}{\ExptEavArgs{\AAA}{\Pi}}
+\newcommand{\ExptCca}{\ExptCcaArgs{\AAA}{\Pi}}
+\newcommand{\ExptCpa}{\ExptCpaArgs{\AAA}{\Pi}}
+\newcommand{\ExptHC}{\ExptHCArgs{\AAA}{\Pi}}
+\newcommand{\ExptINVT}{\ExptINVTArgs{\AAA}{f}}
+\newcommand{\ExptPrgArgs}[2]{\mathsf{PRG}_{#1,#2}}
+\newcommand{\ExptPrg}{\ExptPrgArgs{\AAA}{G}}
+\newcommand{\Fcns}[1]{\mathsf{Func}_n}
+\newcommand{\LengthKey}[1]{\ell_{\mathit{key}}(#1)}
+\newcommand{\LengthInput}[1]{\ell_{\mathit{in}}(#1)}
+\newcommand{\LengthOutput}[1]{\ell_{\mathit{out}}(#1)}
+\newcommand{\xor}{\oplus}
+\newcommand{\Pit}{\widetilde{\Pi}}
+\newcommand{\negl}{{\tt negl}}
+
+\newcommand{\Exec}[5]{\mathit{exec}^{#1}_{#2}(#3,#4,#5)}
+
+\begin{document}
+
+\title{CS 346 Class Notes}
+\date{Mar 23, 2016}
+\author{Mark Lindberg}
+\maketitle
+\thispagestyle{fancy}
+
+{\bf Last Time:}
+
+Theoretical results in chapter 7!
+
+{\bf This Time:}
+
+More chapter 7?! :)
+
+\underline{\bf Chapter 7}: One-way functions.
+
+There are two definitions given in the text, which we will refer to as the ``simple'' definition and the ``complex'' definition.
+
+A \underline{one-way function} is a function $f:\{0,1\}^*\to\{0,1\}^*$ that is\begin{enumerate}
+
+\item Polynomial-time computable.
+
+\item ``Hard to invert''. We will define this in a moment with an experiment.
+
+\end{enumerate}
+
+Experiment: $\ExptINVT(n)$. Choose a uniform random $n$-bit random string $x$. We will compute $y=f(x)$. Then we give $1^n, y$ to $\AAA$, $\AAA$ runs in polynomial time in the size of $\max(n,|y|)$, and $\AAA$ computes $x'$, and succeeds if $f(x')=y$.
+
+We say that $f$ is \underline{hard to invert} if $\forall$ PPT $\AAA$, $\Pr[\ExptINVT(n)=1]\leq\negl(n)$.
+
+A \underline{one-way permutation} is a one-way function that is length-preserving and one-to-one. (bijective, is a permutation.)
+
+Have we seen any one-way functions? What are some likely one-way functions?
+
+Integer factoring. If we are given a number which is the product of 2 large primes $n=p\cdot q$, it is not known how to factor $n$ into $p$ and $q$ in polynomial time in the size of $p$ and $q$. The associated one-way function, $f$, maps $2n$-bits to $2n$-bits. 
+
+Other candidates: \begin{itemize}
+
+\item One in the text based on the subset-sum problem, which is known to be np-complete. We want to know if there is a subset of a given set of integers which add up to a specified target. It takes a set of elements, and a set of indices, and maps them to the set of elements, and the sum of the specified elements. It's easy to compute, but finding the subset that gives the specified sum is hard.
+
+\item Something based on the discrete log problem. Mod arithmetic!
+
+\end{itemize}
+
+PRGs, PRFs, PRPs, Strong PRPs. $\rightarrow$ Existence of 1-way functions established the existence of all structures studied in chapters 3 and 4. (Because we have the stuff listed here.)
+
+Notice that chapter 5 has been left out. Poor little chapter 5. One-way functions are known to be necessary for collision resistant hash functions, however, they are \underline{NOT KNOWN} to be sufficient.
+
+New concept: \underline{Hard-core predicate}. Wat.
+
+We are trying to get PRGs from one-way functions. The key step in this is the Goldreich-Levin Theorem.
+
+First, we will show the expansion factor $\ell(n)=n+1$. The book uses one-way permutations. The output of the one-way permutation, concatenated with hard-core predicate value. But what is that?
+
+\underline{Hard-core predicate}: A function $hc:\{0,1\}^*\to\{0,1\}$ (It goes to a single bit!) is a hard-core predicate for $f:\{0,1\}^*\to\{0,1\}^*$, if $hc$ is polynomial-time computable and $\forall$ PPT adversaries $\AAA$, $\Pr[\AAA(1^n,f(x))=hc(x)]\leq\frac{1}{2}+\negl(n)$, where the probability is over the random $n$-bit value $x$.
+
+\underline{Goldreich-Levin Theorem}: Let $f$ be a 1-way function (respectively, permutation). Then $g$, defined by $g(x, r)=(f(x),r)$, is a 1-way function (respectively, permutation) and $hc(x,r)\neq\underset{\text{bit }i\text{ of }r=1}{\xor}x_i$ is a hard-core predicate for $g$.
+
+Then we want PRGs with arbitrary polynomial expansion factors. In the text, we use 1-way permutations, just for simplification.
+
+Let's see how we get a second bit, $n\to n+2$. We take $f(f(x))||hc(f(x))||hc(x)$. Whee.
+
+For a 3rd bit, $f(f(f(x)))||hc(f(f(x)))||hc(f(x))||hc(x)$. Etc.
+
+PRFs from PRGs.
+
+Use a PRG $G$ with expansion factor $2n$.
+
+We take our $n$-bit key, and construct $F_k(x)$, with $|k|=|x|=n$-bits.
+
+Let $G(x)=G_0(x)||G_1(x)$, basically splitting into 2x $n$-bit outputs.
+
+For each bit of the key, take either $G_0$ or $G_1$ of the output of the previous step, where the first step is to take the key.. So if $n=3$, and $x=011$, $F_k(x)=G_1(G_1(G_0(k)))$ (Should that be of $x$? I think so, but he wrote $k$.)
+
+How to get a PRP? Feistel Network.
+
+Yeah, the picture gets weird, again. Check the textbook. 3 rounds are enough for a PRP, 4 for a strong PRP. Anything less, you fail! 
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
