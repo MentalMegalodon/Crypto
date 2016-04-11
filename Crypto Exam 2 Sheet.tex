@@ -18,6 +18,7 @@
 \newcommand{\FFF}{\mathcal{F}}
 \newcommand{\KKK}{\mathcal{K}}
 \newcommand{\MMM}{\mathcal{M}}
+\newcommand{\XXX}{\mathcal{X}}
 \newcommand{\TTT}{\mathcal{T}}
 \pagenumbering{gobble}
 \newcommand{\Concat}{\parallel}
@@ -134,7 +135,67 @@ In the $\Macf_{\AAA,\Pi}^{\text{1-time}}$ experiment, adversary $\AAA$ outputs $
 
 \defn{Weakly collision resistant}: A Hash function $(\Gen_H, H)$ defined as a Merkle-Damg\r{a}rd transform, except with $k=IV$ being uniformly chosen from $\{0,1\}^n$, such that every PPT adversary $\AAA$ has at most negligible success finding a collision (without knowing $k$.).
 
-\thm{}: Let $k_{out}=h^s(IV||(k\xor\opad))$, $\hat{y}$ be the length-padded $y$, including anything before it, $\widetilde{\Mac}_k(y)=h^s(k||\hat{y}$, and $G^s(k)=h^s(IV||(k\xor\opad))||h^s(IV||(k\xor\ipad))=k_{out}||k_{in}$. If $G^s$ is a PRG for any $s$, $\widetilde{\Mac}_k(y)$ is a secure fixed-length mac for messages of length $n$, and $(\Gen_H,H)$ is weakly collision resistant, then HMAC is a secure MAC for arbitrary-length messages.
+\thm{} Let $k_{out}=h^s(IV||(k\xor\opad))$, $\hat{y}$ be the length-padded $y$, including anything before it, $\widetilde{\Mac}_k(y)=h^s(k||\hat{y})$, and $G^s(k)=h^s(IV||(k\xor\opad))||h^s(IV||(k\xor\ipad))=k_{out}||k_{in}$. If $G^s$ is a PRG for any $s$, $\widetilde{\Mac}_k(y)$ is a secure fixed-length mac for messages of length $n$, and $(\Gen_H,H)$ is weakly collision resistant, then HMAC is a secure MAC for arbitrary-length messages.
+
+\defn{Birthday problem/attack}: Out of $n$ distinct ``days'', if $~\sqrt{n}$ ``people'' are chosen, there is a $50\%$ chance that two of them will share a birthday. This places a lower bound of $2\log(T)$ bits on the size of a hash function, where $T$ is the time we want to run the collision-attack in.
+
+\con{Birthday Attack}: (small space). Start with random valid input $x_0$, then repeatedly compute $x_i=H(x_{i-1})$ and $x_{2i}=H(H(x_{2(i-1)}))$. If they are ever equal, collision has occurred in $x_0,\dots,x_{2(i-1)}$. Calculate each $x_j,x_{j+i}$, and we will find a collision. This runs in $\Theta(2{\ell/2})$ time, where $\ell$ is the length of the output.
+
+\defn{Random Oracle Model}: Model in which the oracle $O$ chooses its function $H$ at random when instantiated, and so probabilities are also taken over the choice of the function $H$. It is then used in whichever function needed. The values of $H$ are considered to be computed the first time they are requested.
+
+\con{} If $\ell_{out}>\ell_{in}$, a random oracle can be used as a pseudorandom generator. If $\ell_{out}<\ell_{in}$, a random oracle is collision resistant. If $F_k(x)=H(k||x)$, where $|k|=|x|=n$, $\ell_{out}=n$, $\ell_{in}=2n$, then $F$ is a pseudorandom function, where $H$ is the pseudorandom oracle.
+
+In general, a proof of security in the random oracle model is significantly better than no proof at all. There have been no successful real-world attacks on schemes proven secure in the random-oracle model, when the random oracle was instantiated properly. Most cryptographic hash functions should not be used ``off the shelf'' to instantiate a random oracle model.
+
+\defn{Virus Fingerprinting}: Process by which a virus scanner stores hashes of known viruses, and compares hashes of email attachments and newly downloaded programs to these known viruses.
+
+\defn{Deduplication}: Process of comparing hashes of new files to hashes of already stored files to eliminate the storing of duplicates. Especially used in the context of cloud storage among multiple users.
+
+\defn{P2P file-sharing}: Processing of storing hashes of available files, allowing for easy requests, etc.
+
+\defn{Merkle-Damg\r{a}rd Tree}: A tree constructed from $2^t$ by placing a file at each leaf of a $t$-level tree, then computing the hash of each pair of files, then each pair of hashes, and so on, until a single root hash is computed. This hash is then stored. Often denoted $\MMM\TTT_t$.
+
+\thm{}Let $(\Gen_H,H)$ be collision resistant. Then $(\Gen_H,\MMM\TTT_t)$ is also collision resistant for any fixed $t$.
+
+\con{Password Hashing}: On a computer, the hash of a password, $hpw$, will be stored, and when the user enters their password, $H(pass)\overset{?}{=}hpw$, if so, authenticated. To prevent dictionary attacks, sometimes a salt is used to calculate $H(s,pass)$.
+
+\defn{min-entropy}: A probability distribution $\XXX$ has $m$ bits of min-entropy if for every fixed value $x$ it holds that $\Pr_{X\from\XXX}[X=x]\leq2^{-m}$. That is, even the most likely outcome occurs with probability at most $2^{-m}$.
+
+\defn{LFSR}: Linear Feedback Shift Register. Very efficient to implement in hardware. Consists of an array of $n$ registers, $s_{n-1},\dots,s_0$ with $n$ feedback coefficients, $c_{n-1},\dots,c_0$. The size of the array is called the degree of the LFSR. On each clock tick, $s_0$ is the output bit, all bits are shifted right by 1 register, and $s_{n-1}$ is set to the XOR of some subset of the other registers, defined as those where $c_i=1$.
+
+These are insecure because the initial state, feedback coefficients, and all future bits, can be determined from watching at most $2n$ consecutive bits of output. We can improve the security by adding non-linear combinations to compute $s_{n-1}$, and it is possible to define such functions with good statistical properties. Trivium is one such stream cipher.
+
+\defn{RC4}: a similar algorithm that also involves bit swaps, is used in many security situations, but is known to have vulnerabilities.
+
+\defn{Avalanche Effect}: In any block cipher, a ``small change'' to the input must affect every bit of the output.
+
+\defn{Feistel Network}: A network which operates in a series of rounds. In each round, a keyed round function is applied. This function need not be invertible. In a \underline{balanced} Feistel Network, the $i$th round of function $\hat{f}_i$ takes as input a sub-key $x_i$ and an $\ell/2$-bit string and outputs an $\ell/2$-bit string.
+
+\con{Feistel Network}: For round $i$ of a Feistel network, divide the input into two halves, $L_{i-1}$ and $R_{i-1}$, each of length $\ell/2$, where $\ell$ is the block length of the cipher. The output $(L_i,R_i)$ is defined as $L_i:=R_{i-1}, R_1=L_{i-1}\xor f_i(R_{i-1})$. In an $r$-round Feistel network, the $\ell$-bit input becomes $(L_0,R_0)$, and the output is the $\ell$-bit value $(L_r,R_r)$.
+
+\thm{}Let $F$ be a keyed function defined by a Feistel Network. Then regardless of the round functions $\{\hat{f}_i\}$, and the number of rounds, $F_k$ is an efficiently invertible permutation for all $k$.
+
+\defn{DES}: Data Encryption Standard. Originally a 16-round Feistel Network with a block length of 64 bits and a key length of 56 bits. Vulnerable to brute-force attacks, but the strengthened triple-DES is widely used today.
+
+\con{DES $\hat{f}$}. $\hat{f}(k_i,R)$, with $k_i\in\{0,1\}^{28}$, $R\in\{0,1\}^{32}$, $R$ is expanded to 48-bit $R'$ by duplicating the first half of the bits, $R'\xor k_i$ is computed, split and passed through an S-box which takes $6$-bit inputs to $4$-bit outputs, and these $4$-bit outputs are mixed to produce the $32$-bit output. DES uses 16 rounds.
+
+The S-boxes were carefully designed to be 4-to-1 functions, and changing any 1 bit of the input changes at least 2 bits of the output. The mixing was designed that the output from any S-box affects the input to six of the $S$-boxes in the next round. Therefore, the mangle function exhibits a strong avalanche effect, which will, after 8 rounds, affect all 64 bits of output. Since DES uses 16 rounds total, similar inputs yields independent-looking outputs.
+
+After 30 years, the best known practical attack on DES is still an exhaustive search through its key space. The 56-bit key length is such that such an attack {\it is} feasible.
+
+\defn{Triple Encryption}: Using 3 keys, $F'_{k_1,k_2,k_3}(x):=F_{k_3}(F_{k_2}^{-1}(F_{k_1}(x)))$. Using only 2, $F'_{k_1,k_2}(x):=F_{k_1}(F_{k_2}^{-1}(F_{k_1}(x)))$. \underline{Triple-DES} is constructed using DES with either of these variants.
+
+\defn{AES}: Advanced Encryption Standard. Has a state array, which is a 4x4 array. Initially the input of the cipher. Then, consists of 4 stages. Stage 1: Add Round Key: A 128-bit sub-key is derived from the master key, and interpreted as a 4x4 array of bytes. The state array is XORed with the sub-key. Stage 2: Sub Bytes: The state array is mixed at the byte level according to a fixed lookup table $S$. Stage 3: Shift Rows: The bytes in each row are shifted to the left by $0$, $1$, $2$, and $3$ places respectively, from the top. Stage 4: Mix Columns: An invertible transformation is applied to each column. It has the property that if the inputs differ in $b>0$ bytes, the outputs differ in at least $5-b$ bytes. In the final round, Mix Columns is replaced with AddRoundKey. To date, there have been no practical attacks significantly better than an exhaustive key-search, so AES is an excellent choice for any cryptographic scheme that requires a (strong) pseudorandom permutation.
+
+\defn{Ideal Cipher Model}: A strengthening of the random-oracle model in which all parties have access to an oracle for a random keyed permutation $F:\{0,1\}^n\times\{0,1\}^\ell\to\{0,1\}^\ell$ and $F^{-1}$.
+
+\con{Davies-Meyer}: Let $F$ be a block cipher with $n$-bit key length and $\ell$-bit block length. The compression function is $h:\{0,1\}^{n+\ell}\to\{0,1\}^\ell$ by $h(k,x):=F_k(x)\xor x$.
+
+\thm{}If $F$ is an ideal cipher, then Davies-Meyer yields a collision-resistant compression function. From the HW, $F_k(x)\xor x\xor k$ also does, but $F_k(x)$ and $F_k(x)\xor k$ do \underline{not}.
+
+Care must be taken when instantiating Davies-Meyer with a particular block cipher, for example, DES causes issues.
+
+MD5 is bad and should not be used, SHA-0 is flawed, SHA-1 has known slight flaws that make it easier to theoretically crack, but has not produced any collisions. It is not recommended for use, SHA-2 seems to be secure, and can be used. SHA-3 is rather powerful, and unusual, and considered very, very secure.
 
 \end{multicols}
 
