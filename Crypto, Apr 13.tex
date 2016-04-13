@@ -1,0 +1,210 @@
+% -*-latex-*-
+\documentclass[12pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{cancel}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{ mathrsfs }
+
+\usepackage[paper=letterpaper,includehead,left=1in,right=1in,bottom=1in,top=.6in,headheight=.6in]{geometry}
+\usepackage{fancyhdr}
+\fancyhead[L]{University of Texas at Austin\\
+Department of Computer Science}
+\fancyhead[R]{Cryptography\\
+CS 346, Spring 2016}
+\pagestyle{fancy}
+
+\frenchspacing
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\G}{\mathbb{G}}
+\newcommand{\AAA}{\mathcal{A}}
+\newcommand{\CCC}{\mathcal{C}}
+\newcommand{\FFF}{\mathcal{F}}
+\newcommand{\KKK}{\mathcal{K}}
+\newcommand{\MMM}{\mathcal{M}}
+\newcommand{\TTT}{\mathcal{T}}
+
+\newcommand{\Concat}{\parallel}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Enc}{\mathsf{Enc}}
+\newcommand{\Dec}{\mathsf{Dec}}
+\newcommand{\Mac}{\mathsf{Mac}}
+\newcommand{\Macf}{\mathsf{Mac\text{-}forge}}
+\newcommand{\Macsf}{\mathsf{Mac\text{-}sforge}}
+\newcommand{\Encf}{\mathsf{Enc\text{-}forge}}
+\newcommand{\Vrfy}{\mathsf{Vrfy}}
+\newcommand{\Decrypt}[2]{\Dec_{#1}(#2)}
+\newcommand{\Encrypt}[2]{\Enc_{#1}(#2)}
+\newcommand{\Gen}{\mathsf{Gen}}
+\newcommand{\GenRSA}{\mathsf{GenRSA}}
+\newcommand{\GenM}{\mathsf{GenModulus}}
+\newcommand{\ang}[1]{\langle#1\rangle}
+\newcommand{\GenEncDec}{(\Gen,\Enc,\Dec)}
+\newcommand{\GenMacVrfy}{(\Gen,\Mac,\Vrfy)}
+\newcommand{\ExptEavArgs}[2]{\mathsf{PrivK}^{\mathsf{eav}}_{#1,#2}}
+\newcommand{\ExptCcaArgs}[2]{\mathsf{PrivK}^{\mathsf{CCA}}_{#1,#2}}
+\newcommand{\ExptCpaArgs}[2]{\mathsf{PrivK}^{\mathsf{CPA}}_{#1,#2}}
+\newcommand{\ExptHCArgs}[2]{\mathsf{Hash\text{-}coll}_{#1,#2}}
+\newcommand{\ExptINVTArgs}[2]{\mathsf{Invert}_{#1,#2}}
+\newcommand{\ExptRSAArgs}[2]{\mathsf{RSA-Inv}_{#1,#2}}
+\newcommand{\ExptDLogArgs}[2]{\mathsf{DLog}_{#1,#2}}
+\newcommand{\FacArgs}[2]{\mathsf{Factor}_{#1,#2}}
+\newcommand{\ExptEav}{\ExptEavArgs{\AAA}{\Pi}}
+\newcommand{\ExptCca}{\ExptCcaArgs{\AAA}{\Pi}}
+\newcommand{\ExptCpa}{\ExptCpaArgs{\AAA}{\Pi}}
+\newcommand{\ExptHC}{\ExptHCArgs{\AAA}{\Pi}}
+\newcommand{\ExptINVT}{\ExptINVTArgs{\AAA}{f}}
+\newcommand{\ExptRSA}{\ExptINVTArgs{\AAA}{\GenRSA}}
+\newcommand{\Fac}{\ExptINVTArgs{\AAA}{\GenM}}
+\newcommand{\ExptPrgArgs}[2]{\mathsf{PRG}_{#1,#2}}
+\newcommand{\ExptPrg}{\ExptPrgArgs{\AAA}{G}}
+\newcommand{\ExptDLog}{\ExptDLogArgs{\AAA}{G}}
+\newcommand{\Fcns}[1]{\mathsf{Func}_n}
+\newcommand{\LengthKey}[1]{\ell_{\mathit{key}}(#1)}
+\newcommand{\LengthInput}[1]{\ell_{\mathit{in}}(#1)}
+\newcommand{\LengthOutput}[1]{\ell_{\mathit{out}}(#1)}
+\newcommand{\xor}{\oplus}
+\newcommand{\Pit}{\widetilde{\Pi}}
+\newcommand{\negl}{{\tt negl}}
+
+\newcommand{\Exec}[5]{\mathit{exec}^{#1}_{#2}(#3,#4,#5)}
+
+\begin{document}
+
+\title{CS 346 Class Notes}
+\date{Apr 13, 2016}
+\author{Mark Lindberg}
+\maketitle
+\thispagestyle{fancy}
+
+{\bf This Time:}
+
+Exam be done.
+
+Prime order subgroup of $\Z_p^*$ ($p$ prime).
+
+$p=rq+1$. $p,q$ prime. Order $q$ subgroup of $\Z_p^*$. $\{h^r\mod{p}\mid h\in\Z_p^*\}$. These are called the $r$th residuals modulo $p$.
+
+It's very easy to show that this is a subgroup.
+
+It is a bit more challenging to prove that the subgroup is order $q$.
+
+Note that $p-1=rq$.
+
+Idea of proof: Show that $f(h)=h^r\mod{p}$ is ``$r$-to-$1$''.
+
+We need to show that groups of $r$ elements each map to 1 element in our new group.
+
+A result from last time, which now becomes useful: Proposition 8.53. Let $G$ be a finite group, $g\in G$ an element of order $i$. Then $g^x=g^y\Leftrightarrow x\equiv y\pmod(i)$.
+
+Corollary: If $g$ is a generator, $g^x=g^y\Leftrightarrow x\equiv y\pmod{|G|}$.
+
+Back to the proof: Let $g$ be a generator of $\Z_p^*$. Therefore, $g$ has order $p-1$ by theorem 8.56. The $g^0,g^1,\dots,g^{p-2}$ are all of the elements of $\Z_p^*$.
+
+Let $i,j\in\Z_{p-1}$.
+
+Claim 1: $g^i$ and $g^j$ have the same $r$th residue mod $p$ if and only if $q\mid(i-j)$.
+
+Proof: Corollary above implies that $g^{ri}\equiv g^{rj}$, working in $\Z_p^*$, if and only if $ri\equiv rj\pmod{p-1}$ if and only if $r(i-j)$ is a multiple of $p-1=qr$, if and only if $i-j$ is a multiple of $q$.
+
+Claim 2: $(g^0)^r,(g^1)^r,\dots,(g^{q-1})^r$ are distinct.
+
+Proof: Immediate from previous claim.
+
+Claim 3: Let $\ell\in\Z_q$.
+
+Then $g^{\ell}, g^{\ell+q}$, $g^{\ell+2q},\dots,g^{\ell+(r-1)q}$ all have the same $r$th residual modulo $p$.
+
+Proof: Immediate from claim 1.
+
+------------------------------------------
+
+Advantages of this type of group $G$, the prime order subgroup:\begin{enumerate}
+
+\item We can generate a uniform random element of $G$: Choose $h$ in $\Z_p^*$ uniformly at random. Take $h^r\mod{p}$.
+
+\item We can identify a generator for $G$ efficiently: Repeat $1)$ until we get an element $\neq$ identity.
+
+\item We can efficiently test whether $h\in\Z_p^*$ belongs to $G$. Claim: $h\in G\Leftrightarrow h^g=1$.
+
+\end{enumerate}
+
+Proof of $3)$: Let $h=g^i$ where $g$ is a generator of $\Z_p^*$. $i\in\Z_{p-1}$.
+
+Claim 1: $h\in G\Leftrightarrow r\mid i$.
+
+Proof: (IF) Assume $r\mid i$. Then $i=cr$, $h=g^{c^r}\Rightarrow h\in G$.
+
+(ONLY IF) Assume $h\in G$. Then $h=(g^j)^r=g^{j^r}$ for some $j\in\Z_{p-1}$. By the corollary from the beginning of class, $i\equiv jr\pmod{p-1}$. Thus, $qr\mid(i-jr)\Rightarrow r\mid(i-jr)\Rightarrow r\mid i$.
+
+Claim 2: $h^q=1\iff r\mid i$.
+
+\begin{align*}
+&h^q=1\\
+\iff&g^{qi}=1=j^0\\
+\iff&(p-1)\mid qi\\
+\iff&rq\mid qi\\
+\iff&r\mid i
+\end{align*}
+
+\underline{\bf ``Discrete Log'' Problem.}
+
+New experiment. $\ExptDLog(n)$. We have $G$ as a group generation algorithm. It generates $(\G,q,g)$, where $\G$ is a cyclic group of order $q$, and $g$ is a generator of $\G$. Our security parameter is $||q||=n$, the number of bits in the binary representation of $q$.
+
+$\ExptDLog(n)$:\begin{itemize}
+
+\item Run $G(1^n)$ to get $(\G,q,g)$.
+
+\item Pick $h$ uniformly at random from $G$.
+
+\item $\AAA$ is given $G,q,g,h$, $\AAA$ outputs $x$.
+
+\item $\AAA$ succeeds if and only if $g^x=h$.
+
+\end{itemize}
+
+Definition 8.6.7: Discrete log is hard relative to $G$ if $\forall$ PPT $\AAA$, $\Pr[\ExptDLog(n)=1]\leq\negl(n)$.
+
+''Discrete log problem is hard'' $\exists G$...
+
+Section 8.4.2: Construction collision resistant hash functions given that we assume the discrete log problem is hard.
+
+Construction 8.78. That's a lot of numbers. There is an explanation of this in the text. (I tend to space out at the end of classes, sorry. 2 classes in a row does that to me.)
+
+Claim: Construction 8.78 gives a collision resistant hash function assuming the discrete-log problem is hard relative to $G$.
+
+Idea of proof: Show that a collision enables us to compute the discrete log of $h$.
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
