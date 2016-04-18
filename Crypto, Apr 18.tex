@@ -1,0 +1,232 @@
+% -*-latex-*-
+\documentclass[12pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{cancel}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{ mathrsfs }
+
+\usepackage[paper=letterpaper,includehead,left=1in,right=1in,bottom=1in,top=.6in,headheight=.6in]{geometry}
+\usepackage{fancyhdr}
+\fancyhead[L]{University of Texas at Austin\\
+Department of Computer Science}
+\fancyhead[R]{Cryptography\\
+CS 346, Spring 2016}
+\pagestyle{fancy}
+
+\frenchspacing
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\G}{\mathbb{G}}
+\newcommand{\AAA}{\mathcal{A}}
+\newcommand{\CCC}{\mathcal{C}}
+\newcommand{\FFF}{\mathcal{F}}
+\newcommand{\KKK}{\mathcal{K}}
+\newcommand{\MMM}{\mathcal{M}}
+\newcommand{\TTT}{\mathcal{T}}
+
+\newcommand{\Concat}{\parallel}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Enc}{\mathsf{Enc}}
+\newcommand{\Dec}{\mathsf{Dec}}
+\newcommand{\Mac}{\mathsf{Mac}}
+\newcommand{\Macf}{\mathsf{Mac\text{-}forge}}
+\newcommand{\Macsf}{\mathsf{Mac\text{-}sforge}}
+\newcommand{\Encf}{\mathsf{Enc\text{-}forge}}
+\newcommand{\Vrfy}{\mathsf{Vrfy}}
+\newcommand{\Decrypt}[2]{\Dec_{#1}(#2)}
+\newcommand{\Encrypt}[2]{\Enc_{#1}(#2)}
+\newcommand{\Gen}{\mathsf{Gen}}
+\newcommand{\GenRSA}{\mathsf{GenRSA}}
+\newcommand{\GenM}{\mathsf{GenModulus}}
+\newcommand{\ang}[1]{\langle#1\rangle}
+\newcommand{\GenEncDec}{(\Gen,\Enc,\Dec)}
+\newcommand{\GenMacVrfy}{(\Gen,\Mac,\Vrfy)}
+\newcommand{\ExptEavArgs}[2]{\mathsf{PrivK}^{\mathsf{eav}}_{#1,#2}}
+\newcommand{\ExptCcaArgs}[2]{\mathsf{PrivK}^{\mathsf{CCA}}_{#1,#2}}
+\newcommand{\ExptCpaArgs}[2]{\mathsf{PrivK}^{\mathsf{CPA}}_{#1,#2}}
+\newcommand{\ExptHCArgs}[2]{\mathsf{Hash\text{-}coll}_{#1,#2}}
+\newcommand{\ExptINVTArgs}[2]{\mathsf{Invert}_{#1,#2}}
+\newcommand{\ExptRSAArgs}[2]{\mathsf{RSA-Inv}_{#1,#2}}
+\newcommand{\ExptDLogArgs}[2]{\mathsf{DLog}_{#1,#2}}
+\newcommand{\ExptKEArgs}[3]{\mathsf{KE}_{#1,#2}^{#3}}
+\newcommand{\FacArgs}[2]{\mathsf{Factor}_{#1,#2}}
+\newcommand{\ExptEav}{\ExptEavArgs{\AAA}{\Pi}}
+\newcommand{\ExptCca}{\ExptCcaArgs{\AAA}{\Pi}}
+\newcommand{\ExptCpa}{\ExptCpaArgs{\AAA}{\Pi}}
+\newcommand{\ExptHC}{\ExptHCArgs{\AAA}{\Pi}}
+\newcommand{\ExptINVT}{\ExptINVTArgs{\AAA}{f}}
+\newcommand{\ExptRSA}{\ExptINVTArgs{\AAA}{\GenRSA}}
+\newcommand{\Fac}{\ExptINVTArgs{\AAA}{\GenM}}
+\newcommand{\ExptPrgArgs}[2]{\mathsf{PRG}_{#1,#2}}
+\newcommand{\ExptPrg}{\ExptPrgArgs{\AAA}{G}}
+\newcommand{\ExptKE}{\ExptKEArgs{\AAA}{\Pi}{EAV}}
+\newcommand{\ExptDLog}{\ExptDLogArgs{\AAA}{G}}
+\newcommand{\Fcns}[1]{\mathsf{Func}_n}
+\newcommand{\LengthKey}[1]{\ell_{\mathit{key}}(#1)}
+\newcommand{\LengthInput}[1]{\ell_{\mathit{in}}(#1)}
+\newcommand{\LengthOutput}[1]{\ell_{\mathit{out}}(#1)}
+\newcommand{\xor}{\oplus}
+\newcommand{\Pit}{\widetilde{\Pi}}
+\newcommand{\negl}{{\tt negl}}
+
+\newcommand{\Exec}[5]{\mathit{exec}^{#1}_{#2}(#3,#4,#5)}
+
+\begin{document}
+
+\title{CS 346 Class Notes}
+\date{Apr 18, 2016}
+\author{Mark Lindberg}
+\maketitle
+\thispagestyle{fancy}
+
+{\bf This Time:}
+
+Chapter 10: Key management and the public-key revolution.
+
+Central question: How can we establish a secret key for communication between two parties?
+
+10.3 Diffie-Hellman key exchange protocol.
+
+10.2 Key distribution centers (KDCs). For example, in a company environment.
+
+Alice wants to communicate with Bob.
+
+Naive approach:\begin{itemize}
+
+\item Alice informs the KDC.
+
+\item The KDC determines the session key $k$.
+
+\item The KDC sends $\Enc_{k_A}(k)$ to Alice, and $\Enc_{k_B}(k)$ to Bob, where $k_A$ is Alice's private key, known only to her and the KDC, and likewise with $k_B$ and Bob.
+
+\end{itemize}
+
+Needham-Schroeder Variant:\begin{itemize}
+
+\item KDC sends $\Enc_{k_A}(k)$ and ticket=$\Enc_{k_B}(k)$ to Alice.
+
+\item Alice sends the ticket to Bob to initiate the session.
+
+\end{itemize}
+
+Rest of the day: 10.3! Diffie-Helman.
+
+Generic key exchange protocol:\begin{itemize}
+
+\item Alice and Bob each get the same security parameter $n$. (in unary)
+
+\item Alice outputs $k_A$; Bob outputs $k_B$, each of which are $n$-bit strings.
+
+\end{itemize}
+
+Security of a key exchange protocol $\Pi$ against an eavesdropper.
+
+$\ExptKE(n)$:\begin{enumerate}
+
+\item Alice, Bob get $1^n$, and run $\Pi$. Produces trace $T$. Key $k=k_A=k_B$.
+
+\item Pick a random bit $b$. If $b=0$, set $\hat{k}=k$. Otherwise, set $\hat{k}$ to a uniformly random $n$-bit value.
+
+\item $\AAA$ is given $T$ and $k$. $\AAA$ outputs $b'\in\{0,1\}$.
+
+\item $\AAA$ succeeds iff $b=b'$.
+
+\end{enumerate}
+
+Security. Definition 10.1. $\Pi$ is secure in the presence of an eavesdropper if $\forall$ PPT adversaries $\AAA$, $\Pr[\ExptKE(n)=1]\leq\frac{1}{2}+\negl(n)$.
+
+Thing.
+
+Let $\G$ be a group generation algorithm, with input $a^n$.
+
+It produces $(G,q,g)$, where \begin{enumerate}
+
+\item $G$ is a (description of a) cyclic group.
+
+\item $q$ is the order of $G$ and $||q||=n$. ($q$ is an $n$-bit number.)
+
+\item $g$ is a generator of $G$.
+
+\end{enumerate}
+
+Diffie-Hellman key exchange protocol. I'm glad I have new glasses.\begin{enumerate}
+
+\item Alice runs $\G(1^n)$ to get $(G,q,g)$.
+
+\item Alice generates a uniform random $x\in\Z_q$. and computes $k_A=g^x$. (Therefore, $k_A$ is a uniform random element of $G$.)
+
+\item Alice sends $(G,q,g,k_A)$ to Bob.
+
+\item Bob generates a uniform random $y=in\Z_q$ and computes $k_B=g^y$. Bob sends $k_B$ to Alice, and outputs $k_A^y=g^{xy}$
+
+\item Alice outputs $k_B^x=g^{xy}$.
+
+\end{enumerate}
+
+This output is their shared, private key.
+
+Stronger assumptions than the discrete log assumption are needed for Diffie-Hellman to be secure.
+
+Computational Diffie-Hellman assumption (CDH).
+
+Given $h_1,h_2$, uniformly random group elements, compute $DH_g(h_1,h_2):=g^{[\log_g(h_1)\cdot\log_g(h_2)]}$.
+
+Due to our security definition being based on indistinguishability, we need a stronger assumption: Decisional Diffie-Hellman!
+
+Definition 8.63. DDH hard relative to $\G$ if $\left|\Pr[\AAA(G,q,g,g^x,g^y,g^z)=1]-Pr[\AAA(G,q,g,g^x,g^y,g^{xy})=1]\right|\leq\negl(n)$.
+
+The probabilities are with respect to\begin{enumerate}
+
+\item Randomness of $\G$.
+
+\item Uniformly random choice of $x,y,z$ in $\Z_q$.
+
+\end{enumerate}
+
+Almost exactly what we need to show security, as in definition 10.1.
+
+Technicality: As described, the output of the protocol is not an $n$-bit string, but a random group element. In practice, we use hash functions to map group elements to $n$-bit strings. Security is shown with respect to the random group element.
+
+The security of the Diffie-Hellman key exchange protocol with respect to the modified definition 10.1.
+
+Let $\AAA$ be an arbitrary PPT adversary.
+
+\begin{align*}
+\Pr[\hat{\ExptKE}(n)=1]&=\frac{1}{2}[\Pr(\hat{\ExptKE}(n)=1\mid b=0)+\Pr(\hat{\ExptKE}(n)=1\mid b=1)]\\
+&=\frac{1}{2}\Pr[\AAA(G,q,g,g^x,g^p,g^{xy})=1]+\frac{1}{2}\Pr[\AAA(G,q,g,g^x,g^y,g^z)]\\
+&\leq\frac{1}{2}+\frac{1}{2}[\Pr(\AAA(G,q,g,g^x,g^y,g^z)=1)-\Pr[\AAA(G,q,g,g^x,g^y,g^{xy}=1]]
+\end{align*}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
