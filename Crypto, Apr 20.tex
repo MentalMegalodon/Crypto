@@ -1,0 +1,225 @@
+% -*-latex-*-
+\documentclass[12pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{cancel}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{ mathrsfs }
+
+\usepackage[paper=letterpaper,includehead,left=1in,right=1in,bottom=1in,top=.6in,headheight=.6in]{geometry}
+\usepackage{fancyhdr}
+\fancyhead[L]{University of Texas at Austin\\
+Department of Computer Science}
+\fancyhead[R]{Cryptography\\
+CS 346, Spring 2016}
+\pagestyle{fancy}
+
+\frenchspacing
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\G}{\mathbb{G}}
+\newcommand{\AAA}{\mathcal{A}}
+\newcommand{\CCC}{\mathcal{C}}
+\newcommand{\FFF}{\mathcal{F}}
+\newcommand{\KKK}{\mathcal{K}}
+\newcommand{\MMM}{\mathcal{M}}
+\newcommand{\TTT}{\mathcal{T}}
+
+\newcommand{\Concat}{\parallel}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Enc}{\mathsf{Enc}}
+\newcommand{\Dec}{\mathsf{Dec}}
+\newcommand{\Mac}{\mathsf{Mac}}
+\newcommand{\Macf}{\mathsf{Mac\text{-}forge}}
+\newcommand{\Macsf}{\mathsf{Mac\text{-}sforge}}
+\newcommand{\Encf}{\mathsf{Enc\text{-}forge}}
+\newcommand{\Vrfy}{\mathsf{Vrfy}}
+\newcommand{\Decrypt}[2]{\Dec_{#1}(#2)}
+\newcommand{\Encrypt}[2]{\Enc_{#1}(#2)}
+\newcommand{\Gen}{\mathsf{Gen}}
+\newcommand{\GenRSA}{\mathsf{GenRSA}}
+\newcommand{\GenM}{\mathsf{GenModulus}}
+\newcommand{\ang}[1]{\langle#1\rangle}
+\newcommand{\GenEncDec}{(\Gen,\Enc,\Dec)}
+\newcommand{\GenMacVrfy}{(\Gen,\Mac,\Vrfy)}
+\newcommand{\ExptEavArgs}[2]{\mathsf{PrivK}^{\mathsf{eav}}_{#1,#2}}
+\newcommand{\ExptPubEavArgs}[2]{\mathsf{PubK}^{\mathsf{eav}}_{#1,#2}}
+\newcommand{\ExptPubCpaArgs}[2]{\mathsf{PubK}^{\mathsf{LR-CPA}}_{#1,#2}}
+\newcommand{\ExptPubCcaArgs}[2]{\mathsf{PubK}^{\mathsf{CCA}}_{#1,#2}}
+\newcommand{\ExptCcaArgs}[2]{\mathsf{PrivK}^{\mathsf{CCA}}_{#1,#2}}
+\newcommand{\ExptCpaArgs}[2]{\mathsf{PrivK}^{\mathsf{CPA}}_{#1,#2}}
+\newcommand{\ExptHCArgs}[2]{\mathsf{Hash\text{-}coll}_{#1,#2}}
+\newcommand{\ExptINVTArgs}[2]{\mathsf{Invert}_{#1,#2}}
+\newcommand{\ExptRSAArgs}[2]{\mathsf{RSA-Inv}_{#1,#2}}
+\newcommand{\ExptDLogArgs}[2]{\mathsf{DLog}_{#1,#2}}
+\newcommand{\ExptKEArgs}[3]{\mathsf{KE}_{#1,#2}^{#3}}
+\newcommand{\FacArgs}[2]{\mathsf{Factor}_{#1,#2}}
+\newcommand{\ExptEav}{\ExptEavArgs{\AAA}{\Pi}}
+\newcommand{\ExptPubEav}{\ExptPubEavArgs{\AAA}{\Pi}}
+\newcommand{\ExptPubCpa}{\ExptPubCpaArgs{\AAA}{\Pi}}
+\newcommand{\ExptPubCca}{\ExptPubCcaArgs{\AAA}{\Pi}}
+\newcommand{\ExptCca}{\ExptCcaArgs{\AAA}{\Pi}}
+\newcommand{\ExptCpa}{\ExptCpaArgs{\AAA}{\Pi}}
+\newcommand{\ExptHC}{\ExptHCArgs{\AAA}{\Pi}}
+\newcommand{\ExptINVT}{\ExptINVTArgs{\AAA}{f}}
+\newcommand{\ExptRSA}{\ExptINVTArgs{\AAA}{\GenRSA}}
+\newcommand{\Fac}{\ExptINVTArgs{\AAA}{\GenM}}
+\newcommand{\ExptPrgArgs}[2]{\mathsf{PRG}_{#1,#2}}
+\newcommand{\ExptPrg}{\ExptPrgArgs{\AAA}{G}}
+\newcommand{\ExptKE}{\ExptKEArgs{\AAA}{\Pi}{EAV}}
+\newcommand{\ExptDLog}{\ExptDLogArgs{\AAA}{G}}
+\newcommand{\Fcns}[1]{\mathsf{Func}_n}
+\newcommand{\LengthKey}[1]{\ell_{\mathit{key}}(#1)}
+\newcommand{\LengthInput}[1]{\ell_{\mathit{in}}(#1)}
+\newcommand{\LengthOutput}[1]{\ell_{\mathit{out}}(#1)}
+\newcommand{\xor}{\oplus}
+\newcommand{\Pit}{\widetilde{\Pi}}
+\newcommand{\negl}{{\tt negl}}
+\newcommand{\from}{\leftarrow}
+
+\newcommand{\Exec}[5]{\mathit{exec}^{#1}_{#2}(#3,#4,#5)}
+
+\begin{document}
+
+\title{CS 346 Class Notes}
+\date{Apr 18, 2016}
+\author{Mark Lindberg}
+\maketitle
+\thispagestyle{fancy}
+
+{\bf This Time:}
+
+Chapter 11: Public-key encryption. PKE.
+
+Definition 11-1. A PKE scheme is a set of PPT algorithms $\Gen\Enc\Dec$ where\begin{enumerate}
+
+\item $\Gen(1^n)$ produces $(pk, sk)$. Assume $pk, sk$ are at least $n$ bits long, and can determine $n$ from $pk, sk$.
+
+\item $\Enc_{pk}(m)$. Randomized, yields ciphertext $c$. $m$ is drawn from the message space, which can depend on $pk$.
+
+\item $\Dec_{sk}(m)$. Computes $m$ or $\perp$, which indicates failure. Deterministic.
+
+\end{enumerate}
+
+Correctness: Except for the possibility with $\negl$ probability over $(pk,sk)$ produced by $\Gen$, $\Dec_{sk}(\Enc_{pk}(m))=m$ for all $m$ in message space.
+
+PKE security notions. Start with indistinguishable in the presence of an eavesdropper. (EAV-security).
+
+Experiment: $\ExptPubEav(n)$. $\Pi=\GenEncDec$.\begin{enumerate}
+
+\item Run $\Gen(1^n)$ to get $(pk,sk)$.
+
+\item $\AAA$ is given $pk$ (!) and outputs equal-length $m_0,m_1$. (From the message space associated with $pk$.
+
+\item Choose a random bit $b$. $c\from\Enc_{pk}(m_b)$. Give $c$ to $\AAA$.
+
+\item $\AAA$ outputs $b'$. $\AAA$ succeeds if $b'=b$.
+
+\end{enumerate}
+
+Definition 11.2: $\Pi$ is EAV-secure if $\forall$ PPT adversaries $\AAA$, $$\Pr[\ExptPubEav(n)=1]\leq\frac{1}{2}+\negl(n).$$
+
+This experiment is analogous to the CPA experiment in the private key setting, since $\AAA$ can compute polynomially many encryptions, because it was given the public key $pk$. (It can make its own oracle.)
+
+Proposition 11.3. If a PKE scheme satisfies definition 11.2, then it is CPA-secure.
+
+Impossibility of perfectly secret PKE. Related to 11.1 (Also 11.2?)
+
+Modify definition 11.2 to \begin{enumerate}
+
+\item Allow $\AAA$ to take an arbitrary amount of time...
+
+\item Require $\Pr[\ExptPubEav(n)=1]=\frac{1}{2}$.
+
+\end{enumerate}
+
+Proof of impossibility: Let $t$ denote the upper bound on random bits used by $\Enc_{pk}$ on input $m_0$.
+
+$\AAA$ can \cancel{run} simulate $\Enc_{pk}(m_0)$ using all possible sequences of $t$ random bits, and see if $c$ is produced. Correctness is now guaranteed.
+
+Insecurity of a deterministic PKE.
+
+Theorem 11.4: No deterministic PKE scheme is secure:
+
+It's easy to compute the $c$ and check with no random bits...
+
+11.2.2: Multiple Encryptions.
+
+Definition 11.5: A PKE scheme $\Pi$ has indistinguishable multiple encryptions if for all PPT $\AAA$, $$\Pr[\ExptPubCpa(n)=1]\leq\frac{1}{2}+\negl(n).$$
+
+Theorem 11.6: (There is a lengthy proof of this in the textbook) If a PKE scheme is CPA-secure, then it is secure with respect to definition 11.5.
+
+Encryption of arbitrary-length messages.
+
+Claim 11.7:
+
+CPA-secure PKE $\Pi$ for fixed length messages $\to$ CPA-secure $\Pi'$ for arbitrary length messages.
+
+CCA-security: $\ExptPubCca(n)$. Main difference here is that $\AAA$ gets access to a decryption oracle, except it can't call $\Dec_{sk}(c)$.
+
+Definition 11.8: $\Pi$ has indistinguishable encryption under a chosen-ciphertext attack if $\forall$ PPT $\AAA$, $$\Pr[\ExptPubCca(n)=1]\leq\frac{1}{2}+\negl(n).$$
+
+The analogue of theorem 11.6 holds!
+
+Unfortunately, claim 11.2 does not.
+
+Section 11.3: Hybrid encryption and the KEM/DEM paradigm.
+
+Private vs public key encryption:\begin{itemize}
+
+\item PKE building blocks are {\it much} slower.
+
+\item Also, PKE has greater ``expansion''.
+
+\item No need for a shared key. ($O(n)$ vs $O(n^2)$).
+
+\end{itemize}
+
+KEM: Key-Encapsulation Mechanism. We'll use a PKE to implement this.
+
+DEM: Data-Encapsulation Mechanism. We'll use private-key encryption here.
+
+KEM=($\Gen$,Encaps, Decaps)\begin{itemize}
+
+\item $\Gen(1^n)$ produces $(pk,sk)$.
+
+\item Encaps$_{pk}(1^n)$ produces $(c,k)$, where length of $k$ = $\ell(n)$.
+
+\item Decaps$_{sk}(c)$ produces $k$.
+
+\end{itemize}
+
+Figure 11.2 from the textbook. Whee. :P
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
