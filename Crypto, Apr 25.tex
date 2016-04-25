@@ -1,0 +1,253 @@
+% -*-latex-*-
+\documentclass[12pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{cancel}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{ mathrsfs }
+
+\usepackage[paper=letterpaper,includehead,left=1in,right=1in,bottom=1in,top=.6in,headheight=.6in]{geometry}
+\usepackage{fancyhdr}
+\fancyhead[L]{University of Texas at Austin\\
+Department of Computer Science}
+\fancyhead[R]{Cryptography\\
+CS 346, Spring 2016}
+\pagestyle{fancy}
+
+\frenchspacing
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\G}{\mathbb{G}}
+\newcommand{\AAA}{\mathcal{A}}
+\newcommand{\CCC}{\mathcal{C}}
+\newcommand{\FFF}{\mathcal{F}}
+\newcommand{\KKK}{\mathcal{K}}
+\newcommand{\MMM}{\mathcal{M}}
+\newcommand{\TTT}{\mathcal{T}}
+
+\newcommand{\Concat}{\parallel}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Enc}{\mathsf{Enc}}
+\newcommand{\Dec}{\mathsf{Dec}}
+\newcommand{\Encaps}{\mathsf{Encaps}}
+\newcommand{\Decaps}{\mathsf{Decaps}}
+\newcommand{\Mac}{\mathsf{Mac}}
+\newcommand{\Macf}{\mathsf{Mac\text{-}forge}}
+\newcommand{\Macsf}{\mathsf{Mac\text{-}sforge}}
+\newcommand{\Encf}{\mathsf{Enc\text{-}forge}}
+\newcommand{\Vrfy}{\mathsf{Vrfy}}
+\newcommand{\Decrypt}[2]{\Dec_{#1}(#2)}
+\newcommand{\Encrypt}[2]{\Enc_{#1}(#2)}
+\newcommand{\Gen}{\mathsf{Gen}}
+\newcommand{\GenRSA}{\mathsf{GenRSA}}
+\newcommand{\GenM}{\mathsf{GenModulus}}
+\newcommand{\ang}[1]{\langle#1\rangle}
+\newcommand{\GenEncDec}{(\Gen,\Enc,\Dec)}
+\newcommand{\GenMacVrfy}{(\Gen,\Mac,\Vrfy)}
+\newcommand{\ExptEavArgs}[2]{\mathsf{PrivK}^{\mathsf{eav}}_{#1,#2}}
+\newcommand{\ExptPubEavArgs}[2]{\mathsf{PubK}^{\mathsf{eav}}_{#1,#2}}
+\newcommand{\ExptPubCpaArgs}[2]{\mathsf{PubK}^{\mathsf{LR-CPA}}_{#1,#2}}
+\newcommand{\ExptPubCcaArgs}[2]{\mathsf{PubK}^{\mathsf{CCA}}_{#1,#2}}
+\newcommand{\ExptCcaArgs}[2]{\mathsf{PrivK}^{\mathsf{CCA}}_{#1,#2}}
+\newcommand{\ExptCpaArgs}[2]{\mathsf{PrivK}^{\mathsf{CPA}}_{#1,#2}}
+\newcommand{\ExptKEMCPAArgs}[2]{\mathsf{KEM}^{\mathsf{CPA}}_{#1,#2}}
+\newcommand{\ExptKEMCCAArgs}[2]{\mathsf{KEM}^{\mathsf{CCA}}_{#1,#2}}
+\newcommand{\ExptHCArgs}[2]{\mathsf{Hash\text{-}coll}_{#1,#2}}
+\newcommand{\ExptINVTArgs}[2]{\mathsf{Invert}_{#1,#2}}
+\newcommand{\ExptRSAArgs}[2]{\mathsf{RSA-Inv}_{#1,#2}}
+\newcommand{\ExptDLogArgs}[2]{\mathsf{DLog}_{#1,#2}}
+\newcommand{\ExptKEArgs}[3]{\mathsf{KE}_{#1,#2}^{#3}}
+\newcommand{\FacArgs}[2]{\mathsf{Factor}_{#1,#2}}
+\newcommand{\ExptEav}{\ExptEavArgs{\AAA}{\Pi}}
+\newcommand{\ExptPubEav}{\ExptPubEavArgs{\AAA}{\Pi}}
+\newcommand{\ExptPubCpa}{\ExptPubCpaArgs{\AAA}{\Pi}}
+\newcommand{\ExptPubCca}{\ExptPubCcaArgs{\AAA}{\Pi}}
+\newcommand{\ExptCca}{\ExptCcaArgs{\AAA}{\Pi}}
+\newcommand{\ExptCpa}{\ExptCpaArgs{\AAA}{\Pi}}
+\newcommand{\ExptKEMCPA}{\ExptKEMCPAArgs{\AAA}{\Pi}}
+\newcommand{\ExptKEMCCA}{\ExptKEMCCAArgs{\AAA}{\Pi}}
+\newcommand{\ExptHC}{\ExptHCArgs{\AAA}{\Pi}}
+\newcommand{\ExptINVT}{\ExptINVTArgs{\AAA}{f}}
+\newcommand{\ExptRSA}{\ExptINVTArgs{\AAA}{\GenRSA}}
+\newcommand{\Fac}{\ExptINVTArgs{\AAA}{\GenM}}
+\newcommand{\ExptPrgArgs}[2]{\mathsf{PRG}_{#1,#2}}
+\newcommand{\ExptPrg}{\ExptPrgArgs{\AAA}{G}}
+\newcommand{\ExptKE}{\ExptKEArgs{\AAA}{\Pi}{EAV}}
+\newcommand{\ExptDLog}{\ExptDLogArgs{\AAA}{G}}
+\newcommand{\Fcns}[1]{\mathsf{Func}_n}
+\newcommand{\LengthKey}[1]{\ell_{\mathit{key}}(#1)}
+\newcommand{\LengthInput}[1]{\ell_{\mathit{in}}(#1)}
+\newcommand{\LengthOutput}[1]{\ell_{\mathit{out}}(#1)}
+\newcommand{\xor}{\oplus}
+\newcommand{\Pit}{\widetilde{\Pi}}
+\newcommand{\negl}{{\tt negl}}
+\newcommand{\from}{\leftarrow}
+
+\newcommand{\Exec}[5]{\mathit{exec}^{#1}_{#2}(#3,#4,#5)}
+
+\begin{document}
+
+\title{CS 346 Class Notes}
+\date{Apr 25, 2016}
+\author{Mark Lindberg}
+\maketitle
+\thispagestyle{fancy}
+
+{\bf This Time:}
+
+Late HWs will only be penalized 2\% per day up to Monday, May 2. You lose 10\% for each day after that. Slip days are, of course, not counted towards this.
+
+Check the notes that the professor has posted on Piazza about problem set 5.
+
+The last problem is probably the most difficult problem.
+
+KEM/DEM paradigm (Key/Data Encapsulation Mechanism). Hybrid encryption produces a PKE scheme. DEM used private-key encryption.
+
+KEM: $(\Gen,\Encaps,\Decaps)$.\begin{itemize}
+
+\item $\Gen(1^n)$ produces $(pk,sk)$.
+
+\item $\Encaps_{pk}(1^n)$ produces $(c,k)$, a Ciphertext and a Key in $\{0,1\}^{\ell(n)}$ (We'll assume $\ell(n)=n$).
+
+\item $\Decaps_{sk}(c)=k$.
+
+\end{itemize}
+
+Construction 11.10. Hybrid Encryption.
+
+KEM $\Pi=(\Gen,\Encaps,\Decaps)$
+
+Private Key Encryption Scheme: $\Pi'=(\Gen',\Enc',\Dec')$.
+
+Produces a PKE: $\Pi''=(\Gen'',\Enc'',\Dec'')$.\begin{itemize}
+
+\item $\Gen''$: Same as $\Gen$. (Yields $(pk,sk)$.)
+
+\item $\Gen''$: On input $pk,m\in\MMM$\begin{enumerate}
+
+\item $(c,k)\from\Encaps(1^n)$.
+
+\item $c'\from\Enc'_k(m)$.
+
+\item Output $c,c'$
+
+\end{enumerate}
+
+\item $\Dec''$: On input $sk$ and $(c,c')$:\begin{enumerate}
+
+\item $k:=\Decaps_{sk}(c)$.
+
+\item $m:=\Dec'_k(c')$.
+
+\end{enumerate}
+
+\end{itemize}
+
+Section 11.3.1: CPA-security.
+
+We want to define the notion of a CPA-secure KEM. Later, we'll also see CCA-secure.
+
+Experiment $\ExptKEMCPA(n)$.\begin{enumerate}
+
+\item $\Gen(1^n)$ is run to obtain $(pk,sk)$, $\Encaps_{pk}(1^n)$ is run to obtain $(c,k)$. [We'll assume $k\in\{0,1\}^n$.]
+
+\item Uniform bit $b$ is chosen. If $b=0$, set $k'=k$. Else, let $k\in\{0,1\}^n$ be chosen uniformly at random.
+
+\item Give $(pk,c,k')$ to $\AAA$. $\AAA$ outputs $b'$.
+
+\item $\AAA$ succeeds iff $b=b'$.
+
+\end{enumerate}
+
+Definition 11.11: KEM $\Pi$ is CPA-secure if $\forall$ PPT $\AAA$, $$\Pr[\ExptKEMCPA(n)=1]\leq\frac{1}{2}+\negl(n).$$
+
+Theorem 11.12: (There is a lengthy proof of this theorem in the textbook.) Construction 11.10 is CPA-secure if $\Pi$ is CPA-secure and $\Pi'$ is ENV-secure.
+
+Section 11.3.2: CCA-security.
+
+$\ExptKEMCCA(n)$. The first 2 steps are the same as $\ExptKEMCPA$. Then:\begin{itemize}
+
+\item[3.] $\AAA$ is given $(pk,c,k')$ and access to $\Decaps_{sk}$ oracle, which it can call on anything but $c$.
+
+\item[4.] $\AAA$ outputs b', and success is as above.
+
+\end{itemize}
+
+Definition 11.13: CCA-secure KEM.
+
+Theorem 11.14: Construction 11.10 is CCA-secure if $\Pi,\Pi'$ are both CCA-secure.
+
+It remains to be shown how to create a CPA- or CCA-secure KEM.
+
+11.4: CHD/DDH-based Encryption.
+
+11.4.1: El Gamal Encryption. It's a variant of the Diffie-Hellman key exchange protocol. (1976).
+
+In 1977, we got RSA!
+
+in 1985, we got the El Gamal extension of Diffie-Hellman for public key encryption.
+
+Lemma 11.15: Let $\G$ be a finit group, $m\in\G$, and $k$ a uniformly random elemnt of $\G$. Then $m\cdot k$ is a uniformly random element of $\G$.
+
+EL GAMAL!\begin{itemize}
+
+\item Group generation algorithm $G$ is the same as in Diffie-Hellman. $G(1^n)=(\G,g,q)$, where $\G$ is a cyclic group of order $q$, $||q||=n$, and $g$ Is a generator of $G$.
+
+\item $\Gen$: Run $G(1^n)$ to get $(G,q,g)$. Choose a uniform $x\in\Z_q$. Let $h=g^x$. ($h$ is a uniformly random element of $\G$.) The public key $pk$ is $(G,q,g,h)$. And the private key $sk$ is $(G,q,g,x)$.
+
+\item $\Enc$: On input $pk=(G,q,g,h)$ and a message $m\in\G$, choose a uniform $y\in\Z_q$, and output ciphertext $(g^y,h^y\cdot m)=(c_1,c_2)$.
+
+\item $\Dec$: On input $(c_1,c_2)$, compute $g^{-xy}\cdot c_2$ to obtain $m$.
+
+\end{itemize}
+
+Theorem 11.18: If DDP is hard relative to $G$, then El Gamal Encryption is CPA-secure.
+
+11.4.2 DDH-based key encapsulation:
+
+Construction 11.19\begin{itemize}
+
+\item $\Gen$: Run $G(1^n)$ to get $(\G,q,g)$. Choose a uniform $x\in\Z_q$. Set $h=g^x$. Specify $H:G\to\{0,1\}^{\ell(n)}$. Public key is $(\G,q,g,h,H)$. Private key is $(\G,g,q,x)$.
+
+\item $\Encaps$: On input $pk=(\G,q,g,h,H)$, choose a uniform $y\in\Z_q$, set $c=g^y$ and $k=H(h^y)$.
+
+\item $\Decaps$: On input $sk=(G,q,g,x)$ and $c(=g^y)$, set $k$ to $H(c^x)$.
+
+\end{itemize}
+
+Theorem 11.20: If DDH hard relative to $G$, and $H$ satisfies certain technical conditions listed in the textbook, then the construction 11.19 (above) is CPA-secure.
+
+Theorem 11.22: If ``GAP-CDH'' hard relative to $G$, and $H$ is modeled as a random oracle, then construction 11.19 (again, above) is CCA-secure.
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
