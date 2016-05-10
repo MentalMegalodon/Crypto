@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  10 APR 2016 23:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  9 MAY 2016 17:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -191,18 +191,18 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 (./Crypto Exam 1+2 Sheet.aux)
 \openout1 = `"Crypto Exam 1+2 Sheet.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -212,15 +212,15 @@ LaTeX Font Info:    ... okay on input line 80.
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
-* h-part:(L,W,R)=(18.06749pt, 578.16002pt, 18.06749pt)
-* v-part:(T,H,B)=(18.06749pt, 758.835pt, 18.06749pt)
+* h-part:(L,W,R)=(14.45377pt, 585.38747pt, 14.45377pt)
+* v-part:(T,H,B)=(14.45377pt, 766.06245pt, 14.45377pt)
 * \paperwidth=614.295pt
 * \paperheight=794.96999pt
-* \textwidth=578.16002pt
-* \textheight=758.835pt
-* \oddsidemargin=-54.2025pt
-* \evensidemargin=-54.2025pt
-* \topmargin=-91.2025pt
+* \textwidth=585.38747pt
+* \textheight=766.06245pt
+* \oddsidemargin=-57.81622pt
+* \evensidemargin=-57.81622pt
+* \topmargin=-94.81622pt
 * \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=10.0pt
@@ -238,264 +238,235 @@ LaTeX Font Info:    ... okay on input line 80.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 85.
+LaTeX Font Info:    Try loading font information for U+msa on input line 86.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 85.
+LaTeX Font Info:    Try loading font information for U+msb on input line 86.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 85--86
+Underfull \hbox (badness 10000) in paragraph at lines 86--87
 []\OT1/cmr/bx/n/5 Definition:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 85--86
+Underfull \hbox (badness 10000) in paragraph at lines 86--87
 []$\OT1/cmr/m/n/5 :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 87--88
-[]\OT1/cmr/bx/n/5 Definition: $[]$\OT1/cmr/m/n/5 :
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 89--90
+Underfull \hbox (badness 10000) in paragraph at lines 90--91
 []\OT1/cmr/bx/n/5 Definition:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 89--90
+Underfull \hbox (badness 10000) in paragraph at lines 90--91
 []$\OT1/cmr/m/n/5 :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 91--92
+Underfull \hbox (badness 10000) in paragraph at lines 92--93
 []\OT1/cmr/bx/n/5 Theorem: $[]$\OT1/cmr/m/n/5 :
  []
 
 
-Underfull \hbox (badness 5726) in paragraph at lines 95--96
+Underfull \hbox (badness 10000) in paragraph at lines 96--97
 []\OT1/cmr/bx/n/5 Definition: $[]$\OT1/cmr/m/n/5 : (Ad-ver-sar-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 95--96
+Underfull \hbox (badness 10000) in paragraph at lines 96--97
 \OT1/cmr/m/n/5 ial In-dis-tin-guisha-bil-ity Ex-per-i-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 97--98
+Underfull \hbox (badness 10000) in paragraph at lines 98--99
 []\OT1/cmr/bx/n/5 Definition:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 97--98
+Underfull \hbox (badness 10000) in paragraph at lines 98--99
+[]$\OT1/cmr/m/n/5 : An
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 98--99
 \OT1/cmr/m/n/5 with $\OMS/cmsy/m/n/5 M$\OT1/cmr/m/n/5 , such that $\OMS/cmsy/m/
 n/5 8A$\OT1/cmr/m/n/5 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 107--108
+Underfull \hbox (badness 10000) in paragraph at lines 108--109
 []\OT1/cmr/bx/n/5 Theorem: $[]$\OT1/cmr/m/n/5 :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 111--112
+Underfull \hbox (badness 10000) in paragraph at lines 112--113
 []\OT1/cmr/bx/n/5 Definition: $[]$ \OT1/cmr/m/n/5 (Prob-a-bilis-tic
  []
 
 
-Underfull \hbox (badness 6725) in paragraph at lines 113--114
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
 []\OT1/cmr/bx/n/5 Definition: $[]$ \OT1/cmr/m/n/5 (Neg-li-gi-ble): A
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 125--126
+Underfull \hbox (badness 5203) in paragraph at lines 116--117
+\OT1/cmr/m/n/5 any PPT ad-ver-sary suc-ceeds in
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 126--127
 []\OT1/cmr/bx/n/5 Definition:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 125--126
+Underfull \hbox (badness 10000) in paragraph at lines 126--127
 []$\OT1/cmr/m/n/5 :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 129--130
+Underfull \hbox (badness 10000) in paragraph at lines 130--131
 []\OT1/cmr/bx/n/5 Definition: $[]$ \OT1/cmr/m/n/5 (in-dis-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 129--130
+Underfull \hbox (badness 10000) in paragraph at lines 130--131
 \OT1/cmr/m/n/5 tin-guish-able en-cryp-tions in the
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 129--130
+Underfull \hbox (badness 10000) in paragraph at lines 130--131
 \OT1/cmr/m/n/5 pri-vate key en-cryp-tion scheme
  []
 
 
-Underfull \hbox (badness 7740) in paragraph at lines 129--130
+Underfull \hbox (badness 10000) in paragraph at lines 130--131
 \OT1/cmr/m/n/5 ([]\OML/cmm/m/it/5 ; []; []\OT1/cmr/m/n/5 )$ such than for all
  []
 
 
-Underfull \hbox (badness 5091) in paragraph at lines 129--130
+Underfull \hbox (badness 6332) in paragraph at lines 130--131
 \OT1/cmr/m/n/5 PPT ad-ver-saries $\OMS/cmsy/m/n/5 A$\OT1/cmr/m/n/5 , for all $\
 OML/cmm/m/it/5 n$\OT1/cmr/m/n/5 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 129--130
+Underfull \hbox (badness 10000) in paragraph at lines 130--131
 []$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 129--130
+Underfull \hbox (badness 10000) in paragraph at lines 130--131
 [] \OMS/cmsy/m/n/5 ^^T
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 133--134
-[]\OT1/cmr/bx/n/5 Theorem: $[]$\OT1/cmr/m/n/5 Let $([]\OML/cmm/m/it/5 ; []\OT1/
-cmr/m/n/5 )$ be a
- []
-
-
-Underfull \hbox (badness 8056) in paragraph at lines 133--134
-\OT1/cmr/m/n/5 scheme for mes-sages of length
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 133--134
+Underfull \hbox (badness 10000) in paragraph at lines 134--135
 []$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 135--136
-\OT1/cmr/m/n/5 polynomial-time al-go-rithm such
+Underfull \hbox (badness 5862) in paragraph at lines 134--135
+\OT1/cmr/m/n/5 the ci-pher-text, with more than
  []
 
 
-Overfull \hbox (0.73354pt too wide) in paragraph at lines 135--136
-[] \OMS/cmsy/m/n/5 ^^T
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 141--142
+Underfull \hbox (badness 10000) in paragraph at lines 142--143
 []\OT1/cmr/bx/n/5 Definition: $[]$\OT1/cmr/m/n/5 :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 145--146
-[]\OT1/cmr/bx/n/5 Theorem: $[]$\OT1/cmr/m/n/5 Any multiple-EAV-
+Underfull \hbox (badness 10000) in paragraph at lines 152--153
+[]\OT1/cmr/bx/n/5 Definition: $[]$\OT1/cmr/m/n/5 :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 145--146
-\OT1/cmr/m/n/5 secure private-key en-cryp-tion
- []
-
-
-Underfull \hbox (badness 7256) in paragraph at lines 151--152
-[]\OT1/cmr/bx/n/5 Definition: $[]$\OT1/cmr/m/n/5 : $\OML/cmm/m/it/5 k \OMS/cmsy
-/m/n/5  
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 153--154
+Underfull \hbox (badness 10000) in paragraph at lines 154--155
 []\OT1/cmr/bx/n/5 Definition: $[]$ \OT1/cmr/m/n/5 (Cho-sen
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 159--160
+Underfull \hbox (badness 5022) in paragraph at lines 154--155
+\OT1/cmr/m/n/5 Plain-text At-tack): A private-key
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 160--161
 []\OT1/cmr/bx/n/5 Definition: $[]$\OT1/cmr/m/n/5 : A
  []
 
 
-Underfull \hbox (badness 5050) in paragraph at lines 159--160
+Underfull \hbox (badness 6608) in paragraph at lines 160--161
 \OMS/cmsy/m/n/5 f\OT1/cmr/m/n/5 0\OML/cmm/m/it/5 ; \OT1/cmr/m/n/5 1\OMS/cmsy/m/
 n/5 g[]$\OT1/cmr/m/n/5 , with first in-put called
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 159--160
+Underfull \hbox (badness 10000) in paragraph at lines 160--161
 \OT1/cmr/m/n/5 polynomial-time al-go-rithm that
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 165--166
+Underfull \hbox (badness 10000) in paragraph at lines 166--167
 \OT1/cmr/m/n/5 Func-tion): An ef-fi-cient, length-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 165--166
+Underfull \hbox (badness 10000) in paragraph at lines 166--167
 \OT1/cmr/m/n/5 preserving keyed func-tion such
  []
 
 
-Overfull \hbox (5.37895pt too wide) in paragraph at lines 165--166
+Overfull \hbox (3.93347pt too wide) in paragraph at lines 166--167
 []$
  []
 
 
-Underfull \hbox (badness 6445) in paragraph at lines 167--168
-\OT1/cmr/m/n/5 func-tion $\OML/cmm/m/it/5 F$ \OT1/cmr/m/n/5 such that $\OML/cmm
-/m/it/5 `[] \OT1/cmr/m/n/5 =
+Underfull \hbox (badness 10000) in paragraph at lines 168--169
+[]\OT1/cmr/bx/n/5 Definition: $[]$\OT1/cmr/m/n/5 : A
  []
 
 
-Underfull \hbox (badness 7944) in paragraph at lines 167--168
-\OML/cmm/m/it/5 `[]$\OT1/cmr/m/n/5 , and for all $\OML/cmm/m/it/5 k \OMS/cmsy/m
-/n/5 2 K$\OT1/cmr/m/n/5 ,
+Underfull \hbox (badness 10000) in paragraph at lines 168--169
+\OT1/cmr/m/n/5 keyed func-tion $\OML/cmm/m/it/5 F$ \OT1/cmr/m/n/5 such that
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 173--174
+Underfull \hbox (badness 10000) in paragraph at lines 174--175
 []\OT1/cmr/bx/n/5 Definition: $[]$\OT1/cmr/m/n/5 : Let
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 173--174
+Underfull \hbox (badness 10000) in paragraph at lines 174--175
 \OT1/cmr/m/n/5 keyed per-mu-ta-tion such that
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 173--174
+Underfull \hbox (badness 10000) in paragraph at lines 174--175
 \OT1/cmr/m/n/5 for all PPT dis-tin-guish-ers $\OML/cmm/m/it/5 D$\OT1/cmr/m/n/5 
 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 173--174
+Underfull \hbox (badness 10000) in paragraph at lines 174--175
 []$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 173--174
+Underfull \hbox (badness 10000) in paragraph at lines 174--175
 [] \OMS/cmsy/m/n/5 ^^T
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 177--178
-[]\OT1/cmr/bx/n/5 Definition: $[]$\OT1/cmr/m/n/5 :
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 177--178
-\OT1/cmr/m/n/5 Stream ci-pher mode which is
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 179--180
+Underfull \hbox (badness 10000) in paragraph at lines 180--181
 []\OT1/cmr/bx/n/5 Definition: $[]$ \OT1/cmr/m/n/5 (Elec-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 179--180
+Underfull \hbox (badness 10000) in paragraph at lines 180--181
 \OMS/cmsy/m/n/5 h\OML/cmm/m/it/5 F[]\OT1/cmr/m/n/5 (\OML/cmm/m/it/5 m[]\OT1/cmr
 /m/n/5 )\OML/cmm/m/it/5 ; F[]\OT1/cmr/m/n/5 (\OML/cmm/m/it/5 m[]\OT1/cmr/m/n/5 
 )\OML/cmm/m/it/5 ; [] ; F[]\OT1/cmr/m/n/5 (\OML/cmm/m/it/5 m[]\OT1/cmr/m/n/5 )\
@@ -503,245 +474,222 @@ OMS/cmsy/m/n/5 i$\OT1/cmr/m/n/5 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 181--182
-[]\OT1/cmr/bx/n/5 Definition: $[]$ \OT1/cmr/m/n/5 (Ci-
+Underfull \hbox (badness 10000) in paragraph at lines 182--183
+[]\OT1/cmr/bx/n/5 Definition: $[]$ \OT1/cmr/m/n/5 (Ci-pher
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 181--182
-\OT1/cmr/m/n/5 pher Block Chain-ing): Choose
+Underfull \hbox (badness 10000) in paragraph at lines 182--183
+\OT1/cmr/m/n/5 and so on. To de-crypt, com-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 181--182
-\OT1/cmr/m/n/5 an IV of length $\OML/cmm/m/it/5 n$\OT1/cmr/m/n/5 . Then,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 181--182
-\OML/cmm/m/it/5 c[] \OT1/cmr/m/n/5 = \OML/cmm/m/it/5 F[]\OT1/cmr/m/n/5 (\OML/cm
-m/m/it/5 c[] \OMS/cmsy/m/n/5 ^^H \OML/cmm/m/it/5 m[]\OT1/cmr/m/n/5 )$, and
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 181--182
-\OT1/cmr/m/n/5 so on. To de-crypt, com-pute
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 181--182
-\OML/cmm/m/it/5 m[] \OT1/cmr/m/n/5 = \OML/cmm/m/it/5 F[]\OT1/cmr/m/n/5 (\OML/cm
-m/m/it/5 c[]\OT1/cmr/m/n/5 ) \OMS/cmsy/m/n/5 ^^H \OML/cmm/m/it/5 c[]$\OT1/cmr/m
-/n/5 ,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 183--184
+Underfull \hbox (badness 10000) in paragraph at lines 184--185
 []\OT1/cmr/bx/n/5 Definition: $[]$ \OT1/cmr/m/n/5 (Out-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 183--184
+Underfull \hbox (badness 10000) in paragraph at lines 184--185
 \OML/cmm/m/it/5 c[] \OT1/cmr/m/n/5 = \OML/cmm/m/it/5 F[]\OT1/cmr/m/n/5 (\OML/cm
 m/m/it/5 F[]\OT1/cmr/m/n/5 (\OML/cmm/m/it/5 IV\OT1/cmr/m/n/5 )) \OMS/cmsy/m/n/5
  ^^H \OML/cmm/m/it/5 m[]$\OT1/cmr/m/n/5 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 191--192
+Underfull \hbox (badness 7273) in paragraph at lines 192--193
+[]\OT1/cmr/bx/n/5 Definition: $[]$ \OT1/cmr/m/n/5 (Cho-sen
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 192--193
 \OT1/cmr/m/n/5 Ci-pher-text At-tack): A private-
  []
 
 
-Underfull \hbox (badness 7238) in paragraph at lines 191--192
+Underfull \hbox (badness 10000) in paragraph at lines 192--193
 \OT1/cmr/m/n/5 key en-cryp-tion scheme $^^E$ such
  []
 
 
-Underfull \hbox (badness 5345) in paragraph at lines 197--198
+Underfull \hbox (badness 6300) in paragraph at lines 196--197
+[]\OT1/cmr/bx/n/5 Definition: $[]$\OT1/cmr/m/n/5 : An
+ []
+
+
+Underfull \hbox (badness 7576) in paragraph at lines 198--199
 []\OT1/cmr/bx/n/5 Definition: $[]$ \OT1/cmr/m/n/5 (Mes-sage Au-
  []
 
 
-Underfull \hbox (badness 5008) in paragraph at lines 203--204
+Underfull \hbox (badness 7133) in paragraph at lines 204--205
 \OT1/cmr/m/n/5 tive Chosen-Message At-tack): A
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 205--206
-[]\OT1/cmr/bx/n/5 Definition: $[]$\OT1/cmr/m/n/5 : MAC
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 209--210
-[]\OT1/cmr/bx/n/5 Construction: $[]$\OT1/cmr/m/n/5 : $[][](\OML/cmm/m/it/5 m\OT
-1/cmr/m/n/5 ) =
- []
-
-
-Underfull \hbox (badness 7433) in paragraph at lines 209--210
-\OML/cmm/m/it/5 F[]\OT1/cmr/m/n/5 (\OML/cmm/m/it/5 m\OT1/cmr/m/n/5 )$, where $\
-OML/cmm/m/it/5 k \OMS/cmsy/m/n/5 2 f\OT1/cmr/m/n/5 0\OML/cmm/m/it/5 ; \OT1/cmr/
-m/n/5 1\OMS/cmsy/m/n/5 g[]$\OT1/cmr/m/n/5 ,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 211--212
+Underfull \hbox (badness 10000) in paragraph at lines 212--213
 []\OT1/cmr/bx/n/5 Construction: $[]$ \OT1/cmr/m/n/5 An-other $[][]$:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 211--212
+Underfull \hbox (badness 10000) in paragraph at lines 212--213
 \OT1/cmr/m/n/5 Chop $\OML/cmm/m/it/5 m$ \OT1/cmr/m/n/5 into $\OML/cmm/m/it/5 n$
 \OT1/cmr/m/n/5 -bit blocks,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 211--212
-\OML/cmm/m/it/5 m[]; m[]; [] ; m[]$\OT1/cmr/m/n/5 , let $\OML/cmm/m/it/5 t[] \O
-T1/cmr/m/n/5 =
- []
-
-
-Underfull \hbox (badness 5217) in paragraph at lines 221--222
+Underfull \hbox (badness 7397) in paragraph at lines 222--223
 []\OT1/cmr/m/n/5 Unfortunately, even this scheme
  []
 
 
-Underfull \hbox (badness 7796) in paragraph at lines 229--230
+Underfull \hbox (badness 10000) in paragraph at lines 230--231
 []\OT1/cmr/bx/n/5 Construction: $[]$\OT1/cmr/m/n/5 : Used
  []
 
 
-Underfull \hbox (badness 7238) in paragraph at lines 237--238
+Underfull \hbox (badness 7486) in paragraph at lines 236--237
+[]\OT1/cmr/bx/n/5 Definition: $[]$\OT1/cmr/m/n/5 : Run
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 238--239
 \OT1/cmr/m/n/5 key en-cryp-tion scheme $^^E$ such
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 239--240
+Underfull \hbox (badness 10000) in paragraph at lines 240--241
 []\OT1/cmr/bx/n/5 Definition: $[]$\OT1/cmr/m/n/5 : A
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 241--242
+Underfull \hbox (badness 10000) in paragraph at lines 242--243
 []\OT1/cmr/bx/n/5 Construction: $[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 241--242
+Underfull \hbox (badness 10000) in paragraph at lines 242--243
+[]$\OT1/cmr/m/n/5 : Given plain-text
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 244--245
+[]\OT1/cmr/bx/n/5 Construction: $[]$
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 244--245
+\OT1/cmr/m/n/5 be-haves as ex-pected, de-crypt-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 246--247
+[]\OT1/cmr/bx/n/5 Construction: $[]$
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 246--247
 \OT1/cmr/m/n/5 sender trans-mits $\OMS/cmsy/m/n/5 h\OML/cmm/m/it/5 c; t\OMS/cms
 y/m/n/5 i$\OT1/cmr/m/n/5 , where
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 245--246
-[]\OT1/cmr/bx/n/5 Construction: $[]$
+Underfull \hbox (badness 5008) in paragraph at lines 264--265
+[]\OT1/cmr/bx/n/5 Definition: $[]$\OT1/cmr/m/n/5 : A
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 245--246
-\OT1/cmr/m/n/5 sender trans-mits $\OMS/cmsy/m/n/5 h\OML/cmm/m/it/5 c; t\OMS/cms
-y/m/n/5 i$\OT1/cmr/m/n/5 , where
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 261--262
-[]\OT1/cmr/bx/n/5 Definition: $[]$ \OT1/cmr/m/n/5 (also
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 261--262
-\OT1/cmr/m/n/5 one-time $\OML/cmm/m/it/5 "$\OT1/cmr/m/n/5 -secure): A MAC
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 273--274
+Underfull \hbox (badness 10000) in paragraph at lines 274--275
 []\OT1/cmr/bx/n/5 Definition: $[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 273--274
+Underfull \hbox (badness 10000) in paragraph at lines 274--275
 \OT1/cmr/m/n/5 (fixed-length hash func-tion for
+ []
+
+
+Underfull \hbox (badness 5711) in paragraph at lines 278--279
+[]\OT1/cmr/bx/n/5 Definition: $[]$\OT1/cmr/m/n/5 : A
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 280--281
+[]\OT1/cmr/bx/n/5 Definition:
  []
 
 [1
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 279--280
-[]\OT1/cmr/bx/n/5 Definition:
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 283--284
+Underfull \hbox (badness 10000) in paragraph at lines 284--285
 []\OT1/cmr/bx/n/5 Construction: $[]$\OT1/cmr/m/n/5 :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 287--288
+Underfull \hbox (badness 10000) in paragraph at lines 288--289
 []\OT1/cmr/bx/n/5 Construction: $[]$\OT1/cmr/m/n/5 :
  []
 
 
-Underfull \hbox (badness 5374) in paragraph at lines 287--288
+Underfull \hbox (badness 6658) in paragraph at lines 288--289
 \OT1/cmr/m/n/5 be a hash func-tion, with out-
  []
 
 
-Underfull \hbox (badness 5374) in paragraph at lines 287--288
+Underfull \hbox (badness 6995) in paragraph at lines 288--289
 [][]$\OT1/cmr/m/n/5 : Takes $1[]$, choses uni-form
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 291--292
+Underfull \hbox (badness 10000) in paragraph at lines 292--293
 []\OT1/cmr/bx/n/5 Construction: $[]$\OT1/cmr/m/n/5 : Let
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 291--292
+Underfull \hbox (badness 10000) in paragraph at lines 292--293
 \OT1/cmr/m/n/5 generated hash func-tion on
  []
 
 
-Underfull \hbox (badness 7504) in paragraph at lines 291--292
+Underfull \hbox (badness 10000) in paragraph at lines 292--293
 \OT1/cmr/m/n/5 con-stants of length $\OML/cmm/m/it/5 n[]$\OT1/cmr/m/n/5 . De-fi
 ne
  []
 
 
-Underfull \hbox (badness 5954) in paragraph at lines 291--292
+Underfull \hbox (badness 7308) in paragraph at lines 292--293
 \OT1/cmr/m/n/5 a MAC as fol-lows: $[]$: Given
  []
 
 
-Underfull \hbox (badness 6032) in paragraph at lines 291--292
+Underfull \hbox (badness 7186) in paragraph at lines 292--293
 \OT1/cmr/m/n/5 1[]$, $\OML/cmm/m/it/5 s \OMS/cmsy/m/n/5   [][]\OT1/cmr/m/n/5 (1
 [])$, uni-form
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 291--292
+Underfull \hbox (badness 10000) in paragraph at lines 292--293
 \OT1/cmr/m/n/5 key $\OMS/cmsy/m/n/5 h\OML/cmm/m/it/5 s; k\OMS/cmsy/m/n/5 i$\OT1
 /cmr/m/n/5 . $[]$: Given $\OMS/cmsy/m/n/5 h\OML/cmm/m/it/5 s; k\OMS/cmsy/m/n/5 
 i$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 291--292
+Underfull \hbox (badness 10000) in paragraph at lines 292--293
 \OML/cmm/m/it/5 H[] []$\OT1/cmr/m/n/5 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 293--294
+Underfull \hbox (badness 10000) in paragraph at lines 294--295
 []\OT1/cmr/bx/n/5 Definition:
  []
 
 
-Underfull \hbox (badness 7151) in paragraph at lines 295--296
+Underfull \hbox (badness 10000) in paragraph at lines 296--297
 []\OT1/cmr/m/n/5 ))$, $[]$ be the length-padded
  []
 
 
-Underfull \hbox (badness 5711) in paragraph at lines 295--296
+Underfull \hbox (badness 10000) in paragraph at lines 296--297
 \OML/cmm/m/it/5 h[]\OT1/cmr/m/n/5 (\OML/cmm/m/it/5 IV\OMS/cmsy/m/n/5 jj\OT1/cmr
 /m/n/5 (\OML/cmm/m/it/5 k \OMS/cmsy/m/n/5 ^^H []\OT1/cmr/m/n/5 ))\OMS/cmsy/m/n/
 5 jj\OML/cmm/m/it/5 h[]\OT1/cmr/m/n/5 (\OML/cmm/m/it/5 IV\OMS/cmsy/m/n/5 jj\OT1
@@ -749,158 +697,191 @@ Underfull \hbox (badness 5711) in paragraph at lines 295--296
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 297--298
+Underfull \hbox (badness 10000) in paragraph at lines 298--299
 []\OT1/cmr/bx/n/5 Definition:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 297--298
+Underfull \hbox (badness 10000) in paragraph at lines 298--299
 []$\OT1/cmr/m/n/5 : Out
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 299--300
+Underfull \hbox (badness 10000) in paragraph at lines 300--301
 []\OT1/cmr/bx/n/5 Construction: $[]$\OT1/cmr/m/n/5 :
  []
 
 
-Underfull \hbox (badness 5274) in paragraph at lines 299--300
+Underfull \hbox (badness 6316) in paragraph at lines 300--301
 \OT1/cmr/m/n/5 com-pute $\OML/cmm/m/it/5 x[] \OT1/cmr/m/n/5 = \OML/cmm/m/it/5 H
 \OT1/cmr/m/n/5 (\OML/cmm/m/it/5 x[]\OT1/cmr/m/n/5 )$ and
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 307--308
+Underfull \hbox (badness 10000) in paragraph at lines 308--309
 []\OT1/cmr/bx/n/5 Definition: $[]$\OT1/cmr/m/n/5 :
  []
 
 
-Underfull \hbox (badness 8000) in paragraph at lines 327--328
+Underfull \hbox (badness 5175) in paragraph at lines 308--309
+\OT1/cmr/m/n/5 stores hashes of known viruses,
+ []
+
+
+Underfull \hbox (badness 6220) in paragraph at lines 314--315
+[]\OT1/cmr/bx/n/5 Definition: $[]$\OT1/cmr/m/n/5 :
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 318--319
+[]\OT1/cmr/bx/n/5 Construction: $[]$\OT1/cmr/m/n/5 :
+ []
+
+
+Underfull \hbox (badness 7099) in paragraph at lines 318--319
+\OT1/cmr/m/n/5 pass-word, $\OML/cmm/m/it/5 hpw$\OT1/cmr/m/n/5 , will be stored,
+
+ []
+
+
+Underfull \hbox (badness 6461) in paragraph at lines 322--323
+[]\OT1/cmr/bx/n/5 Definition: $[]$\OT1/cmr/m/n/5 : Lin-ear Feed-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 328--329
 []\OT1/cmr/bx/n/5 Definition: $[]$\OT1/cmr/m/n/5 : In
  []
 
 
-Underfull \hbox (badness 7291) in paragraph at lines 337--338
+Underfull \hbox (badness 10000) in paragraph at lines 332--333
+[]\OT1/cmr/bx/n/5 Definition: $[]$ \OT1/cmr/m/n/5 (Substitution-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 332--333
+\OT1/cmr/m/n/5 round sub-key. 2) Sub-sti-tu-tion:
+ []
+
+
+Underfull \hbox (badness 6808) in paragraph at lines 344--345
+\OT1/cmr/m/n/5 Stan-dard. Orig-i-nally a 16-round
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 346--347
 []\OT1/cmr/bx/n/5 Construction: $[]$\OT1/cmr/m/n/5 . $[](\OML/cmm/m/it/5 k[]; R
 \OT1/cmr/m/n/5 )$,
  []
 
 
-Underfull \hbox (badness 7814) in paragraph at lines 343--344
-\OT1/cmr/m/n/5 ing 3 keys, $\OML/cmm/m/it/5 F[]\OT1/cmr/m/n/5 (\OML/cmm/m/it/5 
-x\OT1/cmr/m/n/5 ) :=
- []
-
-
-Underfull \hbox (badness 5652) in paragraph at lines 343--344
-[]$ \OT1/cmr/m/n/5 is con-structed us-ing
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 361--362
+Underfull \hbox (badness 10000) in paragraph at lines 352--353
 []\OT1/cmr/bx/n/5 Definition: $[]$\OT1/cmr/m/n/5 :
  []
 
 
-Underfull \hbox (badness 7116) in paragraph at lines 361--362
-\OT1/cmr/m/n/5 puter in poly-no-mial time, and
+Underfull \hbox (badness 7944) in paragraph at lines 352--353
+[]$ \OT1/cmr/m/n/5 is con-structed us-ing
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 361--362
-\OT1/cmr/m/n/5 for all PPT ad-ver-saries $\OMS/cmsy/m/n/5 A$\OT1/cmr/m/n/5 ,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 375--376
+Underfull \hbox (badness 10000) in paragraph at lines 384--385
 []\OT1/cmr/bx/n/5 Theorem: $[]$\OT1/cmr/m/n/5 Assuming the ex-is-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 375--376
+Underfull \hbox (badness 10000) in paragraph at lines 384--385
 \OT1/cmr/m/n/5 CCA-secure private-key en-cryp-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 381--382
+Underfull \hbox (badness 10000) in paragraph at lines 390--391
 []\OT1/cmr/bx/n/5 Theorem: $[]$\OT1/cmr/m/n/5 Let $\OML/cmm/m/it/5 f$ \OT1/cmr/
 m/n/5 and $[]$ be
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 381--382
+Underfull \hbox (badness 10000) in paragraph at lines 390--391
 \OT1/cmr/m/n/5 poly-no-mial $\OML/cmm/m/it/5 p\OT1/cmr/m/n/5 (\OMS/cmsy/m/n/5 ^
 ^A\OT1/cmr/m/n/5 )$ such that
  []
 
 
-Overfull \hbox (5.41565pt too wide) in paragraph at lines 381--382
+Overfull \hbox (3.97017pt too wide) in paragraph at lines 390--391
 [] [] \OMS/cmsy/m/n/5 ^^U
  []
 
 
-Overfull \hbox (15.8676pt too wide) in paragraph at lines 381--382
+Overfull \hbox (14.42212pt too wide) in paragraph at lines 390--391
 [] [] \OMS/cmsy/m/n/5 ^^U
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 387--388
+Underfull \hbox (badness 10000) in paragraph at lines 396--397
 []\OT1/cmr/bx/n/5 Construction: $[]$\OT1/cmr/m/n/5 Let $\OML/cmm/m/it/5 G$ \OT1
 /cmr/m/n/5 be a
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 387--388
+Underfull \hbox (badness 10000) in paragraph at lines 396--397
 \OT1/cmr/m/n/5 PRG with ex-pan-sion fac-tor
  []
 
 
-Underfull \hbox (badness 6364) in paragraph at lines 387--388
+Underfull \hbox (badness 8189) in paragraph at lines 396--397
 \OMS/cmsy/m/n/5 f\OT1/cmr/m/n/5 0\OML/cmm/m/it/5 ; \OT1/cmr/m/n/5 1\OMS/cmsy/m/
 n/5 g[]$ \OT1/cmr/m/n/5 as $\OML/cmm/m/it/5 F[]\OT1/cmr/m/n/5 (\OML/cmm/m/it/5 
 x[]x[] [] x[]\OT1/cmr/m/n/5 ) =
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 399--400
-[]\OT1/cmr/bx/n/5 Theorem: $[]$\OT1/cmr/m/n/5 If there ex-ists an
+Underfull \hbox (badness 10000) in paragraph at lines 408--409
+\OT1/cmr/m/n/5 secure private-key en-cryp-tion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 399--400
-\OT1/cmr/m/n/5 scheme that en-crypts mes-sages
- []
-
-
-Underfull \hbox (badness 5667) in paragraph at lines 427--428
-[]\OT1/cmr/bx/n/5 Definition: $[]$\OT1/cmr/m/n/5 : The num-ber
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 435--436
+Underfull \hbox (badness 10000) in paragraph at lines 444--445
 []\OT1/cmr/bx/n/5 Definition: $[]$\OT1/cmr/m/n/5 : The ad-di-tive
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 449--450
+Underfull \hbox (badness 10000) in paragraph at lines 458--459
 []\OT1/cmr/bx/n/5 Theorem: $[]$\OT1/cmr/m/n/5 :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 449--450
-\OT1/cmr/m/n/5 CRT: Let $\OML/cmm/m/it/5 N \OT1/cmr/m/n/5 = \OML/cmm/m/it/5 pq$
-\OT1/cmr/m/n/5 , where
+Underfull \hbox (badness 10000) in paragraph at lines 458--459
+\OT1/cmr/m/n/5 with $\OML/cmm/m/it/5 f\OT1/cmr/m/n/5 (\OML/cmm/m/it/5 x\OT1/cmr
+/m/n/5 ) := ([\OML/cmm/m/it/5 x[]  p\OT1/cmr/m/n/5 ]\OML/cmm/m/it/5 ; \OT1/cmr/
+m/n/5 [\OML/cmm/m/it/5 x
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 460--461
+\OT1/cmr/m/n/5 clidean Al-go-rithm): [How I do
+ []
+
+
+Underfull \hbox (badness 5359) in paragraph at lines 460--461
+[]\OT1/cmr/m/n/5 (\OML/cmm/m/it/5 a[]; b[]\OT1/cmr/m/n/5 )$, and $\OML/cmm/m/it
+/5 x; y$ \OT1/cmr/m/n/5 such that
+ []
+
+
+Underfull \hbox (badness 7203) in paragraph at lines 460--461
+\OT1/cmr/m/n/5 sub-sti-tute $\OML/cmm/m/it/5 b[] \OT1/cmr/m/n/5 = \OML/cmm/m/it
+/5 r[] \OT1/cmr/m/n/5 =
  []
 
 [2] (./Crypto Exam 1+2 Sheet.aux) ) 
 Here is how much of TeX's memory you used:
- 1886 strings out of 493089
- 23528 string characters out of 6134842
- 225520 words of memory out of 5000000
- 5389 multiletter control sequences out of 15000+600000
+ 1887 strings out of 493089
+ 23531 string characters out of 6134842
+ 237441 words of memory out of 5000000
+ 5390 multiletter control sequences out of 15000+600000
  5411 words of font info for 21 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 27i,8n,26p,1032b,239s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 27i,8n,26p,1032b,227s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmbx5.pfb></usr/local/texlive/2015/texmf-dist/fonts/type
 1/public/amsfonts/cmextra/cmex7.pfb></usr/local/texlive/2015/texmf-dist/fonts/t
@@ -911,7 +892,7 @@ blic/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/publ
 ic/amsfonts/cm/cmti7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmtt8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/a
 msfonts/symbols/msbm5.pfb>
-Output written on "Crypto Exam 1+2 Sheet.pdf" (2 pages, 154786 bytes).
+Output written on "Crypto Exam 1+2 Sheet.pdf" (2 pages, 158902 bytes).
 PDF statistics:
  47 PDF objects out of 1000 (max. 8388607)
  33 compressed objects within 1 object stream

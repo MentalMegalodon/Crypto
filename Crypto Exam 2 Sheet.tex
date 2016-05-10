@@ -28,6 +28,7 @@
 \newcommand{\defn}[1]{{\bf Definition:} \underline{#1}}
 \newcommand{\thm}[1]{{\bf Theorem:} \underline{#1}}
 \newcommand{\con}[1]{{\bf Construction:} \underline{#1}}
+\newcommand{\alg}[1]{{\bf Algorithm:} \underline{#1}}
 \newcommand{\pf}{{\bf Proof:}}
 \newcommand{\Enc}{\mathsf{Enc}}
 \newcommand{\Dec}{\mathsf{Dec}}
@@ -176,6 +177,14 @@ These are insecure because the initial state, feedback coefficients, and all fut
 
 \defn{Avalanche Effect}: In any block cipher, a ``small change'' to the input must affect every bit of the output.
 
+\defn{S-box}: A {\it public} substitution function (permutation). In the examples given, performed on $8$ bits at a time. A change of 1 bit in the input should result in each bit int he output changing with probability about $\frac{1}{2}$.
+
+\defn{SPN} (Substitution-Permutation Network): A series of operations, run in rounds, where each round is as follows, in an example where $x$ is 64-bits long, and each S-box, $S_1,\dots,S_8$ permutes $8$ bits: 1) Key Mixing: Set $x:=x\xor k$, where $k$ is the current-round sub-key. 2) Substitution: Set $x:=S_1(x_1)||\cdots||S_8(x_8)$, where $x_i$ is the $i$th byte of $x$. 3) Permutation: Permute the {\it bits} of $x$ (Rearrange them in a pre-ordained manner) to obtain the output of the round. After the final round is run, there is another Key Mixing step; without this step the last substitution and permutation, assumed to be known by Kerckhoff's principle, would be reversible by an attacker, and therefore useless in the encryption scheme. Different sub-keys are used in each round, derived from a master key according to a key schedule.
+
+\thm{}All SPNs are, by construction, invertible.
+
+\thm{}If all S-boxes in a given SPN are permutations, then no matter how many rounds are applied, and the key schedule, the SPN is a permutation for any $k$.
+
 \defn{Feistel Network}: A network which operates in a series of rounds. In each round, a keyed round function is applied. This function need not be invertible. In a \underline{balanced} Feistel Network, the $i$th round of function $\hat{f}_i$ takes as input a sub-key $x_i$ and an $\ell/2$-bit string and outputs an $\ell/2$-bit string.
 
 \con{Feistel Network}: For round $i$ of a Feistel network, divide the input into two halves, $L_{i-1}$ and $R_{i-1}$, each of length $\ell/2$, where $\ell$ is the block length of the cipher. The output $(L_i,R_i)$ is defined as $L_i:=R_{i-1}, R_1=L_{i-1}\xor f_i(R_{i-1})$. In an $r$-round Feistel network, the $\ell$-bit input becomes $(L_0,R_0)$, and the output is the $\ell$-bit value $(L_r,R_r)$.
@@ -297,6 +306,10 @@ One-way functions are sufficient for \underline{all} private-key cryptography.
 \defn{Isomorphism}: Let $\G,\HH$ be groups with operations $\circ_\G$ and $\circ_\HH$. A function $f:\G\to\HH$ is an isomorphism if it is a bijection and $\forall g_1,g_2\in\G$, $f(g_1\circ_\G g_2)=f(g_1)\circ_\HH f(g_2)$. If $f$ exists, we say the groups are isomorphic, and $\G\simeq\HH$. $|\G|=|\HH|$.
 
 \thm{Chinese Remainder}: CRT: Let $N=pq$, where $p,q>1$ are relatively prime. Then $\Z_N\simeq\Z_p\times\Z_q$ and $\Z_N^*\simeq\Z_p^*\times\Z_q^*$. Moreover, let $f$ be the function mapping $x\in\Z_N$ to pairs $(x_p,x_q)$, $x_p\in\Z_p$, $x_q\in\Z_q$, with $f(x):=([x\mod{p}],[x\mod{q}])$, then $f$ is an isomorphism from $\Z_N$ to $\Z_p\times\Z_q$, and the restriction of $f$ to $\Z_N^*$ is an isomorphism from $\Z_N^*$ to $\Z_p^*\times\Z_q^*$.
+
+\alg{$\mathsf{eGCD}$} (Extended Euclidean Algorithm): [How I do it when working by hand] Given two positive integers $a_0,b_0$, find $\gcd(a_0,b_0)$, and $x,y$ such that $xa_0+yb_0=\gcd(a_0,b_0)$. WLOG, assume $a_0\geq b_0$. compute $q,r$ such that $a_0=q_0b_0+r_0$, $0<r_0<b_0$. Then let $a_1=b_0$, $b_1=r_0$, and recompute until $r_i=0$. Then $\gcd(a_0,b_0)=r_{i-1}$. Take that $r_{i-1}=a_{i-1}-qb_{i-1}$, substitute $b_{i-1}=r_{i-2}=a_{i-2}-b_{i-2}r_{i-2}$, and repeat until $r_{i-1}=\gcd(a_0,b_0)=xa_0+yb_0$.
+
+\alg{}Given $p$, $q$ distinct primes, $x_p$, $x_q$ positive integers, and $X,Y$ such that $Xp+Yq=\gcd(p,q)=1$. Find $x\in\Z_{pq}$ such that $x\mod{p}=x_p$ and $x\mod{y}=x_y$. Let $1_p:=[Yq\mod{pq}]$, and $1_q:=[Xp\mod{pq}]$. Then compute $x=[(x_p\cdot 1_p+x_q\cdot 1_q)\mod{N}]$.
 
 \end{multicols}
 

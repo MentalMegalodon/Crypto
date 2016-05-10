@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  9 MAY 2016 17:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  9 MAY 2016 18:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"Crypto Exam 2 Sheet.tex"
-(./Crypto Exam 2 Sheet.tex
+**"Crypto Exam 3 Sheet.tex"
+(./Crypto Exam 3 Sheet.tex
 LaTeX2e <2015/01/01>
 Babel <3.9l> and hyphenation patterns for 79 languages loaded.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/article.cls
@@ -188,8 +188,8 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layoutvoffset=\dimen128
 \Gm@dimlist=\toks27
 )
-(./Crypto Exam 2 Sheet.aux)
-\openout1 = `"Crypto Exam 2 Sheet.aux"'.
+(./Crypto Exam 3 Sheet.aux)
+\openout1 = `"Crypto Exam 3 Sheet.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 81.
 LaTeX Font Info:    ... okay on input line 81.
@@ -238,234 +238,24 @@ LaTeX Font Info:    ... okay on input line 81.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 86.
-(/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 86.
-
-(/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-Underfull \hbox (badness 10000) in paragraph at lines 86--87
-[]\OT1/cmr/bx/n/7 Definition: $[]$\OT1/cmr/m/n/7 : Run
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 88--89
-\OT1/cmr/m/n/7 key en-cryp-tion scheme $^^E$ such
- []
-
-
-Underfull \hbox (badness 7576) in paragraph at lines 88--89
-\OT1/cmr/m/n/7 that for all PPT ad-ver-saries $\OMS/cmsy/m/n/7 A$\OT1/cmr/m/n/7
- ,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 92--93
-[]\OT1/cmr/bx/n/7 Construction: $[]$
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 94--95
-[]\OT1/cmr/bx/n/7 Construction: $[]$
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 96--97
-[]\OT1/cmr/bx/n/7 Construction: $[]$
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 96--97
-\OT1/cmr/m/n/7 and $\OML/cmm/m/it/7 t \OMS/cmsy/m/n/7   [][]\OT1/cmr/m/n/7 (\OM
-L/cmm/m/it/7 m\OT1/cmr/m/n/7 )$. The re-
- []
-
-
-Underfull \hbox (badness 6542) in paragraph at lines 96--97
-\OT1/cmr/m/n/7 en-cryp-tion scheme (As-sum-ing that
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 124--125
-[]\OT1/cmr/bx/n/7 Definition: $[]$
- []
-
-
-Underfull \hbox (badness 5756) in paragraph at lines 126--127
-[]\OT1/cmr/bx/n/7 Definition: $[]$\OT1/cmr/m/n/7 : $\OML/cmm/m/it/7 s \OMS/cmsy
-/m/n/7  
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 128--129
-[]\OT1/cmr/bx/n/7 Definition: $[]$\OT1/cmr/m/n/7 : A
- []
-
-
-Underfull \hbox (badness 7576) in paragraph at lines 128--129
-\OT1/cmr/m/n/7 that for all PPT ad-ver-saries $\OMS/cmsy/m/n/7 A$\OT1/cmr/m/n/7
- ,
- []
-
-
-Overfull \hbox (1.78305pt too wide) in paragraph at lines 130--131
-[]\OT1/cmr/bx/n/7 Definition: $[]$
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 132--133
-[]\OT1/cmr/bx/n/7 Definition: $[]$\OT1/cmr/m/n/7 : A
- []
-
-
-Underfull \hbox (badness 5578) in paragraph at lines 142--143
-\OT1/cmr/m/n/7 put key $\OMS/cmsy/m/n/7 h\OML/cmm/m/it/7 s; k\OMS/cmsy/m/n/7 i$
-\OT1/cmr/m/n/7 . $[]$: Given $\OMS/cmsy/m/n/7 h\OML/cmm/m/it/7 s; k\OMS/cmsy/m/
-n/7 i$
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 142--143
-\OML/cmm/m/it/7 H[] []$\OT1/cmr/m/n/7 .
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 150--151
-[]\OT1/cmr/bx/n/7 Construction: $[]$\OT1/cmr/m/n/7 :
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 150--151
-\OT1/cmr/m/n/7 (small space). Start with ran-
- []
-
-
-Underfull \hbox (badness 7344) in paragraph at lines 150--151
-\OT1/cmr/m/n/7 ever equal, col-li-sion has oc-curred
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 150--151
-\OT1/cmr/m/n/7 in $\OML/cmm/m/it/7 x[]; [] ; x[]$\OT1/cmr/m/n/7 . Cal-cu-late e
-ach
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 152--153
-[]\OT1/cmr/bx/n/7 Definition: $[]$\OT1/cmr/m/n/7 :
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 182--183
-[]\OT1/cmr/bx/n/7 Definition: $[]$ \OT1/cmr/m/n/7 (Substitution-
- []
-
 [1
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 202--203
-[]\OT1/cmr/bx/n/7 Definition: $[]$\OT1/cmr/m/n/7 :
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 202--203
-\OT1/cmr/m/n/7 Us-ing 3 keys, $\OML/cmm/m/it/7 F[]\OT1/cmr/m/n/7 (\OML/cmm/m/it
-/7 x\OT1/cmr/m/n/7 ) :=
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 202--203
-\OML/cmm/m/it/7 F[]\OT1/cmr/m/n/7 (\OML/cmm/m/it/7 F[]\OT1/cmr/m/n/7 (\OML/cmm/
-m/it/7 F[]\OT1/cmr/m/n/7 (\OML/cmm/m/it/7 x\OT1/cmr/m/n/7 )))$. Us-ing only 2,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 202--203
-\OML/cmm/m/it/7 F[]\OT1/cmr/m/n/7 (\OML/cmm/m/it/7 x\OT1/cmr/m/n/7 ) := \OML/cm
-m/m/it/7 F[]\OT1/cmr/m/n/7 (\OML/cmm/m/it/7 F[]\OT1/cmr/m/n/7 (\OML/cmm/m/it/7 
-F[]\OT1/cmr/m/n/7 (\OML/cmm/m/it/7 x\OT1/cmr/m/n/7 )))$.
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 206--207
-[]\OT1/cmr/bx/n/7 Definition: $[]$\OT1/cmr/m/n/7 : A
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 220--221
-[]\OT1/cmr/bx/n/7 Definition: $[]$\OT1/cmr/m/n/7 : A
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 240--241
-[]\OT1/cmr/bx/n/7 Theorem: $[]$\OT1/cmr/m/n/7 Let $\OML/cmm/m/it/7 f$ \OT1/cmr/
-m/n/7 and $[]$ be
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 240--241
-\OT1/cmr/m/n/7 as above. If $\OMS/cmsy/m/n/7 9$ \OT1/cmr/m/n/7 a PPT $\OMS/cmsy
-/m/n/7 A$
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 240--241
-\OT1/cmr/m/n/7 and poly-no-mial $\OML/cmm/m/it/7 p\OT1/cmr/m/n/7 (\OMS/cmsy/m/n
-/7 ^^A\OT1/cmr/m/n/7 )$ such that
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 240--241
-[] [] \OMS/cmsy/m/n/7 ^^U
- []
-
-
-Underfull \hbox (badness 5741) in paragraph at lines 246--247
-\OT1/cmr/m/n/7 For $\OML/cmm/m/it/7 x \OMS/cmsy/m/n/7 2 f\OT1/cmr/m/n/7 0\OML/c
-mm/m/it/7 ; \OT1/cmr/m/n/7 1\OMS/cmsy/m/n/7 g[]$\OT1/cmr/m/n/7 , de-fine $\OML/
-cmm/m/it/7 F[] \OT1/cmr/m/n/7 :
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 294--295
-[]\OT1/cmr/bx/n/7 Definition: $[]$\OT1/cmr/m/n/7 : The ad-di-tive
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 310--311
-[]\OT1/cmr/bx/n/7 Algorithm: $[]$ \OT1/cmr/m/n/7 (Ex-tended Eu-
- []
-
-[2] (./Crypto Exam 2 Sheet.aux) ) 
+(./Crypto Exam 3 Sheet.aux) ) 
 Here is how much of TeX's memory you used:
- 1893 strings out of 493089
- 23571 string characters out of 6134842
- 170428 words of memory out of 5000000
- 5394 multiletter control sequences out of 15000+600000
- 6526 words of font info for 26 fonts, out of 8000000 for 9000
+ 1859 strings out of 493089
+ 23020 string characters out of 6134842
+ 99552 words of memory out of 5000000
+ 5375 multiletter control sequences out of 15000+600000
+ 3640 words of font info for 14 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 27i,9n,26p,1030b,225s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/
-public/amsfonts/cmextra/cmex7.pfb></usr/local/texlive/2015/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr5.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmss8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmsy5.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmsy7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmti7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmtt8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/s
-ymbols/msbm5.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfont
-s/symbols/msbm7.pfb>
-Output written on "Crypto Exam 2 Sheet.pdf" (2 pages, 169333 bytes).
+ 27i,4n,26p,236b,132s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2015/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr10.pfb>
+Output written on "Crypto Exam 3 Sheet.pdf" (1 page, 23344 bytes).
 PDF statistics:
- 63 PDF objects out of 1000 (max. 8388607)
- 45 compressed objects within 1 object stream
+ 12 PDF objects out of 1000 (max. 8388607)
+ 7 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
