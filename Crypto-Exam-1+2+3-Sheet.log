@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  12 MAY 2016 22:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  12 MAY 2016 23:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -259,653 +259,174 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 119.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (29.2955pt too wide) in paragraph at lines 119--120
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 :
- []
-
-
-Overfull \hbox (23.07458pt too wide) in paragraph at lines 123--124
+Underfull \hbox (badness 10000) in paragraph at lines 119--120
 []\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 :
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 125--126
-[]\OT1/cmr/bx/n/8 Theorem: $[]$\OT1/cmr/m/n/8 :
+[]\OT1/cmr/bx/n/8 Theorem: $[]$\OT1/cmr/m/n/8 : $[][\OML/cmm/m/it/8 A\OMS/cmsy/
+m/n/8 j\OML/cmm/m/it/8 B\OT1/cmr/m/n/8 ] =
  []
 
 
-Overfull \hbox (12.96889pt too wide) in paragraph at lines 131--132
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 :
+Underfull \hbox (badness 10000) in paragraph at lines 127--128
+[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 : An en-cryp-tion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 131--132
-\OT1/cmr/m/n/8 An en-cryp-tion scheme $^^E =
+Underfull \hbox (badness 10000) in paragraph at lines 129--130
+[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 : (Ad-ver-sar-ial In-dis-tin-
  []
 
 
-Underfull \hbox (badness 5771) in paragraph at lines 141--142
-\OT1/cmr/m/n/8 ([]\OML/cmm/m/it/8 ; []; []\OT1/cmr/m/n/8 )$ be an en-cryp-tion
+Underfull \hbox (badness 10000) in paragraph at lines 141--142
+[]\OT1/cmr/bx/n/8 Theorem: $[]$\OT1/cmr/m/n/8 : Let
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 143--144
+[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 A cryp-to-graphic scheme is
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 145--146
-[]\OT1/cmr/bx/n/8 Definition: $[]$ \OT1/cmr/m/n/8 (Prob-a-bilis-tic
+[]\OT1/cmr/bx/n/8 Definition: $[]$ \OT1/cmr/m/n/8 (Prob-a-bilis-tic Poly-no-mia
+l
  []
 
 
-Overfull \hbox (30.63858pt too wide) in paragraph at lines 159--160
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 :
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 163--164
-[]\OT1/cmr/bx/n/8 Definition: $[]$ \OT1/cmr/m/n/8 (in-dis-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 163--164
-\OT1/cmr/m/n/8 tin-guish-able en-cryp-tions in the
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 163--164
-\OT1/cmr/m/n/8 pri-vate key en-cryp-tion scheme
- []
-
-
-Underfull \hbox (badness 6608) in paragraph at lines 163--164
-\OT1/cmr/m/n/8 PPT ad-ver-saries $\OMS/cmsy/m/n/8 A$\OT1/cmr/m/n/8 , for all $\
-OML/cmm/m/it/8 n$\OT1/cmr/m/n/8 ,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 163--164
-[]$
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 163--164
-[] \OMS/cmsy/m/n/8 ^^T
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 167--168
-[]$
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 175--176
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 :
- []
-
-
-Underfull \hbox (badness 7832) in paragraph at lines 185--186
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 : $\OML/cmm/m/it/8 k \OMS/cmsy
-/m/n/8  
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 187--188
-[]\OT1/cmr/bx/n/8 Definition: $[]$ \OT1/cmr/m/n/8 (Cho-sen
+Underfull \hbox (badness 10000) in paragraph at lines 189--190
+[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 : Same as
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 199--200
-\OT1/cmr/m/n/8 Func-tion): An ef-fi-cient, length-
+\OT1/cmr/m/n/8 An ef-fi-cient, length-preserving keyed func-
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 199--200
-\OT1/cmr/m/n/8 preserving keyed func-tion such
+[]$ $[] \OMS/cmsy/m/n/8 ^^T
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 199--200
-[]$
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 207--208
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 : Let
+Underfull \hbox (badness 6220) in paragraph at lines 207--208
+\OT1/cmr/m/n/8 keyed per-mu-ta-tion such that for all PPT
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 207--208
-\OT1/cmr/m/n/8 keyed per-mu-ta-tion such that
+\OT1/cmr/m/n/8 dis-tin-guish-ers $\OML/cmm/m/it/8 D$\OT1/cmr/m/n/8 , $[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 207--208
-\OT1/cmr/m/n/8 for all PPT dis-tin-guish-ers $\OML/cmm/m/it/8 D$\OT1/cmr/m/n/8 
-,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 207--208
-[]$
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 213--214
-[]\OT1/cmr/bx/n/8 Definition: $[]$ \OT1/cmr/m/n/8 (Elec-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 213--214
-\OMS/cmsy/m/n/8 h\OML/cmm/m/it/8 F[]\OT1/cmr/m/n/8 (\OML/cmm/m/it/8 m[]\OT1/cmr
-/m/n/8 )\OML/cmm/m/it/8 ; F[]\OT1/cmr/m/n/8 (\OML/cmm/m/it/8 m[]\OT1/cmr/m/n/8 
-)\OML/cmm/m/it/8 ; [] ; F[]\OT1/cmr/m/n/8 (\OML/cmm/m/it/8 m[]\OT1/cmr/m/n/8 )\
-OMS/cmsy/m/n/8 i$\OT1/cmr/m/n/8 ,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 215--216
-[]\OT1/cmr/bx/n/8 Definition: $[]$ \OT1/cmr/m/n/8 (Ci-pher
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 215--216
-\OT1/cmr/m/n/8 and so on. To de-crypt, com-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 215--216
-\OT1/cmr/m/n/8 pute $\OML/cmm/m/it/8 m[] \OT1/cmr/m/n/8 = \OML/cmm/m/it/8 F[]\O
-T1/cmr/m/n/8 (\OML/cmm/m/it/8 c[]\OT1/cmr/m/n/8 ) \OMS/cmsy/m/n/8 ^^H \OML/cmm/
-m/it/8 c[]$\OT1/cmr/m/n/8 ,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 217--218
-[]\OT1/cmr/bx/n/8 Definition: $[]$ \OT1/cmr/m/n/8 (Out-put
+Underfull \hbox (badness 7238) in paragraph at lines 207--208
+[] \OMS/cmsy/m/n/8 ^^T []\OT1/cmr/m/n/8 (\OML/cmm/m/it/8 n\OT1/cmr/m/n/8 )$, wh
+ere
  []
 
 [1
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 225--226
-\OT1/cmr/m/n/8 Ci-pher-text At-tack): A private-
+Underfull \hbox (badness 6510) in paragraph at lines 229--230
+[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 : An en-cryp-tion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 225--226
-\OT1/cmr/m/n/8 key en-cryp-tion scheme $^^E$ such
+Underfull \hbox (badness 10000) in paragraph at lines 231--232
+[]\OT1/cmr/bx/n/8 Definition: $[]$ \OT1/cmr/m/n/8 (Mes-sage Au-then-ti-ca-tion
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 239--240
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 : MAC
- []
-
-
-Underfull \hbox (badness 6725) in paragraph at lines 245--246
-[]\OT1/cmr/bx/n/8 Construction: $[]$ \OT1/cmr/m/n/8 An-other $[][]$:
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 245--246
-\OT1/cmr/m/n/8 Chop $\OML/cmm/m/it/8 m$ \OT1/cmr/m/n/8 into $\OML/cmm/m/it/8 n$
-\OT1/cmr/m/n/8 -bit blocks,
- []
-
-
-Underfull \hbox (badness 5893) in paragraph at lines 263--264
-[]\OT1/cmr/bx/n/8 Construction: $[]$\OT1/cmr/m/n/8 : Used
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 271--272
-\OT1/cmr/m/n/8 key en-cryp-tion scheme $^^E$ such
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 273--274
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 : A
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 275--276
-[]\OT1/cmr/bx/n/8 Construction: $[]$
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 275--276
-\OT1/cmr/m/n/8 sender trans-mits $\OMS/cmsy/m/n/8 h\OML/cmm/m/it/8 c; t\OMS/cms
-y/m/n/8 i$\OT1/cmr/m/n/8 , where
- []
-
-
-Underfull \hbox (badness 5189) in paragraph at lines 277--278
-[]\OT1/cmr/bx/n/8 Construction: $[]$
+Underfull \hbox (badness 10000) in paragraph at lines 277--278
+[]\OT1/cmr/bx/n/8 Construction: $[]$ $[]$\OT1/cmr/m/n/8 :
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 279--280
-[]\OT1/cmr/bx/n/8 Construction: $[]$
+[]\OT1/cmr/bx/n/8 Construction: $[]$ $[]$\OT1/cmr/m/n/8 :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 279--280
-\OT1/cmr/m/n/8 sender trans-mits $\OMS/cmsy/m/n/8 h\OML/cmm/m/it/8 c; t\OMS/cms
-y/m/n/8 i$\OT1/cmr/m/n/8 , where
+Underfull \hbox (badness 10000) in paragraph at lines 321--322
+[]\OT1/cmr/bx/n/8 Construction: $[]$\OT1/cmr/m/n/8 : Let $^^E =
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 295--296
-[]\OT1/cmr/bx/n/8 Definition: $[]$ \OT1/cmr/m/n/8 (also one-
- []
-
-
-Underfull \hbox (badness 6477) in paragraph at lines 295--296
-\OT1/cmr/m/n/8 time $\OML/cmm/m/it/8 "$\OT1/cmr/m/n/8 -secure): A MAC $^^E =
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 307--308
-[]\OT1/cmr/bx/n/8 Definition: $[]$
- []
-
-
-Underfull \hbox (badness 5711) in paragraph at lines 311--312
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 : A
- []
-
-
-Overfull \hbox (11.21747pt too wide) in paragraph at lines 313--314
-[]\OT1/cmr/bx/n/8 Definition: $[]$
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 317--318
-[]\OT1/cmr/bx/n/8 Construction: $[]$\OT1/cmr/m/n/8 :
- []
-
-
-Underfull \hbox (badness 5607) in paragraph at lines 317--318
-\OT1/cmr/m/n/8 sult as $\OML/cmm/m/it/8 n$\OT1/cmr/m/n/8 -bit blocks $\OML/cmm/
-m/it/8 x[]; [] ; x[]$\OT1/cmr/m/n/8 .
- []
-
-
-Underfull \hbox (badness 7099) in paragraph at lines 321--322
-\OT1/cmr/m/n/8 ^^E = ([]\OML/cmm/m/it/8 ; []\OT1/cmr/m/n/8 )$ be a MAC
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 325--326
-[]\OT1/cmr/bx/n/8 Construction: $[]$\OT1/cmr/m/n/8 : Let
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 325--326
-\OT1/cmr/m/n/8 generated hash func-tion on
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 325--326
-\OML/cmm/m/it/8 n \OT1/cmr/m/n/8 + \OML/cmm/m/it/8 n[]$\OT1/cmr/m/n/8 . Let \OT
-1/cmtt/m/n/8 opad\OT1/cmr/m/n/8 and \OT1/cmtt/m/n/8 ipad\OT1/cmr/m/n/8 be
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 325--326
-\OT1/cmr/m/n/8 fine a MAC as fol-lows: $[]$:
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 325--326
-\OML/cmm/m/it/8 H[] []$\OT1/cmr/m/n/8 .
+Underfull \hbox (badness 10000) in paragraph at lines 321--322
+\OT1/cmr/m/n/8 put length $\OML/cmm/m/it/8 `\OT1/cmr/m/n/8 (\OML/cmm/m/it/8 n\O
+T1/cmr/m/n/8 )$. Con-struct MAC $^^E[] =
  []
 
 [2]
-Overfull \hbox (6.76324pt too wide) in paragraph at lines 327--328
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 :
+Underfull \hbox (badness 10000) in paragraph at lines 325--326
+\OT1/cmr/m/n/8 Merkle-Damg^^Ward-generated hash func-tion on
  []
 
 
-Underfull \hbox (badness 5696) in paragraph at lines 329--330
-[]\OT1/cmr/m/n/8 ))$, $[]$ be the length-padded
- []
-
-
-Underfull \hbox (badness 5504) in paragraph at lines 329--330
-\OML/cmm/m/it/8 y$\OT1/cmr/m/n/8 , in-clud-ing any-thing be-fore it,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 329--330
-\OML/cmm/m/it/8 h[]\OT1/cmr/m/n/8 (\OML/cmm/m/it/8 IV\OMS/cmsy/m/n/8 jj\OT1/cmr
-/m/n/8 (\OML/cmm/m/it/8 k \OMS/cmsy/m/n/8 ^^H []\OT1/cmr/m/n/8 ))\OMS/cmsy/m/n/
-8 jj\OML/cmm/m/it/8 h[]\OT1/cmr/m/n/8 (\OML/cmm/m/it/8 IV\OMS/cmsy/m/n/8 jj\OT1
-/cmr/m/n/8 (\OML/cmm/m/it/8 k \OMS/cmsy/m/n/8 ^^H
- []
-
-
-Overfull \hbox (5.80627pt too wide) in paragraph at lines 331--332
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 :
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 333--334
-[]\OT1/cmr/bx/n/8 Construction: $[]$\OT1/cmr/m/n/8 :
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 333--334
-\OT1/cmr/m/n/8 (small space). Start with ran-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 341--342
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 :
- []
-
-
-Underfull \hbox (badness 5460) in paragraph at lines 341--342
-\OT1/cmr/m/n/8 stores hashes of known viruses,
- []
-
-
-Underfull \hbox (badness 6608) in paragraph at lines 351--352
-[]\OT1/cmr/bx/n/8 Construction: $[]$\OT1/cmr/m/n/8 :
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 365--366
-[]\OT1/cmr/bx/n/8 Definition: $[]$ \OT1/cmr/m/n/8 (Substitution-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 379--380
-[]\OT1/cmr/bx/n/8 Construction: $[]$\OT1/cmr/m/n/8 . $[](\OML/cmm/m/it/8 k[]; R
-\OT1/cmr/m/n/8 )$,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 385--386
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 :
- []
-
-
-Underfull \hbox (badness 7777) in paragraph at lines 385--386
-\OT1/cmr/m/n/8 Us-ing 3 keys, $\OML/cmm/m/it/8 F[]\OT1/cmr/m/n/8 (\OML/cmm/m/it
-/8 x\OT1/cmr/m/n/8 ) :=
+Underfull \hbox (badness 6063) in paragraph at lines 341--342
+[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 : Pro-cess by
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 423--424
-[]\OT1/cmr/bx/n/8 Theorem: $[]$\OT1/cmr/m/n/8 Let $\OML/cmm/m/it/8 f$ \OT1/cmr/
-m/n/8 and $[]$ be
+Underfull \hbox (badness 5563) in paragraph at lines 405--406
+[]\OT1/cmr/bx/n/8 Theorem: $[]$\OT1/cmr/m/n/8 : As-sume one-way
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 423--424
-\OT1/cmr/m/n/8 as above. If $\OMS/cmsy/m/n/8 9$ \OT1/cmr/m/n/8 a PPT $\OMS/cmsy
-/m/n/8 A$
+Underfull \hbox (badness 6461) in paragraph at lines 479--480
+[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 : The mul-ti-plica-tive abelia
+n
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 423--424
-\OT1/cmr/m/n/8 and poly-no-mial $\OML/cmm/m/it/8 p\OT1/cmr/m/n/8 (\OMS/cmsy/m/n
-/8 ^^A\OT1/cmr/m/n/8 )$ such that
- []
-
-
-Overfull \hbox (5.32008pt too wide) in paragraph at lines 423--424
-[] [] \OMS/cmsy/m/n/8 ^^U
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 429--430
-\OMS/cmsy/m/n/8 f\OT1/cmr/m/n/8 0\OML/cmm/m/it/8 ; \OT1/cmr/m/n/8 1\OMS/cmsy/m/
-n/8 g[]$ \OT1/cmr/m/n/8 as $\OML/cmm/m/it/8 F[]\OT1/cmr/m/n/8 (\OML/cmm/m/it/8 
-x[]x[] [] x[]\OT1/cmr/m/n/8 ) =
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 477--478
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 : The ad-di-tive
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 491--492
-[]\OT1/cmr/bx/n/8 Theorem: $[]$\OT1/cmr/m/n/8 :
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 513--514
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 : A
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 517--518
-\OT1/cmr/m/n/8 Fac-tor-ing is hard rel-a-tive to
- []
-
-
-Overfull \hbox (2.31671pt too wide) in paragraph at lines 521--522
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 :
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 521--522
-[]\OT1/cmr/m/n/8 (1[])$. Choose a uni-form
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 523--524
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 The RSA prob-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 523--524
-\OT1/cmr/m/n/8 if for all PPT al-go-rithms $\OMS/cmsy/m/n/8 A$\OT1/cmr/m/n/8 ,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 525--526
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 :
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 527--528
-[]\OT1/cmr/bx/n/8 Algorithm: $[]$\OT1/cmr/m/n/8 : (Vanilla
- []
-
-
-Underfull \hbox (badness 5064) in paragraph at lines 527--528
-\OT1/cmr/m/n/8 1)(\OML/cmm/m/it/8 e \OMS/cmsy/m/n/8 ^^@ \OT1/cmr/m/n/8 1)$. Cho
-ose $\OML/cmm/m/it/8 e$ \OT1/cmr/m/n/8 such that
+Underfull \hbox (badness 6592) in paragraph at lines 503--504
+[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 : An al-go-rithm
  []
 
 [4]
-Underfull \hbox (badness 5592) in paragraph at lines 561--562
-\OT1/cmr/m/n/8 prob-lem is hard rel-a-tive to $\OMS/cmsy/m/n/8 G$\OT1/cmr/m/n/8
- ,
+Underfull \hbox (badness 10000) in paragraph at lines 569--570
+[]\OT1/cmr/bx/n/8 Construction: $[]$\OT1/cmr/m/n/8 : Al-ice gets
  []
 
 
-Underfull \hbox (badness 5245) in paragraph at lines 563--564
-\OT1/cmr/m/n/8 prob-lem is hard, then collision-
+Underfull \hbox (badness 10000) in paragraph at lines 605--606
+[]\OT1/cmr/bx/n/8 Definition: $[]$ \OT1/cmr/m/n/8 (Key En-cap-su-la-tion
  []
 
 
-Overfull \hbox (8.3952pt too wide) in paragraph at lines 575--576
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 :
+Underfull \hbox (badness 10000) in paragraph at lines 605--606
+\OT1/cmr/m/n/8 Mech-a-nism): A tu-ple of PPT al-go-rithms
  []
 
 
-Overfull \hbox (28.57188pt too wide) in paragraph at lines 581--582
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 :
+Underfull \hbox (badness 10000) in paragraph at lines 611--612
+[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 : A key-
  []
 
 
-Underfull \hbox (badness 7888) in paragraph at lines 585--586
-[]\OT1/cmr/bx/n/8 Definition: $[]$ \OT1/cmr/m/n/8 Pub-lic Key EAV
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 593--594
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 :
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 599--600
-[]\OT1/cmr/bx/n/8 Theorem: $[]$\OT1/cmr/m/n/8 Given $^^E =
- []
-
-
-Underfull \hbox (badness 6284) in paragraph at lines 599--600
-\OT1/cmr/m/n/8 ([]\OML/cmm/m/it/8 ; []; []\OT1/cmr/m/n/8 )$ be a fixed-length
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 599--600
-\OT1/cmr/m/n/8 1-bit en-cryp-tion scheme. De-fine
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 599--600
-[][]\OT1/cmr/m/n/8 (\OML/cmm/m/it/8 m[]\OT1/cmr/m/n/8 )\OML/cmm/m/it/8 ; [] ; [
-][]\OT1/cmr/m/n/8 (\OML/cmm/m/it/8 m[]\OT1/cmr/m/n/8 )$, where
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 603--604
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 :
- []
-
-
-Underfull \hbox (badness 8189) in paragraph at lines 603--604
-\OT1/cmr/m/n/8 A public-key en-cryp-tion scheme
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 603--604
-\OT1/cmr/m/n/8 for all PPT ad-ver-saries $\OMS/cmsy/m/n/8 A$\OT1/cmr/m/n/8 ,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 607--608
-[]\OT1/cmr/bx/n/8 Construction: $[]$\OT1/cmr/m/n/8 Let $^^E =
- []
-
-
-Underfull \hbox (badness 6348) in paragraph at lines 607--608
-\OT1/cmr/m/n/8 ([]\OML/cmm/m/it/8 ; []; []\OT1/cmr/m/n/8 )$ be a KEM
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 607--608
-\OT1/cmr/m/n/8 ([][]\OML/cmm/m/it/8 ; [][]; [][]\OT1/cmr/m/n/8 )$ be a private-
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 607--608
-\OT1/cmr/m/n/8 pub-lic key en-cryp-tion scheme
- []
-
-
-Underfull \hbox (badness 7981) in paragraph at lines 607--608
-\OT1/cmr/m/n/8 ^^E[] = ([][]\OML/cmm/m/it/8 ; [][]; [][]\OT1/cmr/m/n/8 )$ as
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 607--608
-[]\OT1/cmr/m/n/8 (1[])$ and use $(\OML/cmm/m/it/8 pk; sk\OT1/cmr/m/n/8 )$ from
- []
-
-
-Underfull \hbox (badness 6575) in paragraph at lines 607--608
-\OT1/cmr/m/n/8 that. $[][]$: On in-put $\OML/cmm/m/it/8 pk$ \OT1/cmr/m/n/8 and
+Underfull \hbox (badness 10000) in paragraph at lines 617--618
+[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 : A key-
  []
 
 [5]
-Underfull \hbox (badness 6775) in paragraph at lines 639--640
-[]\OT1/cmr/bx/n/8 Algorithm: $[]$\OT1/cmr/m/n/8 : In-put $1[]$.
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 641--642
-[]\OT1/cmr/bx/n/8 Construction: $[]$\OT1/cmr/m/n/8 : Let
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 641--642
-\OT1/cmr/m/n/8 public-key en-cryp-tion scheme
- []
-
-
-Underfull \hbox (badness 6641) in paragraph at lines 641--642
-\OT1/cmr/m/n/8 as fol-lows: $[]$: On in-put $1[]$,
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 651--652
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 :
+[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 : (The RSA
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 653--654
-[]\OT1/cmr/bx/n/8 Theorem: $[]$\OT1/cmr/m/n/8 If the RSA prob-
+Underfull \hbox (badness 10000) in paragraph at lines 665--666
+[]\OT1/cmr/bx/n/8 Construction: $[]$\OT1/cmr/m/n/8 : (In the
  []
 
 
-Underfull \hbox (badness 5832) in paragraph at lines 653--654
-[]\OT1/cmr/m/n/8 [[][](\OML/cmm/m/it/8 n\OT1/cmr/m/n/8 ) = 1] \OMS/cmsy/m/n/8 ^
-^T
+Underfull \hbox (badness 10000) in paragraph at lines 677--678
+[]\OT1/cmr/bx/n/8 Construction: $[]$\OT1/cmr/m/n/8 : Let $^^E =
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 663--664
-[]\OT1/cmr/bx/n/8 Construction: $[]$\OT1/cmr/m/n/8 : Let
- []
-
-
-Underfull \hbox (badness 5667) in paragraph at lines 663--664
-\OT1/cmr/m/n/8 uli out-put by $[](1[])$. Let
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 663--664
-\OT1/cmr/m/n/8 ci-pher-text $\OML/cmm/m/it/8 c \OT1/cmr/m/n/8 := [[][]  \OML/cm
-m/m/it/8 N\OT1/cmr/m/n/8 ]$.
- []
-
-
-Underfull \hbox (badness 5847) in paragraph at lines 663--664
-[]$\OT1/cmr/m/n/8 : On in-put $\OML/cmm/m/it/8 pk$ \OT1/cmr/m/n/8 and ci-pher-
- []
-
-
-Underfull \hbox (badness 7888) in paragraph at lines 665--666
-[]\OT1/cmr/bx/n/8 Construction: $[]$\OT1/cmr/m/n/8 :
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 673--674
-[]\OT1/cmr/bx/n/8 Definition: $[]$\OT1/cmr/m/n/8 :
- []
-
-
-Underfull \hbox (badness 7740) in paragraph at lines 675--676
-[]\OT1/cmr/bx/n/8 Definition: $[]$ \OT1/cmr/m/n/8 (Ex-is-ten-tially
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 675--676
-\OT1/cmr/m/n/8 un-forge-able un-der an adap-tive
- []
-
-
-Overfull \hbox (7.02316pt too wide) in paragraph at lines 681--682
-[]\OT1/cmr/bx/n/8 Construction: $[]$\OT1/cmr/m/n/8 :
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 685--686
+Underfull \hbox (badness 10000) in paragraph at lines 681--682
 []\OT1/cmr/bx/n/8 Construction: $[]$\OT1/cmr/m/n/8 : Let
  []
 
@@ -913,11 +434,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 685--686
 Here is how much of TeX's memory you used:
  2025 strings out of 493089
  24859 string characters out of 6134842
- 148493 words of memory out of 5000000
+ 153179 words of memory out of 5000000
  5512 multiletter control sequences out of 15000+600000
  9556 words of font info for 38 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 27i,8n,26p,1185b,240s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 27i,8n,26p,1185b,238s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2015/texmf-dist/fonts/ty
 pe1/public/amsfonts/cmextra/cmex8.pfb></usr/local/texlive/2015/texmf-dist/fonts
@@ -935,7 +456,7 @@ cm/cmti8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmtt8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symb
 ols/msbm10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/
 symbols/msbm7.pfb>
-Output written on Crypto-Exam-1+2+3-Sheet.pdf (6 pages, 258392 bytes).
+Output written on Crypto-Exam-1+2+3-Sheet.pdf (6 pages, 256765 bytes).
 PDF statistics:
  87 PDF objects out of 1000 (max. 8388607)
  62 compressed objects within 1 object stream

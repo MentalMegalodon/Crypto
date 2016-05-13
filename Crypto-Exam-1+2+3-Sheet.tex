@@ -114,7 +114,7 @@
 %\tiny
 %\scriptsize
 \footnotesize
-\begin{multicols}{4}
+\begin{multicols}{3}
 
 \defn{Private-key Encryption Scheme}: Specify a message space $\MMM$, and $\Gen$, $\Dec$, and $\Enc$ algorithms. $\Gen$ is a probabilistic algorithm that outputs a key $k$. $\Enc$ takes $k$ and $m\in\MMM$, and outputs ciphertext $c$. Notation: $c=\Enc_k(m)$. $\Dec$ takes $k$ and $c$, and outputs $m$. Notation: $m=\Dec_k(c)$. Must have $\Dec_k(\Enc_k(m))=m$ for all $k$. The set of valid keys is $\KKK$. WLOG, assume $\Gen$ chooses a uniform $k\in\KKK$.
 
