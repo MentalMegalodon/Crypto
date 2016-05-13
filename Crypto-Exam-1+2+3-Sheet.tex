@@ -1,0 +1,715 @@
+% -*-latex-*-
+\documentclass[10pt]{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{cancel}
+\usepackage{multicol}
+\usepackage[normalem]{ulem}
+\setlength{\columnseprule}{0.4pt}
+
+\usepackage[paper=letterpaper,left=.25in,right=.25in,bottom=.25in,top=.25in]{geometry}
+\frenchspacing
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\G}{\mathbb{G}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\AAA}{\mathcal{A}}
+\newcommand{\CCC}{\mathcal{C}}
+\newcommand{\FFF}{\mathcal{F}}
+\newcommand{\KKK}{\mathcal{K}}
+\newcommand{\MMM}{\mathcal{M}}
+\newcommand{\XXX}{\mathcal{X}}
+\newcommand{\TTT}{\mathcal{T}}
+\newcommand{\GGG}{\mathcal{G}}
+\newcommand{\LR}{\mathsf{LR}}
+\pagenumbering{gobble}
+\newcommand{\Concat}{\parallel}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\defn}[1]{{\bf Definition:} \underline{#1}}
+\newcommand{\thm}[1]{{\bf Theorem:} \underline{#1}}
+\newcommand{\con}[1]{{\bf Construction:} \underline{#1}}
+\newcommand{\alg}[1]{{\bf Algorithm:} \underline{#1}}
+\newcommand{\pf}{{\bf Proof:}}
+\newcommand{\Enc}{\mathsf{Enc}}
+\newcommand{\Dec}{\mathsf{Dec}}
+\newcommand{\Encaps}{\mathsf{Encaps}}
+\newcommand{\Decaps}{\mathsf{Decaps}}
+\newcommand{\Mac}{\mathsf{Mac}}
+\newcommand{\Sign}{\mathsf{Sign}}
+\newcommand{\Macf}{\mathsf{Mac\text{-}forge}}
+\newcommand{\Macsf}{\mathsf{Mac\text{-}sforge}}
+\newcommand{\Encf}{\mathsf{Enc\text{-}forge}}
+\newcommand{\Vrfy}{\mathsf{Vrfy}}
+\newcommand{\Decrypt}[2]{\Dec_{#1}(#2)}
+\newcommand{\Encrypt}[2]{\Enc_{#1}(#2)}
+\newcommand{\Gen}{\mathsf{Gen}}
+\newcommand{\GenM}{\mathsf{GenModulus}}
+\newcommand{\GenRSA}{\mathsf{GenRSA}}
+\newcommand{\ang}[1]{\langle#1\rangle}
+\newcommand{\GenEncDec}{(\Gen,\Enc,\Dec)}
+\newcommand{\GenEncapsDecaps}{(\Gen,\Encaps,\Decaps)}
+\newcommand{\GenMacVrfy}{(\Gen,\Mac,\Vrfy)}
+\newcommand{\ExptEavArgs}[2]{\mathsf{PrivK}^{\mathsf{eav}}_{#1,#2}}
+\newcommand{\ExptPubEavArgs}[2]{\mathsf{PubK}^{\mathsf{eav}}_{#1,#2}}
+\newcommand{\ExptMultArgs}[2]{\mathsf{PrivK}^{\mathsf{mult}}_{#1,#2}}
+\newcommand{\ExptCcaArgs}[2]{\mathsf{PrivK}^{\mathsf{CCA}}_{#1,#2}}
+\newcommand{\ExptPubCcaArgs}[2]{\mathsf{PubK}^{\mathsf{CCA}}_{#1,#2}}
+\newcommand{\ExptCpaArgs}[2]{\mathsf{PrivK}^{\mathsf{CPA}}_{#1,#2}}
+\newcommand{\ExptPubCpaArgs}[2]{\mathsf{PubK}^{\mathsf{LR-cpa}}_{#1,#2}}
+\newcommand{\ExptHCArgs}[2]{\mathsf{Hash\text{-}Coll}_{#1,#2}}
+\newcommand{\ExptFacArgs}[2]{\mathsf{Factor}_{#1,#2}}
+\newcommand{\ExptDLogArgs}[2]{\mathsf{DLog}_{#1,#2}}
+\newcommand{\ExptKEArgs}[2]{\mathsf{KE}^{\mathsf{eav}}_{#1,#2}}
+\newcommand{\ExptRSAArgs}[2]{\mathsf{RSA-inv}_{#1,#2}}
+\newcommand{\ExptWFacArgs}[1]{\mathsf{w-Factor}_{#1}}
+\newcommand{\ExptLrCpa}{\mathsf{PrivK}^{\mathsf{LR-CPA}}_{\AAA,\Pi}}
+\newcommand{\ExptSigF}{\mathsf{Sig\text{-}forge}_{\AAA,\Pi}}
+\newcommand{\ExptKemCpa}{\mathsf{KEM}^{\mathsf{cpa}}_{\AAA,\Pi}}
+\newcommand{\ExptKemCca}{\mathsf{KEM}^{\mathsf{cca}}_{\AAA,\Pi}}
+\newcommand{\ExptRSAHC}{\mathsf{RSA\text{-}lsb}_{\AAA,\GenRSA}}
+\newcommand{\ExptInvtArgs}{\mathsf{Invert}_{\AAA,\Pi}}
+\newcommand{\ExptEav}{\ExptEavArgs{\AAA}{\Pi}}
+\newcommand{\ExptPubEav}{\ExptPubEavArgs{\AAA}{\Pi}}
+\newcommand{\ExptMult}{\ExptMultArgs{\AAA}{\Pi}}
+\newcommand{\ExptCca}{\ExptCcaArgs{\AAA}{\Pi}}
+\newcommand{\ExptPubCca}{\ExptPubCcaArgs{\AAA}{\Pi}}
+\newcommand{\ExptCpa}{\ExptCpaArgs{\AAA}{\Pi}}
+\newcommand{\ExptPubCpa}{\ExptPubCpaArgs{\AAA}{\Pi}}
+\newcommand{\ExptHC}{\ExptHCArgs{\AAA}{\Pi}}
+\newcommand{\ExptFac}{\ExptFacArgs{\AAA}{\GenM(n)}}
+\newcommand{\ExptDLog}{\ExptDLogArgs{\AAA}{\GGG}}
+\newcommand{\ExptKE}{\ExptKEArgs{\AAA}{\Pi}}
+\newcommand{\ExptRSA}{\ExptRSAArgs{\AAA}{\GenRSA(n)}}
+\newcommand{\ExptWFac}{\ExptWFacArgs{\AAA}}
+\newcommand{\ExptInvt}{\ExptInvtArgs{\AAA}{f}}
+\newcommand{\ExptPrgArgs}[2]{\mathsf{PRG}_{#1,#2}}
+\newcommand{\ExptPrg}{\ExptPrgArgs{\AAA}{G}}
+\newcommand{\ExptEncfArgs}[2]{\mathsf{Enc\text{-}Forge}_{#1,#2}}
+\newcommand{\ExptEncf}{\ExptEncfArgs{\AAA}{\Pi}}
+\newcommand{\Fcns}[1]{\mathsf{Func}_n}
+\newcommand{\LengthKey}[1]{\ell_{\mathit{key}}(#1)}
+\newcommand{\LengthInput}[1]{\ell_{\mathit{in}}(#1)}
+\newcommand{\LengthOutput}[1]{\ell_{\mathit{out}}(#1)}
+\newcommand{\xor}{\oplus}
+\newcommand{\Pit}{\widetilde{\Pi}}
+\newcommand{\negl}{{\tt negl}}
+\newcommand{\poly}{{\tt poly}}
+\newcommand{\hc}{{\tt hc}}
+\newcommand{\gl}{{\tt gl}}
+\newcommand{\opad}{{\tt opad}}
+\newcommand{\ipad}{{\tt ipad}}
+\newcommand{\ctr}{{\tt ctr}}
+\newcommand{\trans}{{\tt trans}}
+\newcommand{\hy}{{\tt hy}}
+\newcommand{\lsb}{{\tt lsb}}
+\newcommand{\from}{\leftarrow}
+
+\newcommand{\Exec}[5]{\mathit{exec}^{#1}_{#2}(#3,#4,#5)}
+\setlength{\parindent}{0cm}
+
+\begin{document}
+%\tiny
+%\scriptsize
+\footnotesize
+\begin{multicols}{4}
+
+\defn{Private-key Encryption Scheme}: Specify a message space $\MMM$, and $\Gen$, $\Dec$, and $\Enc$ algorithms. $\Gen$ is a probabilistic algorithm that outputs a key $k$. $\Enc$ takes $k$ and $m\in\MMM$, and outputs ciphertext $c$. Notation: $c=\Enc_k(m)$. $\Dec$ takes $k$ and $c$, and outputs $m$. Notation: $m=\Dec_k(c)$. Must have $\Dec_k(\Enc_k(m))=m$ for all $k$. The set of valid keys is $\KKK$. WLOG, assume $\Gen$ chooses a uniform $k\in\KKK$.
+
+\defn{Kerchoffs' Principle}: An encryption scheme should be designed to be secure {\it even if} an eavesdropper knows all the details of the scheme, so long as the attacker doesn't know the key being used. 
+
+\defn{Sufficient Key-space Principle}: Any secure encryption scheme must have a key space that is sufficiently large to make an exhaustive-search attack infeasible. Necessary, but not sufficient.
+
+\thm{Bayes Theorem}: $\Pr[A|B]=\frac{\Pr[B|A]\cdot\Pr[A]}{\Pr[B]}$.
+
+\defn{Perfect Secrecy}: An encryption scheme $\GenEncDec$ with message space $\MMM$ such that for every probability distribution over $\MMM$, every message $m\in \MMM$, and every ciphertext $c\in\CCC$, for which $\Pr[C=c]>0$, $\Pr[M=m\mid C=c]=\Pr[M=m]$. Equivalently, $\forall m,m'\in\MMM,c\in\CCC$, $\Pr[\Enc_K(m)=c]=\Pr[\Enc_K(m')=c]$.
+
+\defn{$\ExptEav$}: (Adversarial Indistinguishability Experiment): The Adversary $\AAA$ outputs $m_0,m_1\in\MMM$. $k\from\Gen$, $b\in\{0,1\}$ uniformly. $c\from\Enc_k(m_b)$ is given to $\AAA$, called challenge ciphertext. $b'\from\AAA$. Output is $1$ (``success'') iff $b'=b$, notated $\ExptEav=1$.
+
+\defn{Perfect Indistinguishability}: An encryption scheme $\Pi=\GenEncDec$ with $\MMM$, such that $\forall\AAA$, $\Pr[\ExptEav=1]=\frac{1}{2}$.
+
+\thm{}Perfect Indistinguishability $\Leftrightarrow$ Perfect Secrecy.
+
+\defn{One-time Pad}: Fix $\ell>0$. $\MMM=\KKK=\CCC=\{0,1\}^\ell$ (binary strings length $\ell$). $\Gen$: uniform $k\in\KKK$. $\Enc$: $c=k\xor m$, $\xor$ is bitwise xor. $\Dec$: $m=k\xor c$.
+
+\thm{}The one-time pad encryption scheme is perfectly secret.
+
+\thm{}In a perfectly secure encryption scheme, $|\KKK|\geq|\MMM|$. ($|X|$ denotes magnitude/size of $X$.)
+
+\thm{Shannon's Theorem}: Let $\GenEncDec$ be an encryption scheme with $|\MMM|=|\KKK|=|\CCC|$. It is perfectly secret iff all $k\in\KKK$ are chosen with probability $1/|\KKK|$ by $\Gen$, and $\forall m\in\MMM, c\in\CCC$, $\exists!k\in\KKK$ such that $c=\Enc_k(m)$.
+
+\defn{}A cryptographic scheme is \underline{$(t,\varepsilon)$-secure} if any adversary running for time at most $t$ succeeds in breaking the scheme with probability at most $\varepsilon$.
+
+\defn{PPT} (Probabilistic Polynomial Time): An adversary which runs for time at most $p(n)$, where $n$ is the security parameter (length of key), and $p$ is a polynomial.
+
+\defn{\negl} (Negligible): A function $f$ from the natural numbers to the non-negative real numbers such that for every positive polynomial $p$ there is an $N\in\N$ such that $\forall n>N$, $f(n)<\frac{1}{p(n)}$.
+
+\defn{Secure}: A scheme where any PPT adversary succeeds in breaking the scheme with at most negligible probability.
+
+\defn{Probabilistic}: An algorithm that can ``toss a coin'' - access unbiased random bits - as necessary.
+
+\thm{}Let $\negl_1,\negl_2$ be negligible functions, $p$ a polynomial. Then $\negl_1(n)+\negl_2(n)$ and $p(n)\cdot\negl_1(n)$ are both negligible.
+
+\defn{Secure}: A scheme for which every PPT adversary $\AAA$ carrying out an attack of some formally specified type, the probability that $\AAA$ succeeds is negligible.
+
+\defn{}We denote an error from $\Dec$ by $\perp$ (bottom), when it is asked to decrypt a non-valid ciphertext.
+
+\defn{Fixed-length encryption scheme}: An encryption scheme such that for a $k\from\Gen(1^n)$, $\Enc_k$ is only defined for messages $m\in\{0,1\}^{\ell(n)}$ (fixed length messages).
+
+\defn{$\ExptEav(n)$} (Adversarial Indistinguishability Experiment-EAV): , where $n$ is the security parameter, and success is defined as before. However, $\AAA$ is a PPT adversary, $|m_0|=|m_1|$, but the guessing for $b=b'$ is identical.
+
+\defn{EAV-secure} (indistinguishable encryptions in the presence of an eavesdropper): A private key encryption scheme $\GenEncDec$ such than for all PPT adversaries $\AAA$, for all $n$, $\Pr[\ExptEav(n)=1]\leq\frac{1}{2}+\negl(n)$, where the probability is taken over the randomness used by $\AAA$ and the encryption scheme $\Pi$. Equivalently: $\left|\Pr[{\tt out}_{\AAA}(\ExptEav(n,0))=1]-\right.$ $\left.[{\tt out}_{\AAA}(\ExptEav(n,1))=1]\right|\leq\negl(n)$.
+
+\thm{}Let $\Pi=(\Enc,\Dec)$ be a fixed-length private-key encryption scheme for messages of length $\ell$ that has indistinguishable encryptions in the presence of an eavesdropper. Then for all PPT adversaries $\AAA$ and any $i\in\{1,\dots,\ell\}$, there is a negligible function $\negl$ such that $\Pr[\AAA(1^n,\Enc_k(m))=m^i]\leq\frac{1}{2}+\negl(n)$, where $m^i$ is the $i^{\text{th}}$ bit of $m$.
+
+\thm{}Let $(\Enc,\Dec)$ be a fixed-length private key encryption scheme for messages of length $\ell$ that is EAV-secure. Then for any PPT algorithm $\AAA$ there is a PPT algorithm $\AAA'$ such that for any $S\subseteq\{0,1\}^\ell$ and any function $f:\{0,1\}^\ell\to\{0,1\}$, $\left|\Pr[\AAA(1^n,\Enc_k(m))=f(m)]-\right.$ $\left.\Pr[\AAA(1^n)=f(m)]\right|\leq\negl(n)$. That is, $\AAA$ cannot determine any function $f$ of the original message $m$, given the ciphertext, with more than negligible probability better than when not given the ciphertext.
+
+\defn{PRG} (Pseudo-Random Generator): Let $\ell$ be a polynomial and $G$ be a deterministic polynomial-time algorithm such that for any $n$ and any input $s\in\{0,1\}^n$, the result $G(s)$ is a string of length $\ell(n)$. The following must hold: For every $n$, $\ell(n)>n$. For any PPT algorithm $D$, there is a negligible function $\negl$ such that $\left|\Pr[D(G(s))=1]-\Pr[D(r)=1]\right|\leq\negl(n)$. $\ell$ is the \underline{expansion factor} of $G$.
+
+\con{Stream Cipher:} Let $G$ be a pseudorandom generator with expansion factor $\ell$. Let $\Gen(1^n)$ output a uniform $k\in\{0,1\}^n$. Let $c=\Enc_k(m)=G(k)\xor m$. Let $\Dec_k(c)=G(k)\xor c$. This is an EAV-secure private-key encryption scheme.
+
+\defn{$\ExptMult$}: The EAV experiment, except $\AAA$ presents 2 equal length lists of equal length messages, $\vec{M}_0=(m_{0,1},\dots,m_{0,t})$ and $\vec{M}_1=(m_{1,1},\dots,m_{1,t})$, the challenger chooses one of the lists and returns the ciphertext of all messages from that list, and $\AAA$ attempts to determine which list was chosen.
+
+\defn{Multiple-EAV-Secure}: Same as EAV secure, except with the $\ExptMult$ experiment.
+
+\thm{}There are private-key encryption schemes which are EAV-secure but not multiple-EAV-secure.
+
+\thm{}Any multiple-EAV-secure private-key encryption scheme is also EAV-secure.
+
+\thm{}If $\Pi$ is a stateless encryption scheme in which $\Enc$ is deterministic, then $\Pi$ cannot be multiple-EAV-secure.
+
+%``During World War II, the British placed mines at certain locations, knowing that the Germans--when finding those mines--would encrypt the locations and send them back to headquarters. These encrypted messages were used by cryptanalysts at Bletchley Park to break the German encryption scheme."
+
+\defn{$\ExptCpa(n)$}: $k\from\Gen(1^n)$, then adversary $\AAA$ is given $1^n$ and oracle access to $\Enc_k(\cdot)$. $\AAA$, after making its oracle calls, outputs $m_0,m_1$, a pair of same length messages. $b$ is chosen, $c=\Enc_k(m_b)$ is computed and returned, and $\AAA$ outputs $b'$. $\AAA$ ``succeeds'' if $b'=b$, and the experiment outputs $1$. Else, the experiment outputs $0$.
+
+\defn{CPA-secure} (Chosen Plaintext Attack): A private-key encryption scheme $\Pi=\GenEncDec$ such that for all PPT adversaries $\AAA$, $\Pr\left[\ExptCpa(n)=1\right]\leq\frac{1}{2}+\negl(n)$.
+
+\defn{$\ExptLrCpa(n)$}: Same as $\ExptMult$, but for CPA-security. Extends to \underline{Multiple-CPA-security}.
+
+\thm{}CPA-secure $\Rightarrow$ multiple-CPA-secure.
+
+\defn{Keyed Function}: A function $F:\{0,1\}^*\times\{0,1\}^*\to\{0,1\}^*$, with first input called key $k$. It is \underline{efficient} if there is a polynomial-time algorithm that computes $F(k,x)$ given $k$ and $x$.
+
+\defn{Length-Preserving}: A keyed function such that $\ell_{key}(n)=\ell_{in}(n)=\ell_{out}(n)$.
+
+\defn{${\tt Func}_n$}: The set of all functions mapping $n$-bit strings to $n$-bit strings. $|{\tt Func}_n|=2^{n\cdot2^n}$.
+
+\defn{PRF} (Pseudo-Random Function): An efficient, length-preserving keyed function such that for all PPT distinguishers $D$, $\left|\Pr[D^{F_k(\cdot)}(1^n)=1]-\Pr[D^{f(\cdot)}(1^n)\right.$ $\left.=1]\right|\leq\negl(n)$, where $f$ is chosen uniformly from ${\tt Func}_n$. $|\text{PRF}|=2^n$, there are at most that many distinct functions. (Some are not secure.)
+
+\defn{Permutation}: A keyed function $F$ such that $\ell_{in}=\ell_{out}$, and for all $k\in\KKK$, $F_k\{0,1\}^{\ell_{in}(n)}\to\{0,1\}^{\ell_{out}(n)}$ is one-to-one. $F_k$ is \underline{efficient} if $F_k(x)$ and $F_k^{-1}(x)$ are computable with a polynomial-time algorithm.
+
+\defn{PRP} (Pseudo-Random Permutation): Same as a PRF, except $F$ must be indistinguishable from a random $f\in{\tt Perm}_n$, the set of truly random permutations.
+
+\thm{} If $F$ is a PRP and $\ell_{in}(n)\geq n$, $F$ is a PRF.
+
+\defn{Strong PRP}: Let $F:\{0,1\}^*\times\{0,1\}^*\to\{0,1\}^*$ be an efficient, length-preserving, keyed permutation such that for all PPT distinguishers $D$, $\left|\Pr[D^{F_k(\cdot),F_k^{-1}(\cdot)}(1^n)=1]-\right.$ $\left.\Pr[D^{f(\cdot),f^{-1}(\cdot)}(1^n)=1]\right|\leq\negl(n)$, where $f\in{\tt Perm}_n$ uniformly. Any strong PRP is a PRP.
+
+\defn{Synchronized}: Stream cipher mode where sender and receiver must know how much plaintext has been encrypted/decrypted so far. Typically used in a single session between parties.
+
+\defn{Unsynchronized}: Stream cipher mode which is stateless, taking a new IV each time.
+
+\defn{ECB Mode} (Electronic Code Book): Here, $c:=\ang{F_k(m_1),F_k(m_2),\dots,F_k(m_\ell)}$, where $m=m_1,m_2,\dots,m_\ell$ is the message and $F$ is a block cipher of length $n$. Deterministic, and therefore not CPA-secure. Should not be used, only included for historical significance.
+
+\defn{CBC Mode} (Cipher Block Chaining): Choose an IV of length $n$. Then, $c_0=IV$, $c_1=F_k(c_0\xor m_1)$, $c_2=F_k(c_1\xor m_2)$, and so on. To decrypt, compute $m_\ell=F^{-1}_k(c_\ell)\xor c_{\ell-1}$, $m_{\ell-1}=F_k^{-1}(c_{\ell-1})\xor c_{\ell-2}$, and so on. If $F$ is a PRP, and $IV$ is chosen uniformly at random, then CBC mode is CPA-secure. It cannot be computed in parallel, since encrypting $c_i$ requires $c_{i-1}$ for $i>0$. Using $c_\ell$ as $IV$ for the next encryption is \underline{not secure}.
+
+\defn{OFB Mode} (Output FeedBack): Let $IV$ be uniformly chosen of length $n$. Then $c_0=IV$, $c_1=F_k(IV)\xor m_1$, $c_2=F_k(F_k(IV))\xor m_2$, \dots $c_\ell=F_k^\ell(IV)\xor m_\ell$, where $F_k^\ell$ denotes $F_k$ applied $\ell$ times. $F$ need not be invertible, and $m_\ell$ need not be of length $n$, the message may be truncated to match its length. OFB mode is CPA-secure. Using $F_k^{\ell}(IV)$ as the next $IV$, producing a synchronized stream cipher, it remains secure.
+
+\defn{CTR Mode} (CounTeR): Pick an $\ctr=IV$, then $c_0=\ctr$, $c_1=F_k(\ctr+1)\xor m_1$, \dots, $c_\ell=F_k(\ctr+\ell)\xor m_\ell$. $F$ need not be invertible. Here, the encryption can be fully parallelized. CTR mode is CPA-secure, assuming $F$ is a PRF. The stateful variant, where $F_k(\ctr+\ell)$ is used as the new $IV$, remains secure.
+
+Note: None of these schemes achieve message integrity in the sense of chapter 4.
+
+\defn{$\ExptCca(n)$}: The adversary $\AAA$ is given access to a decryption oracle in addition to an encryption oracle, then outputs $m_0,m_1$, gets $c:=\Enc_k(m_b)$, the challenge ciphertext, and tries to determine $b'$. $\AAA$ again has oracle access, but cannot query the decryption oracle with $c$. Success is as defined in previous experiments.
+
+\defn{CCA-Secure} (Chosen Ciphertext Attack): A private-key encryption scheme $\Pi$ such that for all PPT adversaries $\AAA$, $\Pr[\ExptCca(n)=1]\leq\frac{1}{2}+\negl(n)$. Any CCA-secure scheme is also multiple-CCA-secure.
+
+Note: NOTHING above this point is CCA-secure.
+
+\defn{Non-Malleability}: An encryption scheme with the property that if the adversary tries to modify a given ciphertext, the result is either an invalid ciphertext or one whose corresponding plaintext has no relation to the original plaintext.
+
+\defn{MAC} (Message Authentication Code): Three probabilistic polynomial-time algorithms $\Gen\Mac\Vrfy$ such that $\Gen$ takes $1^n$, outputs $k$ with $|k|\geq n$. $\Mac$, the tag-generation algorithm, takes $k$ and $m\in\{0,1\}^*$ and outputs tag $t$. Deterministic $\Vrfy$ takes $k$, $m$, $t$, and outputs $b$, where $b=1$ means $t$ is a valid tag for $m$ with key $k$, and $b=0$ means it is not. It must be that $\Vrfy_k(m,\Mac_k(m))=1$. If $\Mac_k$ is only defined for $m\in\{0,1\}^{\ell(n)}$, we call it a fixed-length MAC.
+
+\defn{Canonical Verification}: Deterministic MACs ($\Mac$ is deterministic), where $\Vrfy_k(m,t)$ computes $\tilde{t}:=\Mac_k(m)$, and out puts $1$ iff $\tilde{t}=t$.
+
+\defn{$\Macf_{\AAA,\Pi}(n)$}: $k\from\Gen(1^n)$. $\AAA$ is given $1^n$ and oracle access to $\Mac_k(\cdot)$. Eventually outputs $(m,t)$. Success is defined as $\Vrfy(m,t)=1$, and $m$ is not a message previously queried from the oracle.
+
+\defn{Secure MAC} (Existentially Unforgeable Under an Adaptive Chosen-Message Attack): A MAC such that for all PPT adversaries $\AAA$, $\Pr[\Macf_{\AAA,\Pi}(n)=1]\leq\negl(n)$. Note: This definition offers no protection against replay attacks.
+
+\defn{Strong MAC}: MAC such that $(m,t)$ cannot have been previously output by the oracle, but using $(m,t')$ is a valid guess.
+
+\thm{} With a canonical $\Vrfy$, Strong Mac $\Leftrightarrow$ Secure MAC.
+
+\con{}: $\Mac_k(m)=F_k(m)$, where $k\in\{0,1\}^n$, $m\in\{0,1\}^n$, and $F$ a PRF. $\Vrfy$ is canonical. If $|m|\neq|k|$, $\Mac$ outputs nothing, and $\Vrfy$ outputs $0$. This construction is a secure fixed-length MAC.
+
+\con{} Another $\Mac_k$: Chop $m$ into $n$-bit blocks, $m_1,m_2,\dots,m_d$, let $t_i=\Mac'(m_i)$, and use $(t_1,t_2,\dots,t_d)$ as the tag.
+
+This is bad. This can be easily broken using a reordering attack. Present $m=m_1,m_2$, get tag $t_1,t_2$. Then message $m'=m_2,m_1$ will have tag $t_2,t_1$, which will pass $\Vrfy$.
+
+To combat this attack, break $m$ into $\frac{n}{2}$-bit blocks $m_1,\dots,m_d$, then $t_i=\Mac'_k(\ang{i}\mid\mid m_i)$, where $\ang{i}$ is the $\frac{n}{2}$-bit binary encoding of $i$. This prevents the reordering attack.
+
+This scheme is still insecure. Since we have an arbitrary-length message $\Mac$, we can use a truncation attack, and present $m=m_1,m_2,m_3$, get $(t_1,t_2,t_3)$. Then we can present $m'=m_1,m_2$. The tag $(t_1,t_2)$ will be valid for $m'$.
+
+To prevent the truncation attack, we will include the length $\ell$ of the full message in the calculation. We will chop our message into $\frac{n}{3}$-bit blocks. Then $t_i=\Mac'_k(\ang{\ell}\mid\mid\ang{i}\mid\mid m_i)$. Note: We pad the last block with $0's$ if necessary. The tag will be $(t_1,\dots)$. By this point, we are sending $4\ell$ bits.
+
+Unfortunately, even this scheme is still insecure. It can be attacked with a ``mix and match'' attack. For example, get tag $t=(t_1,t_2,t_3)$ for $m=m_1,m_2,m_3$. Take another message, same length, $m'=m_4,m_5,m_6$, get tag $t'=(t_4,t_5,t_6)$. Then $(t_1,t_5,t_6)$ is a valid tag for $m_1,m_5,m_6$, which has never been queried from the oracle before.
+
+Finally, let's fix all of this! We'll chop our message $m=m_1,\dots,m_d$ into $\frac{n}{4}$ bit blocks, and pick a random $\frac{n}{4}$-bit value $r$ for the entire message, and $t_i=\Mac'_k(r\mid\mid\ang{\ell}\mid\mid\ang{i}\mid\mid m_i)$. $\Mac_k(m)=(r,t_1,\dots,t_d)$. At this point, this is not a deterministic $\Mac$, so $\Vrfy$ has to behave slightly differently, taking into account the random $r$ passed to it. It can reconstruct the tag as above, with this slight extra step.
+
+This is secure!
+
+But it does produce a tag of 4x the length of the message.
+
+\con{CBC-MAC}: Used widely in practice. On input a key $k\in\{0,1\}^n$, $m$ of length $\ell(n)\cdot n$, let $\ell=\ell(n)$, parse $m=m_1,\dots,m_\ell$, set $t_0:=0^n$, then for $i\in\{1,\ell\}$, $t_i:=F_k(t_i-1)$, where $F$ is a PRF. Output $t_\ell$ only as the tag. $\Vrfy$ is done in the canonical way.
+
+To extend this to arbitrary length messages, {\it prepend} the message with length $|m|$, encoded as an $n$-bit string.
+
+Alternatively, have keys $k_1$, $k_2$, compute CBC-MAC using $k_1$, then output tag $\hat{t}:=F_{k_2}(t)$.
+
+\defn{$\ExptEncf(n)$}: Run $\Gen(1^n)$ to obtain $k$. Adversary $\AAA$ is given input $1^n$ and access to an encryption oracle $\Enc_k(\cdot)$. They output ciphertext $c$. Let $m:=\Dec_k(c)$, and let $Q$ denote the set of all queries that $\AAA$ asked its encryption oracle. The output of the experiment is $1$ iff $m\neq\perp$ and $m\not\in Q$.
+
+\defn{Unforgeable}: A private-key encryption scheme $\Pi$ such that for all PPT adversaries $\AAA$, $\Pr[\ExptEncf(n)=1]\leq\negl(n)$.
+
+\defn{Authenticated}: A private-key encryption scheme that is CCA-secure and unforgeable.
+
+\con{Encrypt-and-} \underline{authenticate}: Given plaintext $m$, sender transmits $\ang{c,t}$, where $c\from\Enc_{k_E}(m)$ and $t\from\Mac_{k_M}(m)$. The receiver behaves as expected, obtaining $m$ from $\Dec_{k_E}(c)$, and running $\Vrfy_{k_M}(m,t)$. It is likely the case here that $t$ leaks information about the message (often, MACs are deterministic, breaking CPA-security), and so this is \underline{not} an authenticated encryption scheme.
+
+\con{Authenticate-then-} \underline{encrypt}: Given plaintext $m$, sender transmits $c$, where $t\from\Mac_{k_M}(m)$ and $c\from\Enc_{k_E}(m||t)$. The receiver behaves as expected, decrypting $m||t$ from $c$, then checking $\Vrfy_{k_M}(m,t)$. If, for example, a CBC-mode-with-padding scheme is used, the decrypt algorithm will return a ``bad padding'' error, while if the padding passes, $\Vrfy$ will return an ``authentication failure''. This difference can leak information and allow for various attacks on the scheme, so this is \underline{not} an authenticated encryption scheme.
+
+\con{Encrypt-then-} \underline{authenticate}: Given plaintext $m$, sender transmits $\ang{c,t}$, where $c\from\Enc_{k_E}(m)$ and $t\from\Mac_{k_M}(m)$. The receiver behaves as expected, checking $\Vrfy_{k_M}(c,t)$, then decrypting $m$ as $\Dec_{k_E}(c)$. Of the three listed, this is the only one that \underline{is} an authenticated encryption scheme (Assuming that $\Enc$ is CPA-secure, $\Mac$ is strongly secure, and $k_E$ and $k_M$ are chosen independently uniformly at random.)
+
+There are 3 major types of network attacker attacks.
+
+In a \underline{reordering attack}, an attacker swaps the order of messages sent across a network, making $c_2$ arrive before $c_1$.
+
+In a \underline{replay attack}, an attacker resends messages later.
+
+In a \underline{reflection attack}, an attacker sends messages from a sender back to them at a later time, which the other person never sent.
+
+The first two attacks can be prevented when $A$ and $B$ (the two people communicating across the network) keep counters, $\ctr_{A,B}$ and $\ctr_{B,A}$, of how many messages have been sent/received in each direction.
+
+A reflection attack can either be prevented by having a reflection bit $b$ to say who the sender is, or by having a different key-set for messages going different directions.
+
+In the $\Macf_{\AAA,\Pi}^{\text{1-time}}$ experiment, adversary $\AAA$ outputs $m'$, is given a tag $t'\from\Mac_k(m')$, then can calculate and think, then output $(m,t)$, $m\neq m'$, which are verified as usual to determine success.
+
+\defn{$\varepsilon$-secure} (also one-time $\varepsilon$-secure): A MAC $\Pi=\GenMacVrfy$ such that for all (even unbounded) adversaries $\AAA$, $\Pr[\Macf_{\AAA,\Pi}^{\text{1-time}}=1]\leq\varepsilon$.
+
+\defn{Strongly universal}: A function $h:\KKK\times\KKK\to\TTT$ such that for all distinct $m,m'\in\MMM$, and all $t,t'\in\TTT$, it holds that $\Pr[h_k(m)=t\wedge h_k(m1)=t']=\frac{1}{|\TTT|^2}$, where the probability is taken over uniform choice of $k\in\KKK$.
+
+\con{}Let $h:\KKK\times\MMM\to\TTT$ be a strongly universal function. Define a MAC as follows: $\Gen$: uniform $k\in\KKK$. $\Mac$: given $k,m$, output tag $t:=h_k(m)$. $\Vrfy$: On input $k,m,t$, output 1 iff $t\overset{?}{=}h_k(m)$.
+
+\thm{}If $h$ is a strongly universal function, then the above construction is a $\frac{1}{|\TTT|}$-secure MAC for messages in $\MMM$.
+
+\thm{}For any prime $p$, the function $h$ defined as $h_{a,b}(m)=[a\cdot m+b\mod{p}]$, where $\MMM=\Z_p$, and $\KKK=\Z_p\times\Z_p$, so $(a,b)\in\KKK$, $m\in\MMM$, is strongly universal.
+
+\defn{Hash function}: A function with output length $\ell$ is a pair of PPT algorithms $(\Gen, H)$ such that $\Gen(1^n)$ outputs a key $s$, and $H$ takes $s$ and a string $x\in\{0,1\}^*$, and outputs a string $H^s(x)\in\{0,1\}^n$, assuming $n$ is implicit in $s$.
+
+\defn{Compression function} (fixed-length hash function for inputs of length $\ell'$): a hash function where $H^s$ is only defined for inputs $x\in\{0,1\}^{\ell'(n)}$, and $\ell'(n)>\ell(n)$.
+
+\defn{$\ExptHC(n)$}: $s\from\Gen(1^n)$. Adversary $\AAA$is given $s$ and outputs $x,x'$. (If $\Pi$ is fixed-length, then $x,x'\in\{0,1\}^{\ell'(n)}$.) The output is 1 (success) iff $x\neq x'$ but $H^s(x)=H^s(x')$.
+
+\defn{Collision resistant}: A has function $\Pi=(\Gen, H)$ such that for all PPT adversaries $\AAA$, $\Pr[\ExptHC(n)=1]\leq\negl(n)$.
+
+\defn{Second-preimage resistance} (target-collision resistance): A hash function such that given $s$ and $x$, an adversary cannot find $x'$ such that $x'\neq x$ and $H^s(x)\neq H^s(x')$.
+
+\defn{Preimage resistance}: A hash function such that given $s$ and $y$, an adversary cannot find $x$ such that $H^s(x)=y$.
+
+\con{Merkle-Damg\r{a}rd}: Let $(\Gen, h)$ be a fixed-length hash function for inputs of length $2n$ and with output length $n$. Construct $(\Gen, H)$ as follows: $\Gen=\Gen$, $H$: given $s$ and $x\in\{0,1\}^*$ of length $L<2^n$, let $B=\left\lceil\frac{L}{n}\right\rceil$, pad $x$ so its length is a multiple of $n$. Consider the padded result as $n$-bit blocks $x_1, \dots,x_B$. Set $x_{B+1}=L$. Set $z_0=0^n$, as the IV. For $i=1,\dots,B+1$, let $z_i=h^s(z_{i-1}||x_i)$. Output $z_{B+1}$.
+
+\thm{}If $(\Gen, h)$ is collision resistant, then so is $(\Gen, H)$.
+
+\con{Hash-and-MAC}: Let $\Pi=(\Mac,\Vrfy)$ be a MAC for length $\ell(n)$, let $\Pi_{H}(\Gen_H,H)$ be a hash function, with output length $\ell(n)$. Construct MAC $\Pi'=(\Gen',\Mac',\Vrfy')$ as follows: $\Gen'$: Takes $1^n$, choses uniform $k\in\{0,1\}^n$, $s\from\Gen_H(1^n)$, outputs key $k'=\ang{k,s}$. $\Mac'$: Given $\ang{k,s}$, $m\in\{0,1\}^*$, output $t\from\Mac_k(H^s(m))$. $\Vrfy'$: Given $\ang{k,s}$, $m\in\{0,1\}^*$, tag $t$, output 1 iff $\Vrfy_k(H^s(m),t)=1$.
+
+\thm{}If $\Pi$ is a secure MAC and $\Pi_H$ is collision resistant, the above construction is a secure MAC for arbitrary-length messages.
+
+\con{HMAC}: Let $(\Gen_H,H)$ be a Merkle-Damg\r{a}rd-generated hash function on $(Gen_H,h)$ taking inputs of length $n+n'$. Let \opad and \ipad be fixed constants of length $n'$. Define a MAC as follows: $\Gen$: Given $1^n$, $s\from\Gen_H(1^n)$, uniform random $k\in\{0,1\}^{n'}$. Output key $\ang{s,k}$. $\Mac$: Given $\ang{s,k}$ and $m\in\{0,1\}^*$, output $t:=H^s\left((k\xor\opad)||H^s((k\xor\ipad)||m)\right)$. $\Vrfy$: Given $\ang{s,k}$, $m\in\{0,1\}^*$, tag $t$, output $1$ iff $t$ recomputes correctly.
+
+\defn{Weakly collision resistant}: A Hash function $(\Gen_H, H)$ defined as a Merkle-Damg\r{a}rd transform, except with $k=IV$ being uniformly chosen from $\{0,1\}^n$, such that every PPT adversary $\AAA$ has at most negligible success finding a collision (without knowing $k$.).
+
+\thm{}Let $k_{out}=h^s(IV||(k\xor\opad))$, $\hat{y}$ be the length-padded $y$, including anything before it, $\widetilde{\Mac}_k(y)=h^s(k||\hat{y})$, and $G^s(k)=h^s(IV||(k\xor\opad))||h^s(IV||(k\xor\ipad))=k_{out}||k_{in}$. If $G^s$ is a PRG for any $s$, $\widetilde{\Mac}_k(y)$ is a secure fixed-length mac for messages of length $n$, and $(\Gen_H,H)$ is weakly collision resistant, then HMAC is a secure MAC for arbitrary-length messages.
+
+\defn{Birthday problem/attack}: Out of $n$ distinct ``days'', if $~\sqrt{n}$ ``people'' are chosen, there is a $50\%$ chance that two of them will share a birthday. This places a lower bound of $2\log(T)$ bits on the size of a hash function, where $T$ is the time we want to run the collision-attack in.
+
+\con{Birthday Attack}: (small space). Start with random valid input $x_0$, then repeatedly compute $x_i=H(x_{i-1})$ and $x_{2i}=H(H(x_{2(i-1)}))$. If they are ever equal, collision has occurred in $x_0,\dots,x_{2(i-1)}$. Calculate each $x_j,x_{j+i}$, and we will find a collision. This runs in $\Theta(2{\ell/2})$ time, where $\ell$ is the length of the output.
+
+\defn{Random Oracle Model}: Model in which the oracle $O$ chooses its function $H$ at random when instantiated, and so probabilities are also taken over the choice of the function $H$. It is then used in whichever function needed. The values of $H$ are considered to be computed the first time they are requested.
+
+\con{} If $\ell_{out}>\ell_{in}$, a random oracle can be used as a pseudorandom generator. If $\ell_{out}<\ell_{in}$, a random oracle is collision resistant. If $F_k(x)=H(k||x)$, where $|k|=|x|=n$, $\ell_{out}=n$, $\ell_{in}=2n$, then $F$ is a pseudorandom function, where $H$ is the pseudorandom oracle.
+
+In general, a proof of security in the random oracle model is significantly better than no proof at all. There have been no successful real-world attacks on schemes proven secure in the random-oracle model, when the random oracle was instantiated properly. Most cryptographic hash functions should not be used ``off the shelf'' to instantiate a random oracle model.
+
+\defn{Virus Fingerprinting}: Process by which a virus scanner stores hashes of known viruses, and compares hashes of email attachments and newly downloaded programs to these known viruses.
+
+\defn{Deduplication}: Process of comparing hashes of new files to hashes of already stored files to eliminate the storing of duplicates. Especially used in the context of cloud storage among multiple users.
+
+\defn{P2P file-sharing}: Processing of storing hashes of available files, allowing for easy requests, etc.
+
+\defn{Merkle-Damg\r{a}rd Tree}: A tree constructed from $2^t$ by placing a file at each leaf of a $t$-level tree, then computing the hash of each pair of files, then each pair of hashes, and so on, until a single root hash is computed. This hash is then stored. Often denoted $\MMM\TTT_t$.
+
+\thm{}Let $(\Gen_H,H)$ be collision resistant. Then $(\Gen_H,\MMM\TTT_t)$ is also collision resistant for any fixed $t$.
+
+\con{Password Hashing}: On a computer, the hash of a password, $hpw$, will be stored, and when the user enters their password, $H(pass)\overset{?}{=}hpw$, if so, authenticated. To prevent dictionary attacks, sometimes a salt is used to calculate $H(s,pass)$.
+
+\defn{min-entropy}: A probability distribution $\XXX$ has $m$ bits of min-entropy if for every fixed value $x$ it holds that $\Pr_{X\from\XXX}[X=x]\leq2^{-m}$. That is, even the most likely outcome occurs with probability at most $2^{-m}$.
+
+\defn{LFSR}: Linear Feedback Shift Register. Very efficient to implement in hardware. Consists of an array of $n$ registers, $s_{n-1},\dots,s_0$ with $n$ feedback coefficients, $c_{n-1},\dots,c_0$. The size of the array is called the degree of the LFSR. On each clock tick, $s_0$ is the output bit, all bits are shifted right by 1 register, and $s_{n-1}$ is set to the XOR of some subset of the other registers, defined as those where $c_i=1$.
+
+These are insecure because the initial state, feedback coefficients, and all future bits, can be determined from watching at most $2n$ consecutive bits of output. We can improve the security by adding non-linear combinations to compute $s_{n-1}$, and it is possible to define such functions with good statistical properties. Trivium is one such stream cipher.
+
+\defn{RC4}: a similar algorithm that also involves bit swaps, is used in many security situations, but is known to have vulnerabilities.
+
+\defn{Avalanche Effect}: In any block cipher, a ``small change'' to the input must affect every bit of the output.
+
+\defn{S-box}: A {\it public} substitution function (permutation). In the examples given, performed on $8$ bits at a time. A change of 1 bit in the input should result in each bit int he output changing with probability about $\frac{1}{2}$.
+
+\defn{SPN} (Substitution-Permutation Network): A series of operations, run in rounds, where each round is as follows, in an example where $x$ is 64-bits long, and each S-box, $S_1,\dots,S_8$ permutes $8$ bits: 1) Key Mixing: Set $x:=x\xor k$, where $k$ is the current-round sub-key. 2) Substitution: Set $x:=S_1(x_1)||\cdots||S_8(x_8)$, where $x_i$ is the $i$th byte of $x$. 3) Permutation: Permute the {\it bits} of $x$ (Rearrange them in a pre-ordained manner) to obtain the output of the round. After the final round is run, there is another Key Mixing step; without this step the last substitution and permutation, assumed to be known by Kerckhoff's principle, would be reversible by an attacker, and therefore useless in the encryption scheme. Different sub-keys are used in each round, derived from a master key according to a key schedule.
+
+\thm{}All SPNs are, by construction, invertible.
+
+\thm{}If all S-boxes in a given SPN are permutations, then no matter how many rounds are applied, and the key schedule, the SPN is a permutation for any $k$.
+
+\defn{Feistel Network}: A network which operates in a series of rounds. In each round, a keyed round function is applied. This function need not be invertible. In a \underline{balanced} Feistel Network, the $i$th round of function $\hat{f}_i$ takes as input a sub-key $x_i$ and an $\ell/2$-bit string and outputs an $\ell/2$-bit string.
+
+\con{Feistel Network}: For round $i$ of a Feistel network, divide the input into two halves, $L_{i-1}$ and $R_{i-1}$, each of length $\ell/2$, where $\ell$ is the block length of the cipher. The output $(L_i,R_i)$ is defined as $L_i:=R_{i-1}, R_1=L_{i-1}\xor f_i(R_{i-1})$. In an $r$-round Feistel network, the $\ell$-bit input becomes $(L_0,R_0)$, and the output is the $\ell$-bit value $(L_r,R_r)$.
+
+\thm{}Let $F$ be a keyed function defined by a Feistel Network. Then regardless of the round functions $\{\hat{f}_i\}$, and the number of rounds, $F_k$ is an efficiently invertible permutation for all $k$.
+
+\defn{DES}: Data Encryption Standard. Originally a 16-round Feistel Network with a block length of 64 bits and a key length of 56 bits. Vulnerable to brute-force attacks, but the strengthened triple-DES is widely used today.
+
+\con{DES $\hat{f}$}. $\hat{f}(k_i,R)$, with $k_i\in\{0,1\}^{28}$, $R\in\{0,1\}^{32}$, $R$ is expanded to 48-bit $R'$ by duplicating the first half of the bits, $R'\xor k_i$ is computed, split and passed through an S-box which takes $6$-bit inputs to $4$-bit outputs, and these $4$-bit outputs are mixed to produce the $32$-bit output. DES uses 16 rounds.
+
+The S-boxes were carefully designed to be 4-to-1 functions, and changing any 1 bit of the input changes at least 2 bits of the output. The mixing was designed that the output from any S-box affects the input to six of the $S$-boxes in the next round. Therefore, the mangle function exhibits a strong avalanche effect, which will, after 8 rounds, affect all 64 bits of output. Since DES uses 16 rounds total, similar inputs yields independent-looking outputs.
+
+After 30 years, the best known practical attack on DES is still an exhaustive search through its key space. The 56-bit key length is such that such an attack {\it is} feasible.
+
+\defn{Triple Encryption}: Using 3 keys, $F'_{k_1,k_2,k_3}(x):=F_{k_3}(F_{k_2}^{-1}(F_{k_1}(x)))$. Using only 2, $F'_{k_1,k_2}(x):=F_{k_1}(F_{k_2}^{-1}(F_{k_1}(x)))$. \underline{Triple-DES} is constructed using DES with either of these variants.
+
+\defn{AES}: Advanced Encryption Standard. Has a state array, which is a 4x4 array. Initially the input of the cipher. Then, consists of 4 stages. Stage 1: Add Round Key: A 128-bit sub-key is derived from the master key, and interpreted as a 4x4 array of bytes. The state array is XORed with the sub-key. Stage 2: Sub Bytes: The state array is mixed at the byte level according to a fixed lookup table $S$. Stage 3: Shift Rows: The bytes in each row are shifted to the left by $0$, $1$, $2$, and $3$ places respectively, from the top. Stage 4: Mix Columns: An invertible transformation is applied to each column. It has the property that if the inputs differ in $b>0$ bytes, the outputs differ in at least $5-b$ bytes. In the final round, Mix Columns is replaced with AddRoundKey. To date, there have been no practical attacks significantly better than an exhaustive key-search, so AES is an excellent choice for any cryptographic scheme that requires a (strong) pseudorandom permutation.
+
+\defn{Ideal Cipher Model}: A strengthening of the random-oracle model in which all parties have access to an oracle for a random keyed permutation $F:\{0,1\}^n\times\{0,1\}^\ell\to\{0,1\}^\ell$ and $F^{-1}$.
+
+\con{Davies-Meyer}: Let $F$ be a block cipher with $n$-bit key length and $\ell$-bit block length. The compression function is $h:\{0,1\}^{n+\ell}\to\{0,1\}^\ell$ by $h(k,x):=F_k(x)\xor x$.
+
+\thm{}If $F$ is an ideal cipher, then Davies-Meyer yields a collision-resistant compression function. From the HW, $F_k(x)\xor x\xor k$ also does, but $F_k(x)$ and $F_k(x)\xor k$ do \underline{not}.
+
+Care must be taken when instantiating Davies-Meyer with a particular block cipher, for example, DES causes issues.
+
+MD5 is bad and should not be used, SHA-0 is flawed, SHA-1 has known slight flaws that make it easier to theoretically crack, but has not produced any collisions. It is not recommended for use, SHA-2 seems to be secure, and can be used. SHA-3 is rather powerful, and unusual, and considered very, very secure.
+
+\defn{$\ExptInvt$}: Uniform $x\in\{0,1\}^n$, $y:=f(x)$. $\AAA$ is given $1^n$ and $y$, outputs $x'$. Outcome $1$ iff $f(x')=y$.
+
+\defn{One-way}: A function $f:\{0,1\}^*\to\{0,1\}^*$ such that there is a polynomial-time algo $M_f$ that computes $f$, and for every PPT adversary $\AAA$, $\Pr[\ExptInvt(n)=1]\leq\negl(n)$.
+
+\defn{Hard-core predicate}: A function $\hc:\{0,1\}^*\to\{0,1\}$ for $f$ such that $\hc$ can be computer in polynomial time, and for all PPT adversaries $\AAA$, $\Pr\limits_{x\from\{0,1\}^n}[\AAA(1^n,f(x))=\hc(x)]\leq\frac{1}{2}+\negl(n)$.
+
+\thm{Goldreich-Levin}: Assume one-way functions (resp., permutations) exist. Then $\exists$ a one-way function (resp., permutation) $g$ and a hard-core predicate $\hc$ of $g$.
+
+\thm{}Let $f$ be a one-way permutation and let $\hc$ be a hard-core predicate of $f$. Then $G(s):=f(s)||\hc(s)$ is a PRG with expansion factor $\ell(n)=n+1$.
+
+\thm{}If $\exists$ a PRG with expansion factor $\ell(n)=n+1$, then for any polynomial $\poly$, $\exists$ a PRG with expansion factor $\poly(n)$.
+
+\thm{}If $\exists$ a PRG with expansion factor $\ell(n)=2n$, then there exists a PRF.
+
+\thm{}If $\exists$ a PRF, then $\exists$ a strong PRP.
+
+\thm{}Assuming the existence of one-way permutations, $\exists$ PRGs with any polynomial expansion factor, PRFs, and strong PRPs.
+
+\thm{}Assuming the existence of one-way permutations, $\exists$ CCA-secure private-key encryption schemes and secure message authentication codes.
+
+\thm{}Let $f$ be a one-way function and define $g(x,r):=(f(x),r)$, where $|x|=|r|$. Define $\gl(x,r):=\xor_{i=1}^{n}x_i\cdot r_i$, where $x=x_1\cdots x_n$, and $r=\cdots r_n$. Then $\gl$ is a hard-core predicate of $g$.
+
+\thm{}Let $f$ and $\gl$ be as above. If $\exists$ a PPT $\AAA$ such that $\AAA(f(x),r)=\gl(x,r)$ $\forall n$ and $\forall x,r\in\{0,1\}^n$, then $\exists$ PPT $\AAA'$ such that $\AAA'(1^n,f(x))=x$ $\forall n$ and $\forall x\in\{0,1\}^n$.
+
+\thm{}Let $f$ and $\gl$ be as above. If $\exists$ a PPT $\AAA$ and polynomial $p(\cdot)$ such that $\Pr\limits_{x,r\from\{0,1\}^n}\left[\AAA(f(x),r)=\gl(x,r)\right]\geq\frac{3}{4}+\frac{1}{p(n)}$ for infinitely many values of $n$, then $\exists$ a PPT $\AAA$ such that $\Pr\limits_{x\from\{0,1\}^n}\left[\AAA(1^n,f(x))\in f^{-1}(f(x))\right]\geq\frac{1}{4p(n)}$.
+
+\thm{}Let $f$ be a one-way permutation with hard-core predicate $\hc$. Then algorithm $G(s):=f(s)||hc(s)$ is a PRG with expansion factor $\ell(n)=n+1$.
+
+\thm{}If $\exists$ a PRG $G$ with expansion factor $n+1$, for any polynomial $\poly$ $\exists$ a PRG $\hat{G}$ with expansion factor $\poly(n)$.
+
+\con{}Let $G$ be a PRG with expansion factor $\ell(n)=2n$, and define $G_0,G_1$ as $G(k)=G_0(k)||G_1(k)$, where $|G_0(k)|=|G_1(k)|=|k|$. For $x\in\{0,1\}^n$, define $F_k:\{0,1\}^n\to\{0,1\}^n$ as $F_k(x_1x_2\dots x_n)=G_{x_n}(\dots(G_{x_2}(G_{x_1}(x))))$.
+
+\thm{}The above construction is a PRF.
+
+\thm{}If one-way functions exist, then so do PRGs, PRFs, and strong PRPs.
+
+\thm{}If one-way functions exist, then so do CCA-secure private-key encryption schemes and secure message authentication codes.
+
+One-way functions are sufficient for \underline{all} private-key cryptography.
+
+\thm{}If a PRG exists, then so does a one-way function.
+
+\thm{}If there exists an EAV-secure private-key encryption scheme that encrypts messages twice as long as its key, then a one-way function exists.
+
+\thm{}MACs also imply that one-way functions exist.
+
+\thm{}Let $a\in\N$ and let $b\in\N^+$. Then $\exists$ unique $q,r\in\N$ such that $a=qb+r$, and $0\leq r<b$. These can be computed in polynomial time.
+
+\defn{GCD}: Greatest Common Divisor of $a,b\in\N$. Largest $c\in\N$ such that $c\mid a$ and $c\mid b$. Notation: $c=\gcd(a,b)$.
+
+\thm{}Let $a,b\in\N^+$. $\exists$ $X,Y$ such that $Xa+Yb=\gcd(a,b)$. $\gcd(a,b)$ is the smallest positive integer that can be expressed this way.
+
+\thm{}If $c\mid ab$ and $\gcd(a,c)=1$, then $c\mid b$. If $p$ prime and $p\mid ab$, then either $p\mid a$ or $p\mid b$.
+
+\thm{}If $a\mid N$, $b\mid N$, and $\gcd(a,b)=1$, then $ab\mid N$.
+
+\defn{mod}: $a\equiv b\mod{N}$ iff $N\mid{a-b}$. This also means that $[a\mod{N}]=[b\mod{N}]$, reduction mod $N$.
+
+\thm{}If $a=a'\mod{N}$ and $b=b'\mod{N}$, then $(a+b)=(a'+b')\mod{N}$ and $ab=a'b'\mod{N}$.
+
+\defn{Invertible}: Given $b,n\in\N$, $b$, $\exists c$ such that $bc=1\mod{N}$.
+
+\thm{}Let $b,N\in\N$, $b\geq1$, $N>1$. Then $b$ is invertible $\mod{N}$ iff $\gcd(b,N)=1$.
+
+\defn{Group}: A set $\G$ with a binary operation $\circ$ such that: 1) $\forall g,h\in\G$, $g\circ h\in\G$. 2) $\exists e\in\G$ such that $\forall g\in\G$, $e\circ g=g=g\circ e$. $e$ is called the identity. 3) $\forall g\in\G$, $\exists h\in\G$ such that $g\circ h=e=h\circ g$. $h$ is called the inverse of $g$. 4) $\forall g_1,g_2,g_3\in\G$, $(g_1\circ g_2)\circ g_3=g_1(g_2\circ g_3)$.
+
+\defn{Abelian}: A group $\G$ with the additional property that $\forall g,h\in\G$, $g\circ h=h\circ g$.
+
+\thm{}Let $\G$ be a group and $a,b,c\in\G$. If $ac=bc$, then $a=b$. If $ac=c$, then $a=e$.
+
+\defn{Order}: The number $m=|\G|$ that is the number of elements in a group, if it is finite.
+
+\thm{}Let $\G$ be a finite group with $m=|\G|$. Then $\forall g\in\G$, $g^m=1$.
+
+\thm{}Let $\G$ be a finite group with $m=|\G|>1$. Then $\forall g\in\G$, and any $x\in\N$, $g^{x}=g{[x\mod{m}]}$.
+
+\thm{}Let $\G$ be a finite group with $m=|G|>1$. Let $e>0$ be an integer, and define the function $f_e:\G\to\G$ by $f_e(g)=g^e$. If $\gcd(e,m)=1$, then $f_e$ is a permutation (i.e. a bijection). Also, if $d=e^{-1}\mod{m}$, then $f_d$ is the inverse of $f_e$.
+
+\defn{$\Z_N$}: The additive abelian group, $\Z\mod{N}$, elements $\{0,1,\dots,N-1\}$. 
+
+\defn{$\Z_N^*$}: The multiplicative abelian group, $\Z\mod{N}$. Consists of the elements $g$ in $\{1,\dots,N-1\}$ such that $\gcd(g,N)=1$. There are all of the elements which are invertible $\mod{N}$.
+
+\defn{$\phi$}: The Euler phi function: $\phi(N)=|\Z_N^*|$, the number of positive integers $<N$ which are relatively prime to $N$.
+
+\thm{}Let $N=\Pi_ip_i^{e_i}$, where the $\{p_i\}$ are distinct primes, and $e_i\geq 1$ (take the prime factorization of $N$). Then $\phi(N)=\Pi_ip_i^{e_i-1}(p_i-1)$. In particular, if $p$ prime, $\phi(p)=p-1$, and if $N=pq$, $p,q$ prime, then $\phi(N)=(p-1)(q-1)$.
+
+\thm{}Take arbitrary $N>1$, $a\in\Z_N^*$. Then $a^{\phi(N)}=1\mod{N}$. If $N=p$ is prime, and $a\in\{1,\dots,p-1\}$, then $a^{p-1}=1\mod{p}$.
+
+\thm{}Fix $N>1$. For integer $e>0$, define $f_e:\Z_N^*\to\Z_N^*$ by $f_e(x)=[x^e\mod{N}]$. If $e$ is relatively prime to $\phi{N}$, then $f_e$ is a permutation. Let $d=e^{-1}\mod{N}$. Then $f_d$ is the inverse of $f_e$.
+
+\defn{Isomorphism}: Let $\G,\HH$ be groups with operations $\circ_\G$ and $\circ_\HH$. A function $f:\G\to\HH$ is an isomorphism if it is a bijection and $\forall g_1,g_2\in\G$, $f(g_1\circ_\G g_2)=f(g_1)\circ_\HH f(g_2)$. If $f$ exists, we say the groups are isomorphic, and $\G\simeq\HH$. $|\G|=|\HH|$.
+
+\thm{Chinese Remainder}: CRT: Let $N=pq$, where $p,q>1$ are relatively prime. Then $\Z_N\simeq\Z_p\times\Z_q$ and $\Z_N^*\simeq\Z_p^*\times\Z_q^*$. Moreover, let $f$ be the function mapping $x\in\Z_N$ to pairs $(x_p,x_q)$, $x_p\in\Z_p$, $x_q\in\Z_q$, with $f(x):=([x\mod{p}],[x\mod{q}])$, then $f$ is an isomorphism from $\Z_N$ to $\Z_p\times\Z_q$, and the restriction of $f$ to $\Z_N^*$ is an isomorphism from $\Z_N^*$ to $\Z_p^*\times\Z_q^*$.
+
+\alg{$\mathsf{eGCD}$} (Extended Euclidean Algorithm): [How I do it when working by hand] Given two positive integers $a_0,b_0$, find $\gcd(a_0,b_0)$, and $x,y$ such that $xa_0+yb_0=\gcd(a_0,b_0)$. WLOG, assume $a_0\geq b_0$. compute $q,r$ such that $a_0=q_0b_0+r_0$, $0<r_0<b_0$. Then let $a_1=b_0$, $b_1=r_0$, and recompute until $r_i=0$. Then $\gcd(a_0,b_0)=r_{i-1}$. Take that $r_{i-1}=a_{i-1}-qb_{i-1}$, substitute $b_{i-1}=r_{i-2}=a_{i-2}-b_{i-2}r_{i-2}$, and repeat until $r_{i-1}=\gcd(a_0,b_0)=xa_0+yb_0$.
+
+\alg{}Given $p$, $q$ distinct primes, $x_p$, $x_q$ positive integers, and $X,Y$ such that $Xp+Yq=\gcd(p,q)=1$. Find $x\in\Z_{pq}$ such that $x\mod{p}=x_p$ and $x\mod{y}=x_y$. Let $1_p:=[Yq\mod{pq}]$, and $1_q:=[Xp\mod{pq}]$. Then compute $x=[(x_p\cdot 1_p+x_q\cdot 1_q)\mod{N}]$.
+
+\defn{$\ExptWFac$} (The Weak Factoring Experiment):Choose two uniform $n$-bit integers, $x_1$, $x_2$. Let $N:=x_1\cdot x_2$. Given $N$, $\AAA$ outputs $x'_1,x'_2>1$. $\AAA$ succeeds iff $x'_1\cdot x'_2=N$. (Need not equal $x_1,x_2$.)
+
+\thm{Prime Number Theorem}: The number of primes less than $x$ is $\pi(x)\approx\frac{x}{\log(x)}$
+
+\thm{Bertrand's Postulate}: For any $n>1$, at least $\frac{1}{3n}$ of the $n$-bit integers are prime.
+
+\defn{Miller-Rabin Test}: An algorithm which takes 2 inputs, integer $p$ and parameter $t$, and attempts to determine if $p$ is prime. The Miller-Rabin test runs in polynomial time in $||p||$ and $t$.
+
+\thm{}If $p$ is prime, the Miller-Rabin test always outputs ``prime''. Else, it outputs composite, except with probability at most $2^{-t}$.
+
+\alg{Random Prime}: Given a length $n$, run the following $3n^2$ times: $p'\from\{0,1\}^{n-1}$, $p=1||p$, run Miller-Rabin on $p$, parameter $t=1^n$. Return $p$ if MR says prime. Else, retry. If all attempts fail, return fail.
+
+\thm{}Let $\G$ be a finite group, and $\HH\subseteq\G$. Assume $\HH$ is nonempty, and for all $a,b\in\HH$, $ab\in\HH$. Then $\HH$ is a subgroup of $\G$.
+
+\thm{}Let $\HH$ be a strict subgroup of a finite group $\G$ (Strict: $\HH\neq \G$.). Then $|\HH|\leq|\G|/2$.
+
+\defn{$\GenM$}: A polynomial-time algorithm, given $1^n$, outputs $(N,p,q)$, $N=pq$, $p,q=n$-bit primes except with probability negligible in $n$.
+
+\defn{$\ExptFac(n)$}: (The Factoring Experiment): Run $\GenM(1^n)$ to obtain $(N,p,q)$. Give $N$ to $\AAA$, get $p',q'>1$. Output of the experiment is $1$ iff $p'\cdot q'=N$. Note: Unless $\GenM$ fails, then success means $\{p',q'\}=\{p,q\}$.
+
+\defn{Factoring Assumption}: Factoring is hard relative to $\GenM$ if for all PPT algorithms $\AAA$, $\Pr[\ExptFac(n)=1]\leq\negl(n)$.
+
+\defn{$\GenRSA$}: A PPT algorithm that, given $1^n$, outputs a modulus $N$ that is the product of $2$ primes, and integers $e,d>0$ wich $\gcd(e,\phi(N))=1$ and $ed=1\mod{\phi(N)}$.
+
+\defn{$\ExptRSA(n)$}: (The RSA Experiment): $(N,e,d)\from\GenRSA(1^n)$. Choose a uniform $y\in\Z^*_N$. Give $N,e,y$ to $\AAA$, get $x\in\Z^*_N$. $\AAA$ succeeds iff $x^e=y\mod{N}$.
+
+\defn{}The RSA problem is hard relative to $\GenRSA$ if for all PPT algorithms $\AAA$, $\Pr[\ExptRSA(n)=1]\leq\negl(n)$.
+
+\defn{RSA Assumption}: There exists as $\GenRSA$ algorithm relative to which the RSA problem is hard.
+
+\alg{$\GenRSA$}: (Vanilla version): Given $1^n$, $(N,p,q)\from\GenM(1^n)$. $\phi(N)=(p-1)(e-1)$. Choose $e$ such that $\gcd(e,\phi(N))=1$. Compute $d:=[e^{-1}\mod{\phi(N)}]$. Return $N,e,d$.
+
+\thm{}There is a PPT algorithm that, given a composite $N$ and $e,d$ with $ed=1\mod{\phi(N)}$, outputs a factor of $N$ except with probability negligible in $||N||$.
+
+\defn{Order}: Let $\G$ be a finite group, $g\in\G$. The order of $g$ is the smallest positive integer $i$ such that $g^i=1$.
+
+\thm{}Let $\G$ be a finite group, $g\in\G$ with order $i$. Then for any integer $x$, $g^x=g^{[x\mod{i}]}$.
+
+\thm{}Let $\G$ be a finite group, $g\in\G$ with order $i$. Then $g^x=g^y$ iff $x=y\mod{i}$.
+
+\defn{Generator}: An element $g\in\G$, such that order$(g)=$order$(\G)$. Notation: $\ang{g}=\G$.
+
+\defn{Cyclic}: A group $\G$ such that some $g\in\G$ is a generator of $\G$.
+
+\thm{}Let $\G$ be a finite group order $m$, $g\in\G$ with order $i$. Then $i\mid m$.
+
+\thm{}If $\G$ is a group of prime order $p$, then $\G$ is cyclic, and all elements except the identity are generators of $\G$.
+
+\thm{}If $p$ is prime, then $\Z_p^*$ is a cyclic group of order $p-1$.
+
+\defn{$\GGG$}: Group Generation Algorithm. On input $1^n$, gives (description of) cyclic group $\G$, order $q$, and generator $g$.
+
+\defn{$\ExptDLog(n)$}: Run $\GGG(1^n)$ to obtain $(\G,q,g)$. Choose a uniform $h\in\G$. $\AAA$ is given $G,q,g,h$, and outputs $x\in\Z_q$. $\AAA$ succeeds iff $g^x=h$.
+
+\defn{}The Discrete-Logarithm Problem is hard relative to $\GGG$ if for all PPT algorithms $\AAA$, $\Pr[\ExptDLog(n)=1]\leq\negl(n)$.
+
+\defn{DDH Problem}: The Decisional Diffie-Hellman Problem: It is hard relative to $\GGG$ if for all PPT algorithms $\AAA$, $|\Pr[\AAA(\G,q,g,g^x,g^y,g^z)=1]-\Pr[\AAA(\G,q,g,g^x,g^y,g^{xy})=1]|\leq\negl(n)$.
+
+\thm{}Let $p=rq+1$, with $p,q$ prime. Then $G\overset{\text{def}}{=}\{[h^n\mod{p}]\mid h\in\Z^*_p\}$ is a subgroup of $\Z^*_p$ of order $q$.
+
+\alg{Group Generation}: A basic $\GGG$. Input $1^n$, $\ell=\ell(n)$. Generate a uniform $n$-bit prime $q$. Generate an $\ell$-bit prime $p$ such that $q\mid (p-1)$. Choose a uniform $h\in\Z_p^*$ with $h\neq 1$. Set $g:=[h^{(p-1)/q}\mod{p}]$. Return $p,q,g$.
+
+\con{}Let $\GGG$ be as above. Define a fixed-length hash function $(\Gen,H)$ as follows: $\Gen$: Given $1^n$, get $(\G,q,g)\from\GGG(1^n)$, select uniform $h\in\G$. Output $s:=\ang{\G,q,g,h}$ as the key. $H$: Given $s$, and input $(x_1,x_2)\in\Z_q\times\Z_q$, output $H^s(x_1,x_2):=g^{x_1}h^{x_2}\in\G$.
+
+\thm{}If the discrete-logarithm problem is hard relative to $\GGG$, the above construction is collision-resistant.
+
+\thm{}If the discrete-logarithm problem is hard, then collision-resistant hash functions exist.
+
+\defn{$\ExptKE(n)$}: The Key-Exchange Experiment: Two parties with $1^n$ execute protocol $\Pi$. This results in a transcript \trans containing all the messages sent by the parties, and a key $k$ output by each of the parties. A uniform bit $b\in\{0,1\}$ is chosen. If $b=0$, set $\hat{k}:=k$. Else, choose $\hat{k}\in\{0,1\}^n$ at random. $\AAA$ is given $\trans$ and $\hat{k}$, outputs $b'$. Success if and only if $b'=b$.
+
+\defn{KE EAV secure}: (Security in the presence of an eavesdropper): A key-exchange protocol such that for all PPT adversaries $\AAA$, $\Pr[\ExptKE(n)=1]\leq\frac{1}{2}+\negl(n)$.
+
+\con{Diffie-Hellman}: Alice gets $(\G,q,g)\from\GGG(1^n)$. She chooses a uniform $x\in\Z_q$, computes $h_A:=g^x$. Alice sends $(\G,q,g,h_A)$ to Bob. Bob chooses a uniform $y\in\Z_q$, and computes $h_B:=g^y$. Bob sends $h_B$ to Alice and outputs the key $k_B:=h^y_A$. Alice outputs the key $k_A:=h_B^x$. Note: $k_A=k_B$.
+
+\thm{}If the DDH problem is hard relative to $\GGG$, then the Diffie-Hellman key-exchange protocol $\Pi$ is secure in the presence of an eavesdropper.
+
+It is not, however, even remotely secure in the presence of an active attacker, who can simulate Bob, and intercept and decrypt all messages.
+
+\defn{Public Key Cryptography}: A party generates a pair of keys; the public key is widely distributed, and the private key is kept secret. The public key can encrypt messages to the party, which are only decryptable with the private key.
+
+\defn{Signature}: Some function of a message is computed (usually a hash), then encrypted using the private key. It is then sent with the message, as the signature can be decoded by anyone, but only produced by the person with the private key.
+
+\defn{Non-repudiation}: Verification that a document was indeed signed by the person the signature claims it is from.
+
+\defn{Public-Key Encryption Scheme}: A triple of probabilistic polynomial-time algorithms $\GenEncDec$ such that: $\Gen$: takes $1^n$ and outputs a par of keys $(pk,sk)$, there $pk$ is public key and $sk$ is secret (or private) key. Assume both are length $\geq n$, and $n$ can be determined from them. $\Enc$: takes public key $pk$ and message $m$, and outputs $c\from\Enc_{pk}(m)$. $\Dec$: Deterministic, takes secret key $sk$ and $c$, and $m:=\Dec_{sk}(c)$. Outputs $\perp$ on failure.
+
+\defn{$\ExptPubEav(n)$}: $(pk,sk)\from\Gen(1^n)$. $\AAA$ is given $pk$, outputs $m_0,m_1\in\MMM$, with $|m_0|=|m_1|$. $b\in\{0,1\}$ is chosen uniformly, and $c\from\Enc_{pk}(m_b)$ is computed and returned to $\AAA$ as the challenge ciphertext. $\AAA$ outputs $b'$. Success iff $b'=b$.
+
+\defn{} Public Key EAV Security: A public-key encryption scheme $\Pi=\GenEncDec$ such that for all PPT adversaries $\AAA$, $\Pr[\ExptPubEav(n)=1]\leq\frac{1}{2}+\negl(n)$.
+
+\thm{} If a public-key encryption scheme has indistinguishable encryptions in the presences of an eaves-dropper (is EAV-secure), then it is CPA-secure.
+
+\thm{}No deterministic public-key encryption scheme is CPA-secure.
+
+\defn{$\LR$}: Left-or-right oracle, on input a pair of equal-length messages $m_0,m_1$, outputs $c\from\LR_{pk,b}(m_0,m_1):=\Enc_{pk}(m_b)$.
+
+\defn{$\ExptPubCpa(n)$}: $(pk,sk)\from\Gen(1^n)$. $b\in\{0,1\}$ is chosen uniformly. $\AAA$ is given $pk$ and oracle access to $\LR_{pk,b}(\cdot,\cdot)$. $\AAA$ outputs a bit $b'$. Success iff $b'=b$.
+
+\defn{Pub LR-cpa secure}: A public-key encryption scheme $\Pi=\GenEncDec$ has indistinguishable multiple encryptions if for all PPT adversaries $\AAA$, $\Pr[\ExptPubCpa(n)=1]\leq\frac{1}{2}+\negl(n)$.
+
+\thm{}If a public-key encryption scheme is CPA-secure, then it also has indistinguishable multiple encryptions.
+
+\thm{}Given $\Pi=\GenEncDec$ be a fixed-length 1-bit encryption scheme. Define $\Pi=(\Gen,\Enc',\Dec')$ for arbitrary length messages where $\Enc'_{pk}(m)=\Enc_{pk}(m_1),\dots,\Enc_{pk}(m_\ell)$, where $m=m_1\cdots m_\ell$, and $\Dec'$ is constructed similarly. Then if $\Pi$ is CPA-secure, so is $\Pi'$.
+
+\defn{$\ExptPubCca(n)$}: $(pk,sk)\from\Gen(1^n)$. $\AAA$ is given access to $pk$ and decryption oracle $\Dec_{sk}(\cdot)$. Outputs $m_1,m_2$, of same length. $b\in\{0,1\}$ is chosen uniformly. $c\from\Enc_{pk}(m_b)$ is given to $\AAA$. $\AAA$ can call $\Dec_{sk}(\cdot)$ again, but not with $c$. $\AAA$ outputs $b'$. Success iff $b'=b$.
+
+\defn{Pub CCA-secure}: A public-key encryption scheme $\Pi=\GenEncDec$ such that for all PPT adversaries $\AAA$, $\Pr[\ExptPubCca(n)=1]\leq\frac{1}{2}+\negl(n)$.
+
+\defn{KEM} (Key Encapsulation Mechanism): A tuple of PPT algorithms $\GenEncapsDecaps$ such that: $\Gen$ takes $1^n$ and outputs a public/private key pair, $(pk,sk)$. Assume $pk,sk$ have length $\geq n$, and $n$ can be determined from them. $\Encaps$ takes $pk$ and $1^n$. Outputs $c$ and $k\in\{0,1\}^{\ell(n)}$, where $\ell$ is the key length. $\Decaps$ takes $sk$ and $c$ and outputs a key $k$. If failure, outputs $\perp$.
+
+\con{}Let $\Pi=\GenEncapsDecaps$ be a KEM with key length $n$, and let $\Pi=(\Gen',\Enc',\Dec')$ be a private-key encryption scheme. Construct public key encryption scheme $\Pi^{\hy}=(\Gen^\hy,\Enc^\hy,\Dec^\hy)$ as follows: $\Gen^\hy$ On input $1^n$, run $\Gen(1^n)$ and use $(pk,sk)$ from that. $\Enc^\hy$: On input $pk$ and $m\in\{0,1\}^*$, $(c,k)\from\Encaps_{pk}(1^n)$, $c'\from\from\Enc'_k(m)$, output $\ang{c,c'}$. $\Dec^\hy$ On input $sk,\ang{c,c'}$, compute $k:=\Decaps_{sk}(c)$, output $m:=\Dec'_k(c')$.
+
+\defn{$\ExptKemCpa(n)$}: $(pk,sk)\from\Gen(1^n)$. $(c,k)\from\Encaps_{pk}(1^n)$. $b\in\{0,1\}$ chosen uniformly. If $b=0$, $\hat{k}:=k$, else $\hat{k}\in\{0,1\}$ uniformly at random. Give $(pk,c,\hat{k})$ to $\AAA$, which outputs $b'$. Success iff $b'=b$.
+
+\defn{CPA-Secure KEM}: A key-encapsulation mechanism $\Pi$ such that for all PPT adversaries $\AAA$, $\Pr[\ExptKemCpa(n)=1]\leq\frac{1}{2}+\negl(n)$.
+
+\thm{}If $\Pi$ is a CPA-secure KEM and $\Pi'$ is a private-key encryption scheme that has indistinguishable encryptions in the presence of an eavesdropped, then $\Pi^\hy$ as above is a CPA-secure public key encryption scheme.
+
+\defn{$\ExptKemCca(n)$}: $(pk,sk)\from\Gen(1^n)$. $(c,k)\from\Encaps_{pk}(1^n)$. $b\in\{0,1\}$ chosen uniformly. If $b=0$, $\hat{k}:=k$, else $\hat{k}\in\{0,1\}^n$ uniformly at random. Give $(pk,c,\hat{k})$ to $\AAA$. $\AAA$ can access $\Decaps_{sk}(\cdot)$ oracle, but not on $c$ itself. $\AAA$ outputs $b'$. Success iff $b'=b$.
+
+\defn{KEM CCA-Secure}: A key-encapsulation mechanism $\Pi$ such that for all PPT adversaries $\AAA$, $\Pr[\ExptKemCca(n)=1]\leq\frac{1}{2}+\negl(n)$.
+
+\thm{}If $\Pi$ is a CCA-secure KEM and $\Pi'$ is a CCA-secure private-key encryption scheme, then $\Pi^\hy$ as above is a CCA-secure public-key encryption scheme.
+
+\thm{}Let $\G$ be a finite group and let $m\in\G$ be arbitrary. Choose a uniform $k\in\G$. For any $\hat{g}\in\G$, $\Pr[k\cdot m=\hat{g}]=1/|\G|$.
+
+\con{El Gamal}: Let $\GGG$ be as in the Group Generation algorithm. Define a public-key encryption scheme as follows: $\Gen$: On input $1^n$, $(\G,q,g)\from\GGG(1^n)$. Then choose a uniform $x\in\Z_q$ and compute $h:=g^x$. The public key is $\ang{\G,q,g,h}$ and the secret (private) key is $\ang{\G,q,g,x}$. The message space is $\G$. $\Enc$: Given $pk,m$, choose a uniform $y\in\Z_q$ and output the ciphertext $\ang{g^y,h^y\cdot m}$. $\Dec$: Given $sk,c=\ang{c_1,c_2}$, output $\hat{m}:=c_2/c_1^x$.
+
+\thm{}If the DDH problem is hard relative to $\GGG$, then the El Gamal encryption scheme is CPA-secure.
+
+\con{}Let $\GGG$ be as in the Group Generation algorithm. Define a KEM as follows: $\Gen$: On input $1^n$, $(\G,q,g)\from\GGG(1^n)$. Choose a uniform $x\in\Z_q$, set $h:=g^x$. Specify a function $H:\G\to\{0,1\}^{\ell(n)}$. for some function $\ell$. $pk=\ang{\G,q,g,h,H}$, $sk=\ang{\G,q,g,x}$. $\Encaps$: On input $pk$, choose uniform $y\in\Z_q$, and output ciphertext $g^y$ and key $H(h^y)$. $\Decaps$: On input $sk,c\in\G$, output key $H(c^x)$.
+
+\thm{}If the DDH problem is hard relative to $\GGG$, and $H$ is as specified in the text, then the above construction is a CPA-secure KEM.
+
+\thm{}If the CDH problem is hard relative to $\GGG$, and $H$ is modeled as a random oracle, then the above construction is CPA-secure.
+
+\thm{}If the gap-CDH problem is hard relative to $\GGG$, and $H$ is modeled as a random oracle, then the above construction is a CCA-secure KEM.
+
+\con{DHIES/ECIES}: Let $\GGG$ be as in the Group Generation algorithm. Let $\Pi_E=(\Enc',\Dec')$ be a private-key encryption scheme, and let $\Pi_M=(\Mac,\Vrfy)$ be a message authentication code. Define a public-key encryption scheme as follows: $\Gen$: On input $1^n$, $(\G,q,g)\from\GGG(1^n)$. Choose a uniform $x\in\Z_q$, set $h:=g^x$, and specify $H:\G\to\{0,1\}^{2n}$. $pk=\ang{\G,q,g,h,H}$, $sk=\ang{\G,q,g,x,H}$. $\Enc$: On input $pk$, message $m$, choose a uniform $y\in\Z_q$, set $k_E||k_M:=H(h^y)$. Compute $c'\from\Enc'_{k_E}(m)$, output ciphertext $\ang{g^y,c',\Mac_{k_M}(c')}$. $\Dec$: On input $sk$, and ciphertext $\ang{c,c',t}$, output $\perp$ if $c\not\in\G$. Else, compute $k_E||k_M:=H(c^x)$. If $\Vrfy_{k_M}(c',t)\neq1$ output $\perp$. Else, output $\Dec'_{k_E}(c')$.
+
+\thm{}Let $\Pi_E$ be a CPA-secure private-key encryption scheme, and let $\Pi_M$ be a strongly secure MAC. If the gap-CDH problem is hard relative to $\GGG$, and $h$ is modeled as a random oracle, then the above construction is a CCA-secure public-key encryption scheme.
+
+\alg{$\GenRSA$}: Input $1^n$. $(N,p,q)\from\GenM(1^n)$. $\phi(N)=(p-1)(q-1)$. Choose $e>1$ such that $\gcd(e,\phi(N))=1$. Compute $d:=[e^{-1}\mod{\phi(N)}]$. Return $N,e,d$.
+
+\con{Plain RSA}: Let $\GenRSA$ be as above. Define a public-key encryption scheme as follows: $\Gen$: On input $1^n$, $(N,e,d)\from\GenRSA(1^n)$. $pk=\ang{N,e}$, $sk=\ang{N,d}$. $\Enc$: On input $pk$, message $m\in\Z_N^*$, output ciphertext $c:=[m^e\mod{N}]$. $\Dec$: On input $sk$, $c\in\Z_N^*$, compute message $m:[c^d\mod{N}]$.
+
+\alg{RSA FAIL}: Input $pk=\ang{N,e}$, ciphertext $c$. Set $T:=2^{\alpha n}$, where $\alpha\in(\frac{1}{2},1)$ is some fixed constant, and $n$ is the security parameter. For integer $r\in[1,T]$, $x_r:=[c/r^e\mod{N}]$. Sort the pairs $\{(r,x_r)\}^T_{r=1}$ by their second component. For $s=1$ to $T$: If $x_r\overset{?}{=}[s^e\mod{N}]$ for some $r$, return $[r\cdot s\mod{N}]$.
+
+\thm{}Let $p(x)$ be a polynomial of degree $e$. Then in time $\poly(||N||,e)$ one can find all $m$ such that $p(m)=0\mod{N}$ and $|m|\leq N^{1/e}$.
+
+\con{Padded RSA}: Let $\GenRSA$ be as above, and let $\ell$ be a function with $\ell(n)\leq2n-4$ for all $n$. Define a public-key encryption scheme as follows: $\Gen$: On input $1^n$, $(N,e,d)\from\GenRSA(1^n)$. Output $pk=\ang{N,e}$, $sk=\ang{N,d}$. $\Enc$ On input $pk$ and $m\in\{0,1\}^{||N||-\ell(n)-2}$, choose a uniform string $r\in\{0,1\}^{\ell(n)}$ and interpret $\hat{m}$ as an element of $\Z_N^*$. Output the ciphertext $c:=[\hat{m}^e\mod{N}]$. $\Dec$: On input $sk$, and ciphertext $c$, compute $\hat{m}:=[c^d\mod{N}]$, and output the $||N||-\ell(n)-2$ least-significant bits of $\hat{m}$.
+
+\defn{$\lsb$}: Least Significant Bit.
+
+\defn{$\ExptRSAHC(1^n)$}: (The RSA hard-core predicate experiment): $(N,e,d)\from\GenRSA(1^n)$. Choose a uniform $x\in\Z_N^*$ ad compute $y:=[x^e\mod{N}]$. $\AAA$ is given $N,e,y$ and outputs a bit $b$. The output of the experiment is $1$ iff $\lsb(x)=b$.
+
+\thm{}If the RSA problem is hard relative to $\GenRSA$, then for all PPT algorithms $\AAA$, $\Pr[\ExptRSAHC(n)=1]\leq\frac{1}{2}+\negl(n)$.
+
+\con{}Let $\GenRSA$ be as usual, and define a public-key encryption scheme as follows: $\Gen$: On input $1^n$, $(N,e,d)\from\GenRSA(1^n)$. Output $pk=\ang{N,e}$, $sk=\ang{N,d}$. $\Enc$: On input $pk$, $m\in\{0,1\}$, choose a uniform $r\in\Z_N^*$ subject to the constraint that $\lsb(r)=m$. Output ciphertext $c:=[r^e\mod{N}]$. $\Dec$: On input $sk$ and ciphertext $c$, compute $r:=[c^d\mod{N}]$ and output $\lsb(r)$.
+
+\thm{}If the RSA problem is hard relative to $\GenRSA$, then the above construction is CPA-secure.
+
+\con{}Let $\GenRSA$ be as usual, and define a KEM as follows: $\Gen$: On input $1^n$, $(N,e,d)\from\GenRSA(1^n)$. Comute $d'=[d^n\mod{\phi(N)}]$. Output $pk=\ang{N,e}$, and $sk=\ang{N,d'}$. $\Encaps$: On input $pk$ and $1^n$, choose a uniform $c_1\in\Z_N^*$. Then for $i=1,\dots,n$, compute $k_i=\lsb(c_i)$ and $c_{i+1}:=[c_i^e\mod{N}]$. Output ciphertext $c_{n+1}$ and key $k=k_1\cdots k_n$. $\Decaps$ On input $sk$ and ciphertext $c$, compute $c_1:=[c^{d'}\mod{N}]$. Then for $i=1,\dots,n$, compute $k_i:=\lsb(c_i)$, and $c_{i+1}:=c_i^e\mod{N}]$. Output the key $k=k_1\dots k_n$.
+
+\thm{}If the RSA problem is hard relative to $\GenRSA$, then the above construction is a CPA-secure KEM.
+
+\con{RSA-OAEP}: Let $\GenRSA$ be as usual, and $\ell=\ell(n)$, $k_0=k_0(n)$, and $k_1=k_1(n)$ be integer valued functions with $k_0(n),k_1(n)=\Phi(n)$, and such that $\ell(n)+k_0(n)+k_1(n)$ is less than the minimum bit-length of moduli output by $\GenRSA(1^n)$. Let $G:\{0,1\}^{k_0}\to\{0,1\}^{\ell+k_1}$ and $H:\{0,1\}^{\ell+k_1}\to\{0,1\}^{k_0}$ be functions. Construct a public-key encryption scheme as follows: $\Gen$ On input $1^n$, $(N,e,d)\from\GenRSA(1^n)$. $pk=\ang{N,e}$, $sk=\ang{N,d}$. $\Enc$: On input $pk$ and message $m\in\{0,1\}^\ell$, set $m':=m||0^{k_1}$ and choose a uniform $r\in\{0,1\}^k_0$. Then compute $s:=m'\xor G(r)$ and $t:=r\xor H(s)$. and set $\hat{m}:=s||t$. Output the ciphertext $c:=[\hat{m}^e\mod{N}]$. $\Dec$: On input $pk$ and ciphertext $c\in\Z_N^*$, compute $\hat{m}:=[c^d\mod{N}]$. If $||\hat{m}||>\ell+k_0+k_1$, output $\perp$. Else, parse $\hat{m}$ as $s||t$ with $s\in\{0,1\}^{\ell+k_1}$ and $t\in\{0,1\}^{k_0}$. Compute $r:=H(s)\xor t$ and $m':=G(r)\xor s$. If the least-significant $k_1$ bits of $m'$ are no all $0$, output $\perp$. Otherwise, output the $\ell$ most significant bits of $\hat{m}$.
+
+\con{CCA-secure KEM}: (In the random-oracle model) Let $\GenRSA$ be as usual and construct a KEM as follows. $\Gen$: On input $1^n$, $(N,e,d)\from\GenRSA(1^n)$. $pk=\ang{N,e}$, $sk=\ang{N,d}$. As part of the key generation, a function $H:\Z_N^*$ is specified, but the book leaves it implicit. $\Encaps$: On input $pk$, $1^n$, choose uniform $r\in\Z_N^*$. Output the ciphertext $c:=[r^e\mod{N}]$, and key $k:=H(r)$. $\Decaps$: On input $pk$ and ciphertext $c\in\Z_N^*$, compute $r:=[c^d\mod{N}]$ and output key $k:=H(r)$.
+
+\thm{} If the RSA problem is hard relative to $\GenRSA$ and $H$ is modeled as a random oracle, then the above construction is CCA-secure.
+
+\thm{}If the RSA problem is hard relative to $\GenRSA$ and $H$ is modeled as a random oracle, then $\Pr[{\tt Query}]$ is negligible, where {\tt Query} is the event that, at any point during it's executing, a PPT adversary $\AAA$ queries $r$ to the random oracle $H$.
+
+\defn{Signature Scheme}: A set of PPT algorithms $(\Gen,\Sign,\Vrfy)$ such that: Key generation algorithm $\Gen$ takes security parameter $1^n$ and outputs a pair of keys $(pk,sk)$. Assume each has length $\geq n$ and that $n$ can be determined from them. Signing algorithm $\Sign$ takes $sk$ and message $m$ for some message space, and outputs $\sigma\from\Sign_{sk}(m)$. Deterministic verification algorithm $\Vrfy$ takes $pk$, $m$, and $\sigma$, and outputs $b$, with $b=1$ meaning valid and $b=0$ meaning invalid. $b:=\Vrfy_{pk}(m,\sigma)$. Except with $\negl$ probability over $(pk,sk)$, it must be that $\Vrfy_{pk}(m,\Sign_{sk}(m))=1$ for all legal $m$.
+
+\defn{$\ExptSigF(n)$}: $(pk,sk)\from\Gen(1^n)$. $\AAA$ is given $pk$ and access to oracle $\Sign_{sk}(\cdot)$. $\AAA$ outputs $m,\sigma$. $\AAA$ succeeds iff $\Vrfy_{pk}(m,\sigma)=1$ {\it and} $m\not\in Q$, where $q$ is the set of all queries that $\AAA$ asked its oracle.
+
+\defn{Secure} (Existentially unforgeable under an adaptive chosen-message attack): A signature scheme $\Pi$ such that for all PPT adversaries $\AAA$, $\Pr[\ExptSigF(n)=1]\leq\negl(n)$.
+
+\con{Hash-And-Sign}: Let $\Pi=(\Gen,\Sign,\Vrfy)$ be a signature scheme for messages of length $\ell(n)$. Let $\Pi_{H}=(\Gen_H,H)$ be a hash function with output length $\ell(n)$. Construct signature scheme $\Pi'=(\Gen',\Sign',\Vrfy')$ as follows: $\Gen'$: On input $1^n$, $(pk,sk)\from\Gen(1^n)$, $s\from\Gen_H(1^n)$. Public key $\ang{pk,s}$, secret key $\ang{sk,s}$. $\Sign'$: On input a secret key and message $m\in\{0,1\}^*$, output $\sigma=\Sign_{sk}(H^s(m))$. $\Vrfy'$ On input public key, $m$, and $\sigma$, output $1$ iff $\Vrfy_{pk}(H^s(m),\sigma)\overset{?}{=}1$.
+
+\thm{}If $\Pi$ is a secure signature scheme for messages of length $\ell$ and $\Pi_H$ is collision resistant, then the above construction is a secure signature scheme (for arbitrary-length messages).
+
+\con{Plain RSA Signatures}: Let $\GenRSA$ be usual. Define a signature scheme as follows: $\Gen$: On input $1^n$, $(N,e,d)\from\GenRSA(1^n)$. $pk=\ang{N,e}$, $sk=\ang{N,d}$. $\Sign$: On input $sk$, message $m\in\Z_N^*$, compute $\sigma:=[m^d\mod{N}]$. $\Vrfy$: On input $pk$, $m\in\Z_N^*$, and $\sigma\in\Z_N^*$, output $1$ iff $m\overset{?}{=}[\sigma^e\mod{N}]$.
+
+To break the above, choose $\sigma$, and compute $m:=[\sigma^e\mod{N}]$.
+
+\con{RSA-FDH}: Let $\GenRSA$ be as usual, and construct a signature scheme as follows: $\Gen$: On input $1^n$, $(N,e,d)\from\GenRSA(1^n)$. $pk=\ang{N,e}$, $sk=\ang{N,d}$. As part of this key generation, a function $H:\{0,1\}^*\to\Z_N^*$ is specified, but the textbook leaves it implicit. $\Sign$: On input $sk$, message $m\in\{0,1\}^*$, compute $\sigma:=[H(m)^d\mod{N}]$. $\Vrfy$: On input $pk$, $m$, $\sigma$, output $1$ iff $\sigma^e\overset{?}{=}H(m)\mod{N}$.
+
+\thm{} If the RSA problem is hard relative to $\GenRSA$ and $H$ is modeled as a random oracle, then the above construction is secure.
+
+\end{multicols}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

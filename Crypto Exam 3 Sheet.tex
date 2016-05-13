@@ -6,6 +6,7 @@
 \usepackage{amsthm}
 \usepackage{cancel}
 \usepackage{multicol}
+\usepackage[normalem]{ulem}
 \setlength{\columnseprule}{0.4pt}
 
 \usepackage[paper=letterpaper,left=.25in,right=.25in,bottom=.25in,top=.25in]{geometry}
@@ -22,6 +23,8 @@
 \newcommand{\MMM}{\mathcal{M}}
 \newcommand{\XXX}{\mathcal{X}}
 \newcommand{\TTT}{\mathcal{T}}
+\newcommand{\GGG}{\mathcal{G}}
+\newcommand{\LR}{\mathsf{LR}}
 \pagenumbering{gobble}
 \newcommand{\Concat}{\parallel}
 \newcommand{\eps}{\varepsilon}
@@ -32,7 +35,10 @@
 \newcommand{\pf}{{\bf Proof:}}
 \newcommand{\Enc}{\mathsf{Enc}}
 \newcommand{\Dec}{\mathsf{Dec}}
+\newcommand{\Encaps}{\mathsf{Encaps}}
+\newcommand{\Decaps}{\mathsf{Decaps}}
 \newcommand{\Mac}{\mathsf{Mac}}
+\newcommand{\Sign}{\mathsf{Sign}}
 \newcommand{\Macf}{\mathsf{Mac\text{-}forge}}
 \newcommand{\Macsf}{\mathsf{Mac\text{-}sforge}}
 \newcommand{\Encf}{\mathsf{Enc\text{-}forge}}
@@ -40,21 +46,44 @@
 \newcommand{\Decrypt}[2]{\Dec_{#1}(#2)}
 \newcommand{\Encrypt}[2]{\Enc_{#1}(#2)}
 \newcommand{\Gen}{\mathsf{Gen}}
+\newcommand{\GenM}{\mathsf{GenModulus}}
+\newcommand{\GenRSA}{\mathsf{GenRSA}}
 \newcommand{\ang}[1]{\langle#1\rangle}
 \newcommand{\GenEncDec}{(\Gen,\Enc,\Dec)}
+\newcommand{\GenEncapsDecaps}{(\Gen,\Encaps,\Decaps)}
 \newcommand{\GenMacVrfy}{(\Gen,\Mac,\Vrfy)}
 \newcommand{\ExptEavArgs}[2]{\mathsf{PrivK}^{\mathsf{eav}}_{#1,#2}}
+\newcommand{\ExptPubEavArgs}[2]{\mathsf{PubK}^{\mathsf{eav}}_{#1,#2}}
 \newcommand{\ExptMultArgs}[2]{\mathsf{PrivK}^{\mathsf{mult}}_{#1,#2}}
 \newcommand{\ExptCcaArgs}[2]{\mathsf{PrivK}^{\mathsf{CCA}}_{#1,#2}}
+\newcommand{\ExptPubCcaArgs}[2]{\mathsf{PubK}^{\mathsf{CCA}}_{#1,#2}}
 \newcommand{\ExptCpaArgs}[2]{\mathsf{PrivK}^{\mathsf{CPA}}_{#1,#2}}
+\newcommand{\ExptPubCpaArgs}[2]{\mathsf{PubK}^{\mathsf{LR-cpa}}_{#1,#2}}
 \newcommand{\ExptHCArgs}[2]{\mathsf{Hash\text{-}Coll}_{#1,#2}}
+\newcommand{\ExptFacArgs}[2]{\mathsf{Factor}_{#1,#2}}
+\newcommand{\ExptDLogArgs}[2]{\mathsf{DLog}_{#1,#2}}
+\newcommand{\ExptKEArgs}[2]{\mathsf{KE}^{\mathsf{eav}}_{#1,#2}}
+\newcommand{\ExptRSAArgs}[2]{\mathsf{RSA-inv}_{#1,#2}}
+\newcommand{\ExptWFacArgs}[1]{\mathsf{w-Factor}_{#1}}
 \newcommand{\ExptLrCpa}{\mathsf{PrivK}^{\mathsf{LR-CPA}}_{\AAA,\Pi}}
+\newcommand{\ExptSigF}{\mathsf{Sig\text{-}forge}_{\AAA,\Pi}}
+\newcommand{\ExptKemCpa}{\mathsf{KEM}^{\mathsf{cpa}}_{\AAA,\Pi}}
+\newcommand{\ExptKemCca}{\mathsf{KEM}^{\mathsf{cca}}_{\AAA,\Pi}}
+\newcommand{\ExptRSAHC}{\mathsf{RSA\text{-}lsb}_{\AAA,\GenRSA}}
 \newcommand{\ExptInvtArgs}{\mathsf{Invert}_{\AAA,\Pi}}
 \newcommand{\ExptEav}{\ExptEavArgs{\AAA}{\Pi}}
+\newcommand{\ExptPubEav}{\ExptPubEavArgs{\AAA}{\Pi}}
 \newcommand{\ExptMult}{\ExptMultArgs{\AAA}{\Pi}}
 \newcommand{\ExptCca}{\ExptCcaArgs{\AAA}{\Pi}}
+\newcommand{\ExptPubCca}{\ExptPubCcaArgs{\AAA}{\Pi}}
 \newcommand{\ExptCpa}{\ExptCpaArgs{\AAA}{\Pi}}
+\newcommand{\ExptPubCpa}{\ExptPubCpaArgs{\AAA}{\Pi}}
 \newcommand{\ExptHC}{\ExptHCArgs{\AAA}{\Pi}}
+\newcommand{\ExptFac}{\ExptFacArgs{\AAA}{\GenM(n)}}
+\newcommand{\ExptDLog}{\ExptDLogArgs{\AAA}{\GGG}}
+\newcommand{\ExptKE}{\ExptKEArgs{\AAA}{\Pi}}
+\newcommand{\ExptRSA}{\ExptRSAArgs{\AAA}{\GenRSA(n)}}
+\newcommand{\ExptWFac}{\ExptWFacArgs{\AAA}}
 \newcommand{\ExptInvt}{\ExptInvtArgs{\AAA}{f}}
 \newcommand{\ExptPrgArgs}[2]{\mathsf{PRG}_{#1,#2}}
 \newcommand{\ExptPrg}{\ExptPrgArgs{\AAA}{G}}
@@ -73,6 +102,9 @@
 \newcommand{\opad}{{\tt opad}}
 \newcommand{\ipad}{{\tt ipad}}
 \newcommand{\ctr}{{\tt ctr}}
+\newcommand{\trans}{{\tt trans}}
+\newcommand{\hy}{{\tt hy}}
+\newcommand{\lsb}{{\tt lsb}}
 \newcommand{\from}{\leftarrow}
 
 \newcommand{\Exec}[5]{\mathit{exec}^{#1}_{#2}(#3,#4,#5)}
@@ -80,182 +112,200 @@
 
 \begin{document}
 %\tiny
-%\scriptsize
-\begin{multicols}{2}
+\scriptsize
+\begin{multicols}{3}
 
-The Weak Factoring Experiment. (302)
+\defn{$\ExptWFac$} (The Weak Factoring Experiment):Choose two uniform $n$-bit integers, $x_1$, $x_2$. Let $N:=x_1\cdot x_2$. Given $N$, $\AAA$ outputs $x'_1,x'_2>1$. $\AAA$ succeeds iff $x'_1\cdot x'_2=N$. (Need not equal $x_1,x_2$.)
 
-Theorem 8.32.
+\thm{Prime Number Theorem}: The number of primes less than $x$ is $\pi(x)\approx\frac{x}{\log(x)}$
 
-Theorem 8.33.
+\thm{Bertrand's Postulate}: For any $n>1$, at least $\frac{1}{3n}$ of the $n$-bit integers are prime.
 
-Algorithm 8.31/8.34.
+\defn{Miller-Rabin Test}: An algorithm which takes 2 inputs, integer $p$ and parameter $t$, and attempts to determine if $p$ is prime. The Miller-Rabin test runs in polynomial time in $||p||$ and $t$.
 
-Proposition 8.36.
+\thm{}If $p$ is prime, the Miller-Rabin test always outputs ``prime''. Else, it outputs composite, except with probability at most $2^{-t}$.
 
-Lemma 8.37.
+\alg{Random Prime}: Given a length $n$, run the following $3n^2$ times: $p'\from\{0,1\}^{n-1}$, $p=1||p$, run Miller-Rabin on $p$, parameter $t=1^n$. Return $p$ if MR says prime. Else, retry. If all attempts fail, return fail.
 
-The Factoring Experiment. (311)
+\thm{}Let $\G$ be a finite group, and $\HH\subseteq\G$. Assume $\HH$ is nonempty, and for all $a,b\in\HH$, $ab\in\HH$. Then $\HH$ is a subgroup of $\G$.
 
-Definition 8.45.
+\thm{}Let $\HH$ be a strict subgroup of a finite group $\G$ (Strict: $\HH\neq \G$.). Then $|\HH|\leq|\G|/2$.
 
-The RSA Experiment.
+\defn{$\GenM$}: A polynomial-time algorithm, given $1^n$, outputs $(N,p,q)$, $N=pq$, $p,q=n$-bit primes except with probability negligible in $n$.
 
-Definition 8.46.
+\defn{$\ExptFac(n)$}: (The Factoring Experiment): Run $\GenM(1^n)$ to obtain $(N,p,q)$. Give $N$ to $\AAA$, get $p',q'>1$. Output of the experiment is $1$ iff $p'\cdot q'=N$. Note: Unless $\GenM$ fails, then success means $\{p',q'\}=\{p,q\}$.
 
-The RSA Assumption.
+\defn{Factoring Assumption}: Factoring is hard relative to $\GenM$ if for all PPT algorithms $\AAA$, $\Pr[\ExptFac(n)=1]\leq\negl(n)$.
 
-GenRSA.
+\defn{$\GenRSA$}: A PPT algorithm that, given $1^n$, outputs a modulus $N$ that is the product of $2$ primes, and integers $e,d>0$ wich $\gcd(e,\phi(N))=1$ and $ed=1\mod{\phi(N)}$.
 
-Theorem 8.50.
+\defn{$\ExptRSA(n)$}: (The RSA Experiment): $(N,e,d)\from\GenRSA(1^n)$. Choose a uniform $y\in\Z^*_N$. Give $N,e,y$ to $\AAA$, get $x\in\Z^*_N$. $\AAA$ succeeds iff $x^e=y\mod{N}$.
 
-Definition 8.51.
+\defn{}The RSA problem is hard relative to $\GenRSA$ if for all PPT algorithms $\AAA$, $\Pr[\ExptRSA(n)=1]\leq\negl(n)$.
 
-Proposition 8.52.
+\defn{RSA Assumption}: There exists as $\GenRSA$ algorithm relative to which the RSA problem is hard.
 
-Proposition 8.53.
+\alg{$\GenRSA$}: (Vanilla version): Given $1^n$, $(N,p,q)\from\GenM(1^n)$. $\phi(N)=(p-1)(e-1)$. Choose $e$ such that $\gcd(e,\phi(N))=1$. Compute $d:=[e^{-1}\mod{\phi(N)}]$. Return $N,e,d$.
 
-Definition Cyclic Group.
+\thm{}There is a PPT algorithm that, given a composite $N$ and $e,d$ with $ed=1\mod{\phi(N)}$, outputs a factor of $N$ except with probability negligible in $||N||$.
 
-Definition Generator.
+\defn{Order}: Let $\G$ be a finite group, $g\in\G$. The order of $g$ is the smallest positive integer $i$ such that $g^i=1$.
 
-Proposition 8.54.
+\thm{}Let $\G$ be a finite group, $g\in\G$ with order $i$. Then for any integer $x$, $g^x=g^{[x\mod{i}]}$.
 
-Corollary 8.55.
+\thm{}Let $\G$ be a finite group, $g\in\G$ with order $i$. Then $g^x=g^y$ iff $x=y\mod{i}$.
 
-Theorem 8.56.
+\defn{Generator}: An element $g\in\G$, such that order$(g)=$order$(\G)$. Notation: $\ang{g}=\G$.
 
-The Discrete-logarithm Experiment. (And definitions.)
+\defn{Cyclic}: A group $\G$ such that some $g\in\G$ is a generator of $\G$.
 
-Definition 8.62.
+\thm{}Let $\G$ be a finite group order $m$, $g\in\G$ with order $i$. Then $i\mid m$.
 
-Definition 8.63.
+\thm{}If $\G$ is a group of prime order $p$, then $\G$ is cyclic, and all elements except the identity are generators of $\G$.
 
-Theorem 8.64.
+\thm{}If $p$ is prime, then $\Z_p^*$ is a cyclic group of order $p-1$.
 
-Group Generation Algorithm.
+\defn{$\GGG$}: Group Generation Algorithm. On input $1^n$, gives (description of) cyclic group $\G$, order $q$, and generator $g$.
 
-Construction 8.78. (335)
+\defn{$\ExptDLog(n)$}: Run $\GGG(1^n)$ to obtain $(\G,q,g)$. Choose a uniform $h\in\G$. $\AAA$ is given $G,q,g,h$, and outputs $x\in\Z_q$. $\AAA$ succeeds iff $g^x=h$.
 
-Theorem 8.79.
+\defn{}The Discrete-Logarithm Problem is hard relative to $\GGG$ if for all PPT algorithms $\AAA$, $\Pr[\ExptDLog(n)=1]\leq\negl(n)$.
 
-Theorem 8.80.
+\defn{DDH Problem}: The Decisional Diffie-Hellman Problem: It is hard relative to $\GGG$ if for all PPT algorithms $\AAA$, $|\Pr[\AAA(\G,q,g,g^x,g^y,g^z)=1]-\Pr[\AAA(\G,q,g,g^x,g^y,g^{xy})=1]|\leq\negl(n)$.
 
-The Key-Exchange Experiment. (365)
+\thm{}Let $p=rq+1$, with $p,q$ prime. Then $G\overset{\text{def}}{=}\{[h^n\mod{p}]\mid h\in\Z^*_p\}$ is a subgroup of $\Z^*_p$ of order $q$.
 
-Definition 10.1.
+\alg{Group Generation}: A basic $\GGG$. Input $1^n$, $\ell=\ell(n)$. Generate a uniform $n$-bit prime $q$. Generate an $\ell$-bit prime $p$ such that $q\mid (p-1)$. Choose a uniform $h\in\Z_p^*$ with $h\neq 1$. Set $g:=[h^{(p-1)/q}\mod{p}]$. Return $p,q,g$.
 
-Construction 10.2. (Diffie-Hellman)
+\con{}Let $\GGG$ be as above. Define a fixed-length hash function $(\Gen,H)$ as follows: $\Gen$: Given $1^n$, get $(\G,q,g)\from\GGG(1^n)$, select uniform $h\in\G$. Output $s:=\ang{\G,q,g,h}$ as the key. $H$: Given $s$, and input $(x_1,x_2)\in\Z_q\times\Z_q$, output $H^s(x_1,x_2):=g^{x_1}h^{x_2}\in\G$.
 
-Theorem 10.3. Real Life weaknesses.
+\thm{}If the discrete-logarithm problem is hard relative to $\GGG$, the above construction is collision-resistant.
 
-Definition: Public Key Crypto.
+\thm{}If the discrete-logarithm problem is hard, then collision-resistant hash functions exist.
 
-Definition: Signatures.
+\defn{$\ExptKE(n)$}: The Key-Exchange Experiment: Two parties with $1^n$ execute protocol $\Pi$. This results in a transcript \trans containing all the messages sent by the parties, and a key $k$ output by each of the parties. A uniform bit $b\in\{0,1\}$ is chosen. If $b=0$, set $\hat{k}:=k$. Else, choose $\hat{k}\in\{0,1\}^n$ at random. $\AAA$ is given $\trans$ and $\hat{k}$, outputs $b'$. Success if and only if $b'=b$.
 
-Definition: Non-repudiation.
+\defn{KE EAV secure}: (Security in the presence of an eavesdropper): A key-exchange protocol such that for all PPT adversaries $\AAA$, $\Pr[\ExptKE(n)=1]\leq\frac{1}{2}+\negl(n)$.
 
-Definition 11.1: Public Key Encryption Scheme.
+\con{Diffie-Hellman}: Alice gets $(\G,q,g)\from\GGG(1^n)$. She chooses a uniform $x\in\Z_q$, computes $h_A:=g^x$. Alice sends $(\G,q,g,h_A)$ to Bob. Bob chooses a uniform $y\in\Z_q$, and computes $h_B:=g^y$. Bob sends $h_B$ to Alice and outputs the key $k_B:=h^y_A$. Alice outputs the key $k_A:=h_B^x$. Note: $k_A=k_B$.
 
-The Eavesdropping Indistinguishability Experiment.
+\thm{}If the DDH problem is hard relative to $\GGG$, then the Diffie-Hellman key-exchange protocol $\Pi$ is secure in the presence of an eavesdropper.
 
-Definition 11.2.
+It is not, however, even remotely secure in the presence of an active attacker, who can simulate Bob, and intercept and decrypt all messages.
 
-Proposition 11.3.
+\defn{Public Key Cryptography}: A party generates a pair of keys; the public key is widely distributed, and the private key is kept secret. The public key can encrypt messages to the party, which are only decryptable with the private key.
 
-Theorem 11.4.
+\defn{Signature}: Some function of a message is computed (usually a hash), then encrypted using the private key. It is then sent with the message, as the signature can be decoded by anyone, but only produced by the person with the private key.
 
-The LR-oracle Experiment.
+\defn{Non-repudiation}: Verification that a document was indeed signed by the person the signature claims it is from.
 
-Definition 11.5.
+\defn{Public-Key Encryption Scheme}: A triple of probabilistic polynomial-time algorithms $\GenEncDec$ such that: $\Gen$: takes $1^n$ and outputs a par of keys $(pk,sk)$, there $pk$ is public key and $sk$ is secret (or private) key. Assume both are length $\geq n$, and $n$ can be determined from them. $\Enc$: takes public key $pk$ and message $m$, and outputs $c\from\Enc_{pk}(m)$. $\Dec$: Deterministic, takes secret key $sk$ and $c$, and $m:=\Dec_{sk}(c)$. Outputs $\perp$ on failure.
 
-Theorem 11.6.
+\defn{$\ExptPubEav(n)$}: $(pk,sk)\from\Gen(1^n)$. $\AAA$ is given $pk$, outputs $m_0,m_1\in\MMM$, with $|m_0|=|m_1|$. $b\in\{0,1\}$ is chosen uniformly, and $c\from\Enc_{pk}(m_b)$ is computed and returned to $\AAA$ as the challenge ciphertext. $\AAA$ outputs $b'$. Success iff $b'=b$.
 
-Claim 11.7.
+\defn{} Public Key EAV Security: A public-key encryption scheme $\Pi=\GenEncDec$ such that for all PPT adversaries $\AAA$, $\Pr[\ExptPubEav(n)=1]\leq\frac{1}{2}+\negl(n)$.
 
-The CCA Indistinguishability Experiment.
+\thm{} If a public-key encryption scheme has indistinguishable encryptions in the presences of an eaves-dropper (is EAV-secure), then it is CPA-secure.
 
-Definition 11.8.
+\thm{}No deterministic public-key encryption scheme is CPA-secure.
 
-Definition 11.9: Key Encapsulation Mechanism.
+\defn{$\LR$}: Left-or-right oracle, on input a pair of equal-length messages $m_0,m_1$, outputs $c\from\LR_{pk,b}(m_0,m_1):=\Enc_{pk}(m_b)$.
 
-Construction 11.10.
+\defn{$\ExptPubCpa(n)$}: $(pk,sk)\from\Gen(1^n)$. $b\in\{0,1\}$ is chosen uniformly. $\AAA$ is given $pk$ and oracle access to $\LR_{pk,b}(\cdot,\cdot)$. $\AAA$ outputs a bit $b'$. Success iff $b'=b$.
 
-The CPA Indistinguishability Experiment.
+\defn{Pub LR-cpa secure}: A public-key encryption scheme $\Pi=\GenEncDec$ has indistinguishable multiple encryptions if for all PPT adversaries $\AAA$, $\Pr[\ExptPubCpa(n)=1]\leq\frac{1}{2}+\negl(n)$.
 
-Definition 11.11.
+\thm{}If a public-key encryption scheme is CPA-secure, then it also has indistinguishable multiple encryptions.
 
-Theorem 11.12.
+\thm{}Given $\Pi=\GenEncDec$ be a fixed-length 1-bit encryption scheme. Define $\Pi=(\Gen,\Enc',\Dec')$ for arbitrary length messages where $\Enc'_{pk}(m)=\Enc_{pk}(m_1),\dots,\Enc_{pk}(m_\ell)$, where $m=m_1\cdots m_\ell$, and $\Dec'$ is constructed similarly. Then if $\Pi$ is CPA-secure, so is $\Pi'$.
 
-The CCA Indistinguishability Experiment.
+\defn{$\ExptPubCca(n)$}: $(pk,sk)\from\Gen(1^n)$. $\AAA$ is given access to $pk$ and decryption oracle $\Dec_{sk}(\cdot)$. Outputs $m_1,m_2$, of same length. $b\in\{0,1\}$ is chosen uniformly. $c\from\Enc_{pk}(m_b)$ is given to $\AAA$. $\AAA$ can call $\Dec_{sk}(\cdot)$ again, but not with $c$. $\AAA$ outputs $b'$. Success iff $b'=b$.
 
-Definition 11.13.
+\defn{Pub CCA-secure}: A public-key encryption scheme $\Pi=\GenEncDec$ such that for all PPT adversaries $\AAA$, $\Pr[\ExptPubCca(n)=1]\leq\frac{1}{2}+\negl(n)$.
 
-Theorem 11.14.
+\defn{KEM} (Key Encapsulation Mechanism): A tuple of PPT algorithms $\GenEncapsDecaps$ such that: $\Gen$ takes $1^n$ and outputs a public/private key pair, $(pk,sk)$. Assume $pk,sk$ have length $\geq n$, and $n$ can be determined from them. $\Encaps$ takes $pk$ and $1^n$. Outputs $c$ and $k\in\{0,1\}^{\ell(n)}$, where $\ell$ is the key length. $\Decaps$ takes $sk$ and $c$ and outputs a key $k$. If failure, outputs $\perp$.
 
-Lemma 11.15.
+\con{}Let $\Pi=\GenEncapsDecaps$ be a KEM with key length $n$, and let $\Pi=(\Gen',\Enc',\Dec')$ be a private-key encryption scheme. Construct public key encryption scheme $\Pi^{\hy}=(\Gen^\hy,\Enc^\hy,\Dec^\hy)$ as follows: $\Gen^\hy$ On input $1^n$, run $\Gen(1^n)$ and use $(pk,sk)$ from that. $\Enc^\hy$: On input $pk$ and $m\in\{0,1\}^*$, $(c,k)\from\Encaps_{pk}(1^n)$, $c'\from\from\Enc'_k(m)$, output $\ang{c,c'}$. $\Dec^\hy$ On input $sk,\ang{c,c'}$, compute $k:=\Decaps_{sk}(c)$, output $m:=\Dec'_k(c')$.
 
-Construction 11.16: El Gamal.
+\defn{$\ExptKemCpa(n)$}: $(pk,sk)\from\Gen(1^n)$. $(c,k)\from\Encaps_{pk}(1^n)$. $b\in\{0,1\}$ chosen uniformly. If $b=0$, $\hat{k}:=k$, else $\hat{k}\in\{0,1\}$ uniformly at random. Give $(pk,c,\hat{k})$ to $\AAA$, which outputs $b'$. Success iff $b'=b$.
 
-Theorem 11.18.
+\defn{CPA-Secure KEM}: A key-encapsulation mechanism $\Pi$ such that for all PPT adversaries $\AAA$, $\Pr[\ExptKemCpa(n)=1]\leq\frac{1}{2}+\negl(n)$.
 
-Construction 11.19: El Gamal-like KEM.
+\thm{}If $\Pi$ is a CPA-secure KEM and $\Pi'$ is a private-key encryption scheme that has indistinguishable encryptions in the presence of an eavesdropped, then $\Pi^\hy$ as above is a CPA-secure public key encryption scheme.
 
-Theorem 11.20.
+\defn{$\ExptKemCca(n)$}: $(pk,sk)\from\Gen(1^n)$. $(c,k)\from\Encaps_{pk}(1^n)$. $b\in\{0,1\}$ chosen uniformly. If $b=0$, $\hat{k}:=k$, else $\hat{k}\in\{0,1\}^n$ uniformly at random. Give $(pk,c,\hat{k})$ to $\AAA$. $\AAA$ can access $\Decaps_{sk}(\cdot)$ oracle, but not on $c$ itself. $\AAA$ outputs $b'$. Success iff $b'=b$.
 
-Theorem 11.21.
+\defn{KEM CCA-Secure}: A key-encapsulation mechanism $\Pi$ such that for all PPT adversaries $\AAA$, $\Pr[\ExptKemCca(n)=1]\leq\frac{1}{2}+\negl(n)$.
 
-Theorem 11.22.
+\thm{}If $\Pi$ is a CCA-secure KEM and $\Pi'$ is a CCA-secure private-key encryption scheme, then $\Pi^\hy$ as above is a CCA-secure public-key encryption scheme.
 
-Construction 11.23.
+\thm{}Let $\G$ be a finite group and let $m\in\G$ be arbitrary. Choose a uniform $k\in\G$. For any $\hat{g}\in\G$, $\Pr[k\cdot m=\hat{g}]=1/|\G|$.
 
-Corollary 11.24.
+\con{El Gamal}: Let $\GGG$ be as in the Group Generation algorithm. Define a public-key encryption scheme as follows: $\Gen$: On input $1^n$, $(\G,q,g)\from\GGG(1^n)$. Then choose a uniform $x\in\Z_q$ and compute $h:=g^x$. The public key is $\ang{\G,q,g,h}$ and the secret (private) key is $\ang{\G,q,g,x}$. The message space is $\G$. $\Enc$: Given $pk,m$, choose a uniform $y\in\Z_q$ and output the ciphertext $\ang{g^y,h^y\cdot m}$. $\Dec$: Given $sk,c=\ang{c_1,c_2}$, output $\hat{m}:=c_2/c_1^x$.
 
-Algorithm 11.25.
+\thm{}If the DDH problem is hard relative to $\GGG$, then the El Gamal encryption scheme is CPA-secure.
 
-Construction 11.26: Textbook RSA.
+\con{}Let $\GGG$ be as in the Group Generation algorithm. Define a KEM as follows: $\Gen$: On input $1^n$, $(\G,q,g)\from\GGG(1^n)$. Choose a uniform $x\in\Z_q$, set $h:=g^x$. Specify a function $H:\G\to\{0,1\}^{\ell(n)}$. for some function $\ell$. $pk=\ang{\G,q,g,h,H}$, $sk=\ang{\G,q,g,x}$. $\Encaps$: On input $pk$, choose uniform $y\in\Z_q$, and output ciphertext $g^y$ and key $H(h^y)$. $\Decaps$: On input $sk,c\in\G$, output key $H(c^x)$.
 
-Algorithm 11.28: An attack on plain RSA.
+\thm{}If the DDH problem is hard relative to $\GGG$, and $H$ is as specified in the text, then the above construction is a CPA-secure KEM.
 
-Theorem 11.29.
+\thm{}If the CDH problem is hard relative to $\GGG$, and $H$ is modeled as a random oracle, then the above construction is CPA-secure.
 
-Construction 11.30: Padded RSA.
+\thm{}If the gap-CDH problem is hard relative to $\GGG$, and $H$ is modeled as a random oracle, then the above construction is a CCA-secure KEM.
 
-The RSA hard-core predicate experiment.
+\con{DHIES/ECIES}: Let $\GGG$ be as in the Group Generation algorithm. Let $\Pi_E=(\Enc',\Dec')$ be a private-key encryption scheme, and let $\Pi_M=(\Mac,\Vrfy)$ be a message authentication code. Define a public-key encryption scheme as follows: $\Gen$: On input $1^n$, $(\G,q,g)\from\GGG(1^n)$. Choose a uniform $x\in\Z_q$, set $h:=g^x$, and specify $H:\G\to\{0,1\}^{2n}$. $pk=\ang{\G,q,g,h,H}$, $sk=\ang{\G,q,g,x,H}$. $\Enc$: On input $pk$, message $m$, choose a uniform $y\in\Z_q$, set $k_E||k_M:=H(h^y)$. Compute $c'\from\Enc'_{k_E}(m)$, output ciphertext $\ang{g^y,c',\Mac_{k_M}(c')}$. $\Dec$: On input $sk$, and ciphertext $\ang{c,c',t}$, output $\perp$ if $c\not\in\G$. Else, compute $k_E||k_M:=H(c^x)$. If $\Vrfy_{k_M}(c',t)\neq1$ output $\perp$. Else, output $\Dec'_{k_E}(c')$.
 
-Theorem 11.31.
+\thm{}Let $\Pi_E$ be a CPA-secure private-key encryption scheme, and let $\Pi_M$ be a strongly secure MAC. If the gap-CDH problem is hard relative to $\GGG$, and $h$ is modeled as a random oracle, then the above construction is a CCA-secure public-key encryption scheme.
 
-Construction 11.32.
+\alg{$\GenRSA$}: Input $1^n$. $(N,p,q)\from\GenM(1^n)$. $\phi(N)=(p-1)(q-1)$. Choose $e>1$ such that $\gcd(e,\phi(N))=1$. Compute $d:=[e^{-1}\mod{\phi(N)}]$. Return $N,e,d$.
 
-Theorem 11.33.
+\con{Plain RSA}: Let $\GenRSA$ be as above. Define a public-key encryption scheme as follows: $\Gen$: On input $1^n$, $(N,e,d)\from\GenRSA(1^n)$. $pk=\ang{N,e}$, $sk=\ang{N,d}$. $\Enc$: On input $pk$, message $m\in\Z_N^*$, output ciphertext $c:=[m^e\mod{N}]$. $\Dec$: On input $sk$, $c\in\Z_N^*$, compute message $m:[c^d\mod{N}]$.
 
-Construction 11.34.
+\alg{RSA FAIL}: Input $pk=\ang{N,e}$, ciphertext $c$. Set $T:=2^{\alpha n}$, where $\alpha\in(\frac{1}{2},1)$ is some fixed constant, and $n$ is the security parameter. For integer $r\in[1,T]$, $x_r:=[c/r^e\mod{N}]$. Sort the pairs $\{(r,x_r)\}^T_{r=1}$ by their second component. For $s=1$ to $T$: If $x_r\overset{?}{=}[s^e\mod{N}]$ for some $r$, return $[r\cdot s\mod{N}]$.
 
-Theorem 11.35.
+\thm{}Let $p(x)$ be a polynomial of degree $e$. Then in time $\poly(||N||,e)$ one can find all $m$ such that $p(m)=0\mod{N}$ and $|m|\leq N^{1/e}$.
 
-Construction 11.36.
+\con{Padded RSA}: Let $\GenRSA$ be as above, and let $\ell$ be a function with $\ell(n)\leq2n-4$ for all $n$. Define a public-key encryption scheme as follows: $\Gen$: On input $1^n$, $(N,e,d)\from\GenRSA(1^n)$. Output $pk=\ang{N,e}$, $sk=\ang{N,d}$. $\Enc$ On input $pk$ and $m\in\{0,1\}^{||N||-\ell(n)-2}$, choose a uniform string $r\in\{0,1\}^{\ell(n)}$ and interpret $\hat{m}$ as an element of $\Z_N^*$. Output the ciphertext $c:=[\hat{m}^e\mod{N}]$. $\Dec$: On input $sk$, and ciphertext $c$, compute $\hat{m}:=[c^d\mod{N}]$, and output the $||N||-\ell(n)-2$ least-significant bits of $\hat{m}$.
 
-Construction 11.37.
+\defn{$\lsb$}: Least Significant Bit.
 
-Theorem 11.38.
+\defn{$\ExptRSAHC(1^n)$}: (The RSA hard-core predicate experiment): $(N,e,d)\from\GenRSA(1^n)$. Choose a uniform $x\in\Z_N^*$ ad compute $y:=[x^e\mod{N}]$. $\AAA$ is given $N,e,y$ and outputs a bit $b$. The output of the experiment is $1$ iff $\lsb(x)=b$.
 
-Claim 11.39.
+\thm{}If the RSA problem is hard relative to $\GenRSA$, then for all PPT algorithms $\AAA$, $\Pr[\ExptRSAHC(n)=1]\leq\frac{1}{2}+\negl(n)$.
 
-Definition 12.1. (442)
+\con{}Let $\GenRSA$ be as usual, and define a public-key encryption scheme as follows: $\Gen$: On input $1^n$, $(N,e,d)\from\GenRSA(1^n)$. Output $pk=\ang{N,e}$, $sk=\ang{N,d}$. $\Enc$: On input $pk$, $m\in\{0,1\}$, choose a uniform $r\in\Z_N^*$ subject to the constraint that $\lsb(r)=m$. Output ciphertext $c:=[r^e\mod{N}]$. $\Dec$: On input $sk$ and ciphertext $c$, compute $r:=[c^d\mod{N}]$ and output $\lsb(r)$.
 
-Definition 12.2.
+\thm{}If the RSA problem is hard relative to $\GenRSA$, then the above construction is CPA-secure.
 
-Construction 12.3.
+\con{}Let $\GenRSA$ be as usual, and define a KEM as follows: $\Gen$: On input $1^n$, $(N,e,d)\from\GenRSA(1^n)$. Comute $d'=[d^n\mod{\phi(N)}]$. Output $pk=\ang{N,e}$, and $sk=\ang{N,d'}$. $\Encaps$: On input $pk$ and $1^n$, choose a uniform $c_1\in\Z_N^*$. Then for $i=1,\dots,n$, compute $k_i=\lsb(c_i)$ and $c_{i+1}:=[c_i^e\mod{N}]$. Output ciphertext $c_{n+1}$ and key $k=k_1\cdots k_n$. $\Decaps$ On input $sk$ and ciphertext $c$, compute $c_1:=[c^{d'}\mod{N}]$. Then for $i=1,\dots,n$, compute $k_i:=\lsb(c_i)$, and $c_{i+1}:=c_i^e\mod{N}]$. Output the key $k=k_1\dots k_n$.
 
-Theorem 12.4.
+\thm{}If the RSA problem is hard relative to $\GenRSA$, then the above construction is a CPA-secure KEM.
 
-Construction 12.5: Plain RSA signatures.
+\con{RSA-OAEP}: Let $\GenRSA$ be as usual, and $\ell=\ell(n)$, $k_0=k_0(n)$, and $k_1=k_1(n)$ be integer valued functions with $k_0(n),k_1(n)=\Phi(n)$, and such that $\ell(n)+k_0(n)+k_1(n)$ is less than the minimum bit-length of moduli output by $\GenRSA(1^n)$. Let $G:\{0,1\}^{k_0}\to\{0,1\}^{\ell+k_1}$ and $H:\{0,1\}^{\ell+k_1}\to\{0,1\}^{k_0}$ be functions. Construct a public-key encryption scheme as follows: $\Gen$ On input $1^n$, $(N,e,d)\from\GenRSA(1^n)$. $pk=\ang{N,e}$, $sk=\ang{N,d}$. $\Enc$: On input $pk$ and message $m\in\{0,1\}^\ell$, set $m':=m||0^{k_1}$ and choose a uniform $r\in\{0,1\}^k_0$. Then compute $s:=m'\xor G(r)$ and $t:=r\xor H(s)$. and set $\hat{m}:=s||t$. Output the ciphertext $c:=[\hat{m}^e\mod{N}]$. $\Dec$: On input $pk$ and ciphertext $c\in\Z_N^*$, compute $\hat{m}:=[c^d\mod{N}]$. If $||\hat{m}||>\ell+k_0+k_1$, output $\perp$. Else, parse $\hat{m}$ as $s||t$ with $s\in\{0,1\}^{\ell+k_1}$ and $t\in\{0,1\}^{k_0}$. Compute $r:=H(s)\xor t$ and $m':=G(r)\xor s$. If the least-significant $k_1$ bits of $m'$ are no all $0$, output $\perp$. Otherwise, output the $\ell$ most significant bits of $\hat{m}$.
 
-Construction 12.6.
+\con{CCA-secure KEM}: (In the random-oracle model) Let $\GenRSA$ be as usual and construct a KEM as follows. $\Gen$: On input $1^n$, $(N,e,d)\from\GenRSA(1^n)$. $pk=\ang{N,e}$, $sk=\ang{N,d}$. As part of the key generation, a function $H:\Z_N^*$ is specified, but the book leaves it implicit. $\Encaps$: On input $pk$, $1^n$, choose uniform $r\in\Z_N^*$. Output the ciphertext $c:=[r^e\mod{N}]$, and key $k:=H(r)$. $\Decaps$: On input $pk$ and ciphertext $c\in\Z_N^*$, compute $r:=[c^d\mod{N}]$ and output key $k:=H(r)$.
 
-Theorem 12.7.
+\thm{} If the RSA problem is hard relative to $\GenRSA$ and $H$ is modeled as a random oracle, then the above construction is CCA-secure.
 
+\thm{}If the RSA problem is hard relative to $\GenRSA$ and $H$ is modeled as a random oracle, then $\Pr[{\tt Query}]$ is negligible, where {\tt Query} is the event that, at any point during it's executing, a PPT adversary $\AAA$ queries $r$ to the random oracle $H$.
 
+\defn{Signature Scheme}: A set of PPT algorithms $(\Gen,\Sign,\Vrfy)$ such that: Key generation algorithm $\Gen$ takes security parameter $1^n$ and outputs a pair of keys $(pk,sk)$. Assume each has length $\geq n$ and that $n$ can be determined from them. Signing algorithm $\Sign$ takes $sk$ and message $m$ for some message space, and outputs $\sigma\from\Sign_{sk}(m)$. Deterministic verification algorithm $\Vrfy$ takes $pk$, $m$, and $\sigma$, and outputs $b$, with $b=1$ meaning valid and $b=0$ meaning invalid. $b:=\Vrfy_{pk}(m,\sigma)$. Except with $\negl$ probability over $(pk,sk)$, it must be that $\Vrfy_{pk}(m,\Sign_{sk}(m))=1$ for all legal $m$.
+
+\defn{$\ExptSigF(n)$}: $(pk,sk)\from\Gen(1^n)$. $\AAA$ is given $pk$ and access to oracle $\Sign_{sk}(\cdot)$. $\AAA$ outputs $m,\sigma$. $\AAA$ succeeds iff $\Vrfy_{pk}(m,\sigma)=1$ {\it and} $m\not\in Q$, where $q$ is the set of all queries that $\AAA$ asked its oracle.
+
+\defn{Secure} (Existentially unforgeable under an adaptive chosen-message attack): A signature scheme $\Pi$ such that for all PPT adversaries $\AAA$, $\Pr[\ExptSigF(n)=1]\leq\negl(n)$.
+
+\con{Hash-And-Sign}: Let $\Pi=(\Gen,\Sign,\Vrfy)$ be a signature scheme for messages of length $\ell(n)$. Let $\Pi_{H}=(\Gen_H,H)$ be a hash function with output length $\ell(n)$. Construct signature scheme $\Pi'=(\Gen',\Sign',\Vrfy')$ as follows: $\Gen'$: On input $1^n$, $(pk,sk)\from\Gen(1^n)$, $s\from\Gen_H(1^n)$. Public key $\ang{pk,s}$, secret key $\ang{sk,s}$. $\Sign'$: On input a secret key and message $m\in\{0,1\}^*$, output $\sigma=\Sign_{sk}(H^s(m))$. $\Vrfy'$ On input public key, $m$, and $\sigma$, output $1$ iff $\Vrfy_{pk}(H^s(m),\sigma)\overset{?}{=}1$.
+
+\thm{}If $\Pi$ is a secure signature scheme for messages of length $\ell$ and $\Pi_H$ is collision resistant, then the above construction is a secure signature scheme (for arbitrary-length messages).
+
+\con{Plain RSA Signatures}: Let $\GenRSA$ be usual. Define a signature scheme as follows: $\Gen$: On input $1^n$, $(N,e,d)\from\GenRSA(1^n)$. $pk=\ang{N,e}$, $sk=\ang{N,d}$. $\Sign$: On input $sk$, message $m\in\Z_N^*$, compute $\sigma:=[m^d\mod{N}]$. $\Vrfy$: On input $pk$, $m\in\Z_N^*$, and $\sigma\in\Z_N^*$, output $1$ iff $m\overset{?}{=}[\sigma^e\mod{N}]$.
+
+To break the above, choose $\sigma$, and compute $m:=[\sigma^e\mod{N}]$.
+
+\con{RSA-FDH}: Let $\GenRSA$ be as usual, and construct a signature scheme as follows: $\Gen$: On input $1^n$, $(N,e,d)\from\GenRSA(1^n)$. $pk=\ang{N,e}$, $sk=\ang{N,d}$. As part of this key generation, a function $H:\{0,1\}^*\to\Z_N^*$ is specified, but the textbook leaves it implicit. $\Sign$: On input $sk$, message $m\in\{0,1\}^*$, compute $\sigma:=[H(m)^d\mod{N}]$. $\Vrfy$: On input $pk$, $m$, $\sigma$, output $1$ iff $\sigma^e\overset{?}{=}H(m)\mod{N}$.
+
+\thm{} If the RSA problem is hard relative to $\GenRSA$ and $H$ is modeled as a random oracle, then the above construction is secure.
 
 \end{multicols}
 

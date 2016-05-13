@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  9 MAY 2016 18:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  12 MAY 2016 22:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -157,12 +157,24 @@ Package: multicol 2015/03/31 v1.8m multicolumn formatting (FMi)
 \colbreak@box=\box53
 \mc@col@check@num=\count107
 )
+(/usr/local/texlive/2015/texmf-dist/tex/generic/ulem/ulem.sty
+\UL@box=\box54
+\UL@hyphenbox=\box55
+\UL@skip=\skip51
+\UL@hook=\toks26
+\UL@height=\dimen121
+\UL@pe=\count108
+\UL@pixel=\dimen122
+\ULC@box=\box56
+Package: ulem 2012/05/18
+\ULdepth=\dimen123
+)
 (/usr/local/texlive/2015/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks26
+\KV@toks@=\toks27
 )
 (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
@@ -175,34 +187,34 @@ Package ifvtex Info: VTeX not detected.
 (/usr/local/texlive/2015/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
-\Gm@cnth=\count108
-\Gm@cntv=\count109
-\c@Gm@tempcnt=\count110
-\Gm@bindingoffset=\dimen121
-\Gm@wd@mp=\dimen122
-\Gm@odd@mp=\dimen123
-\Gm@even@mp=\dimen124
-\Gm@layoutwidth=\dimen125
-\Gm@layoutheight=\dimen126
-\Gm@layouthoffset=\dimen127
-\Gm@layoutvoffset=\dimen128
-\Gm@dimlist=\toks27
+\Gm@cnth=\count109
+\Gm@cntv=\count110
+\c@Gm@tempcnt=\count111
+\Gm@bindingoffset=\dimen124
+\Gm@wd@mp=\dimen125
+\Gm@odd@mp=\dimen126
+\Gm@even@mp=\dimen127
+\Gm@layoutwidth=\dimen128
+\Gm@layoutheight=\dimen129
+\Gm@layouthoffset=\dimen130
+\Gm@layoutvoffset=\dimen131
+\Gm@dimlist=\toks28
 )
 (./Crypto Exam 3 Sheet.aux)
 \openout1 = `"Crypto Exam 3 Sheet.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 113.
+LaTeX Font Info:    ... okay on input line 113.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -238,24 +250,85 @@ LaTeX Font Info:    ... okay on input line 81.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
+LaTeX Font Info:    Try loading font information for U+msa on input line 118.
+(/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 118.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+Underfull \hbox (badness 7613) in paragraph at lines 144--145
+[]\OT1/cmr/bx/n/7 Definition: $[]$\OT1/cmr/m/n/7 The RSA prob-lem is hard rel-a
+-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 146--147
+[]\OT1/cmr/bx/n/7 Definition: $[]$\OT1/cmr/m/n/7 : There ex-ists as
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 202--203
+[]\OT1/cmr/bx/n/7 Definition: $[]$\OT1/cmr/m/n/7 : A
+ []
+
+
+Underfull \hbox (badness 5878) in paragraph at lines 220--221
+\OT1/cmr/m/n/7 length 1-bit en-cryp-tion scheme. De-fine $^^E =
+ []
+
+
+Underfull \hbox (badness 5504) in paragraph at lines 230--231
+[]\OT1/cmr/bx/n/7 Definition: $[]$\OT1/cmr/m/n/7 : $(\OML/cmm/m/it/7 pk; sk\OT1
+/cmr/m/n/7 ) \OMS/cmsy/m/n/7   []\OT1/cmr/m/n/7 (1[])$.
+ []
+
+
+Underfull \hbox (badness 5504) in paragraph at lines 236--237
+[]\OT1/cmr/bx/n/7 Definition: $[]$\OT1/cmr/m/n/7 : $(\OML/cmm/m/it/7 pk; sk\OT1
+/cmr/m/n/7 ) \OMS/cmsy/m/n/7   []\OT1/cmr/m/n/7 (1[])$.
+ []
+
 [1
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-(./Crypto Exam 3 Sheet.aux) ) 
+Underfull \hbox (badness 10000) in paragraph at lines 260--261
+[]\OT1/cmr/bx/n/7 Algorithm: $[]$\OT1/cmr/m/n/7 : In-put $1[]$. $(\OML/cmm/m/it
+/7 N; p; q\OT1/cmr/m/n/7 ) \OMS/cmsy/m/n/7  
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 298--299
+[]\OT1/cmr/bx/n/7 Construction: $[]$\OT1/cmr/m/n/7 : Let $^^E =
+ []
+
+[2] (./Crypto Exam 3 Sheet.aux) ) 
 Here is how much of TeX's memory you used:
- 1859 strings out of 493089
- 23020 string characters out of 6134842
- 99552 words of memory out of 5000000
- 5375 multiletter control sequences out of 15000+600000
- 3640 words of font info for 14 fonts, out of 8000000 for 9000
+ 2003 strings out of 493089
+ 24610 string characters out of 6134842
+ 154697 words of memory out of 5000000
+ 5499 multiletter control sequences out of 15000+600000
+ 6632 words of font info for 27 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 27i,4n,26p,236b,132s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmr10.pfb>
-Output written on "Crypto Exam 3 Sheet.pdf" (1 page, 23344 bytes).
+ 27i,8n,26p,1183b,222s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2015/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr5.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmss8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmsy5.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmsy7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmti7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmtt8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/symb
+ols/msbm7.pfb>
+Output written on "Crypto Exam 3 Sheet.pdf" (2 pages, 146514 bytes).
 PDF statistics:
- 12 PDF objects out of 1000 (max. 8388607)
- 7 compressed objects within 1 object stream
+ 55 PDF objects out of 1000 (max. 8388607)
+ 39 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
